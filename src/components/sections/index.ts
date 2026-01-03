@@ -1,0 +1,13 @@
+export { Hero } from './Hero';
+export { TrustStrip } from './TrustStrip';
+export { BusinessSegments } from './BusinessSegments';
+export { Problem } from './Problem';
+export { Features } from './Features';
+export { HowItWorks } from './HowItWorks';
+export { UseCases } from './UseCases';
+export { Testimonials } from './Testimonials';
+export { Pricing } from './Pricing';
+export { Security } from './Security';
+export { FAQ } from './FAQ';
+export { FinalCTA } from './FinalCTA';
+export { LeadForm } from './LeadForm';

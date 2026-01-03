@@ -1,0 +1,398 @@
+{
+  "header": {
+    "nav": {
+      "solution": "Solution",
+      "howItWorks": "How It Works",
+      "features": "Features",
+      "pricing": "Pricing",
+      "security": "Security",
+      "cases": "Cases",
+      "faq": "FAQ"
+    },
+    "login": "Login",
+    "cta": "Start 7-Day Free Trial",
+    "microCopy": "Setup from 1 day • API + Dashboard • WhatsApp/Telegram Support"
+  },
+  "hero": {
+    "badge": "7 days free trial",
+    "headline": "Automate Kaspi Payments: Invoice → Payment → Verification → Receipt",
+    "subheadline": "AiPay creates invoices by phone number, confirms payment receipt, helps match payments with orders, and automates fiscal receipts — no more manual \"screenshot economy\".",
+    "bullets": [
+      "Invoice creation in Kaspi by phone number (via Dashboard or API)",
+      "Instant payment verification 24/7 with transaction statuses",
+      "Auto-receipts and order: fiscalization and reporting (optional)"
+    ],
+    "primaryCta": "Start 7-Day Free Trial",
+    "secondaryCta": "Watch Demo (20 min)",
+    "ctaMicroCopy": "Perfect for SMB: Instagram/info-business/services/retail. Cash register account needed for receipt automation. WhatsApp/Telegram support."
+  },
+  "trustStrip": {
+    "partnersLabel": "Trusted by businesses",
+    "title": "What's important to know:",
+    "points": [
+      "AiPay doesn't withdraw money or initiate outgoing transfers — only automation and accounting.",
+      "7 days free, then: 20,000 ₸/terminal or 1% of turnover",
+      "Custom integrations — paid (per specification)"
+    ]
+  },
+  "businessSegments": {
+    "title": "Choose your business type",
+    "tabs": {
+      "instagram": "Instagram Shop",
+      "infobusiness": "Info-business",
+      "services": "Services/Beauty",
+      "retail": "Market/Retail",
+      "other": "Other"
+    },
+    "content": {
+      "instagram": {
+        "headline": "For Instagram Shops",
+        "description": "1-click invoice → customer pays → \"paid\" status → order to delivery",
+        "bullets": [
+          "Automatic payment notifications",
+          "Fewer \"lost\" payments and night delays",
+          "Bot and CRM integration"
+        ]
+      },
+      "infobusiness": {
+        "headline": "For Info-business",
+        "description": "Payment → instant access delivery 24/7",
+        "bullets": [
+          "Automatic course and key delivery",
+          "Fewer refunds from waiting for response at night",
+          "Works without your involvement"
+        ]
+      },
+      "services": {
+        "headline": "For Services and Beauty",
+        "description": "Prepayment on booking → fewer no-shows",
+        "bullets": [
+          "Guaranteed prepayment for service",
+          "Automatic receipt and peace of mind",
+          "Fewer \"didn't show up\" clients"
+        ]
+      },
+      "retail": {
+        "headline": "For Market and Retail",
+        "description": "Fast payment verification without constantly \"checking the phone\"",
+        "bullets": [
+          "Sound notification on payment",
+          "Can be supplemented with Soundbox (\"voice of money\")",
+          "Minimum distractions from sales"
+        ]
+      },
+      "other": {
+        "headline": "For Any Business",
+        "description": "Payment acceptance automation for your processes",
+        "bullets": [
+          "API for integration with your system",
+          "Webhooks for instant actions",
+          "Flexible configuration for tasks"
+        ]
+      }
+    }
+  },
+  "problem": {
+    "title": "Manual reconciliation — hidden losses every day",
+    "description": "When there are many orders, screenshot checks slow down business: you spend hours reconciling, encounter errors, and risk accepting fake receipts. Fear of blocks and tax questions forces \"visual control\", but it doesn't scale.",
+    "cards": [
+      {
+        "icon": "clock",
+        "title": "Routine",
+        "description": "Reconciliation paralyzes business at 50+ orders per day."
+      },
+      {
+        "icon": "alertTriangle",
+        "title": "Errors and Fraud",
+        "description": "Fake receipts, \"triangles\", disputed payments."
+      },
+      {
+        "icon": "brain",
+        "title": "Stress and Control",
+        "description": "Manual checking seems free — but it's hours of owner time and risks."
+      }
+    ]
+  },
+  "features": {
+    "title": "AiPay covers the entire cycle: invoice → payment → confirmation → action → receipt",
+    "subtitle": "You stop \"catching payments\" manually: the system creates an invoice, confirms payment, and triggers your process — automatically.",
+    "cards": [
+      {
+        "icon": "fileText",
+        "title": "Invoice Creation by Phone Number",
+        "description": "Create invoices manually in Dashboard or programmatically via API — for orders, prepayments, bookings."
+      },
+      {
+        "icon": "checkCircle",
+        "title": "24/7 Payment Verification",
+        "description": "AiPay confirms receipt and assigns status: paid / not paid / error / needs attention."
+      },
+      {
+        "icon": "gitMerge",
+        "title": "Order Matching",
+        "description": "Amount/identifier/comment matching — fewer disputed situations."
+      },
+      {
+        "icon": "layoutDashboard",
+        "title": "Owner Dashboard",
+        "description": "Filters, search, reports: see receipts and statuses without chaos."
+      },
+      {
+        "icon": "code",
+        "title": "API + Webhooks for Your Process",
+        "description": "Connect site, CRM, bot, access delivery, shipping — as convenient for business."
+      },
+      {
+        "icon": "receipt",
+        "title": "Auto-receipts and Fiscalization (optional)",
+        "description": "Integration with cash register services: receipt goes to client automatically after payment confirmation."
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "How it works — 3 steps",
+    "steps": [
+      {
+        "number": "1",
+        "title": "You create an invoice",
+        "description": "— by phone number in Dashboard or via API."
+      },
+      {
+        "number": "2",
+        "title": "Customer pays",
+        "description": "— regular payment in Kaspi."
+      },
+      {
+        "number": "3",
+        "title": "AiPay confirms payment and triggers action",
+        "description": "— access delivery / manager notification / booking / receipt / shipping."
+      }
+    ],
+    "cta": "Watch Demo"
+  },
+  "useCases": {
+    "title": "Where AiPay delivers maximum impact",
+    "cases": [
+      {
+        "icon": "instagram",
+        "title": "Instagram Shops",
+        "bullets": [
+          "1-click invoice → customer pays → \"paid\" status → order to delivery",
+          "Fewer \"lost\" payments and night delays"
+        ]
+      },
+      {
+        "icon": "graduationCap",
+        "title": "Info-business",
+        "bullets": [
+          "Payment → instant access delivery 24/7",
+          "Fewer refunds from waiting for response at night"
+        ]
+      },
+      {
+        "icon": "scissors",
+        "title": "Services/Beauty",
+        "bullets": [
+          "Prepayment on booking → fewer no-shows",
+          "Automatic receipt and peace of mind"
+        ]
+      },
+      {
+        "icon": "store",
+        "title": "Market/Retail",
+        "bullets": [
+          "Fast payment verification without constantly \"checking the phone\"",
+          "Can be supplemented with Soundbox (\"voice of money\")"
+        ]
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Customer results in the first week",
+    "cases": [
+      {
+        "type": "Instagram Shop (clothing)",
+        "before": "~80 payments/day, manual reconciliation ~2 hours/day",
+        "after": "~15 minutes/day for exceptions",
+        "result": "saving ~45 hours per month",
+        "quote": "No longer living in screenshots — I see everything in one place."
+      },
+      {
+        "type": "Info-business (courses/keys)",
+        "before": "night delivery delays → negativity/refunds",
+        "after": "delivery immediately after payment confirmation 24/7",
+        "result": "faster value delivery to customer, fewer \"lost\" sales",
+        "quote": "Customer pays — instantly gets access. Even at night."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Choose the payment model that benefits your turnover",
+    "trial": {
+      "text": "7 days free",
+      "subtext": "— to test on real payments"
+    },
+    "plans": [
+      {
+        "name": "Fixed",
+        "price": "20,000",
+        "currency": "₸",
+        "period": "/terminal/month",
+        "description": "Suitable if turnover is high and predictability is needed.",
+        "features": [
+          "Unlimited transactions",
+          "Dashboard and API access",
+          "24/7 verification",
+          "WhatsApp/Telegram support"
+        ],
+        "cta": "Choose Fixed"
+      },
+      {
+        "name": "Revenue Share",
+        "price": "1",
+        "currency": "%",
+        "period": "of turnover/month",
+        "description": "Suitable if turnover fluctuates or you're just starting.",
+        "features": [
+          "Pay only for results",
+          "Dashboard and API access",
+          "24/7 verification",
+          "WhatsApp/Telegram support"
+        ],
+        "cta": "Choose Revenue Share",
+        "popular": true
+      }
+    ],
+    "microCopy": "Self-serve setup. Custom integrations — per specification."
+  },
+  "security": {
+    "title": "Data and money under control",
+    "points": [
+      {
+        "icon": "shieldOff",
+        "title": "No Access to Withdraw Money",
+        "description": "AiPay automates payment confirmation and accounting, but doesn't initiate outgoing operations."
+      },
+      {
+        "icon": "database",
+        "title": "Data Minimization",
+        "description": "We save only what's needed for verification and reporting."
+      },
+      {
+        "icon": "users",
+        "title": "Roles and Access",
+        "description": "You can separate owner and employee access."
+      },
+      {
+        "icon": "fileSearch",
+        "title": "Transparency",
+        "description": "Event and status logs for payments for control."
+      }
+    ],
+    "link": "View Security FAQ"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How long does setup take?",
+        "answer": "Best case — from 1 day. Depends on your process and available access."
+      },
+      {
+        "question": "What's needed to start?",
+        "answer": "Be a Kaspi Pay client. Cash register account needed for receipt automation."
+      },
+      {
+        "question": "Does this work for Instagram/Telegram sales?",
+        "answer": "Yes. AiPay covers invoice → payment → confirmation and you can connect bot/CRM/delivery via API."
+      },
+      {
+        "question": "Can AiPay withdraw money or \"take access\"?",
+        "answer": "No. We don't manage money withdrawal and don't make outgoing transfers."
+      },
+      {
+        "question": "Are custom integrations available?",
+        "answer": "Yes. If you need to embed AiPay into site/CRM/bot — we do it per specification (paid)."
+      },
+      {
+        "question": "What if payment \"didn't match\"?",
+        "answer": "Such cases go to \"exceptions\": you see them in Dashboard and resolve quickly."
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Try AiPay on real payments today",
+    "subtitle": "7 days free. Setup from 1 day. WhatsApp/Telegram support.",
+    "cta": "Start 7-Day Free Trial",
+    "microCopy": "Leave your contacts — we'll send access and setup checklist."
+  },
+  "leadForm": {
+    "title": "Start 7-Day Free Trial",
+    "description": "Fill in 60 seconds — we'll create access and help you connect.",
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "phone": {
+        "label": "Phone (WhatsApp)",
+        "placeholder": "+7 7XX XXX XX XX",
+        "hint": "We'll send access to this number and write in WhatsApp"
+      },
+      "businessName": {
+        "label": "Business Name",
+        "placeholder": "ShopName / StudioName"
+      },
+      "businessType": {
+        "label": "Business Type",
+        "options": ["Instagram Shop", "Info-business", "Services/Beauty", "Market/Retail", "Other"]
+      },
+      "hasKaspiPay": {
+        "label": "Is Kaspi Pay connected?",
+        "hint": "Needed to work with payments",
+        "options": ["Yes", "No"]
+      },
+      "needsFiscal": {
+        "label": "Need fiscal receipts?",
+        "hint": "Cash register account needed for receipt automation",
+        "options": ["Yes", "No", "Not sure yet"]
+      },
+      "integrationMethod": {
+        "label": "How do you want to connect?",
+        "options": ["Dashboard only", "API (have a developer)", "Need custom integration (need evaluation)"]
+      },
+      "monthlyVolume": {
+        "label": "Monthly turnover via Kaspi (approximately)",
+        "options": ["up to 2M", "2–5M", "5–10M", "10M+"]
+      },
+      "paymentModel": {
+        "label": "Preferred payment model",
+        "options": ["20,000 ₸/terminal", "1% of turnover", "Not sure"]
+      },
+      "consent": {
+        "label": "I agree to data processing and receiving messages in WhatsApp/Telegram."
+      }
+    },
+    "submit": "Get Access",
+    "submitting": "Creating access...",
+    "success": "Done! We've sent instructions to WhatsApp. Setup usually takes from 1 day.",
+    "error": "Failed to submit form. Write to us on WhatsApp — we'll respond quickly.",
+    "errors": {
+      "nameRequired": "Enter your name",
+      "phoneRequired": "Enter your phone",
+      "phoneInvalid": "Check phone format",
+      "consentRequired": "Consent to data processing required"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 AiPay. All rights reserved.",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "contact": {
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram"
+    }
+  }
+}
