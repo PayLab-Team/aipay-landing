@@ -4,22 +4,14 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Shield, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { LogoMarquee } from '@/components/shared';
 
 interface TrustStripProps {
   className?: string;
 }
 
-// Placeholder partner logos
-const PARTNER_LOGOS = [
-  { name: 'Kaspi Bank' },
-  { name: 'Halyk Bank' },
-  { name: 'Jusan Bank' },
-  { name: 'Freedom Finance' },
-  { name: 'Forte Bank' },
-  { name: 'Technodom' },
-  { name: 'Sulpak' },
-  { name: 'Arbuz.kz' },
+// Compatible payment systems and platforms (not endorsements)
+const COMPATIBLE_SYSTEMS = [
+  { name: 'Kaspi Pay' },
 ];
 
 export function TrustStrip({ className }: TrustStripProps) {
@@ -38,11 +30,16 @@ export function TrustStrip({ className }: TrustStripProps) {
         >
           {t('partnersLabel') || 'Нам доверяют компании'}
         </motion.p>
-        <LogoMarquee
-          logos={PARTNER_LOGOS}
-          speed="normal"
-          pauseOnHover
-        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6 }}
+          className="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200"
+        >
+          <span className="text-gray-600 font-medium text-sm">
+            {COMPATIBLE_SYSTEMS[0].name}
+          </span>
+        </motion.div>
       </div>
 
       {/* Trust points card */}

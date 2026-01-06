@@ -14,20 +14,20 @@
     "microCopy": "Setup from 1 day • API + Dashboard • WhatsApp/Telegram Support"
   },
   "hero": {
-    "badge": "7 days free trial",
-    "headline": "Automate Kaspi Payments: Invoice → Payment → Verification → Receipt",
-    "subheadline": "AiPay creates invoices by phone number, confirms payment receipt, helps match payments with orders, and automates fiscal receipts — no more manual \"screenshot economy\".",
+    "badge": "7 days free",
+    "headline": "Kaspi Payments on Autopilot",
+    "subheadline": "Stop checking screenshots. AiPay verifies payments instantly and triggers your business actions automatically.",
     "bullets": [
-      "Invoice creation in Kaspi by phone number (via Dashboard or API)",
-      "Instant payment verification 24/7 with transaction statuses",
-      "Auto-receipts and order: fiscalization and reporting (optional)"
+      "Instant verification 24/7",
+      "Auto-invoices by phone",
+      "Fiscal receipts included"
     ],
-    "primaryCta": "Start 7-Day Free Trial",
-    "secondaryCta": "Watch Demo (20 min)",
-    "ctaMicroCopy": "Perfect for SMB: Instagram/info-business/services/retail. Cash register account needed for receipt automation. WhatsApp/Telegram support."
+    "primaryCta": "Start Free Trial",
+    "secondaryCta": "See How It Works",
+    "ctaMicroCopy": "Setup in 1 day · No card required · WhatsApp support"
   },
   "trustStrip": {
-    "partnersLabel": "Trusted by businesses",
+    "partnersLabel": "Works with",
     "title": "What's important to know:",
     "points": [
       "AiPay doesn't withdraw money or initiate outgoing transfers — only automation and accounting.",
@@ -209,6 +209,11 @@
   },
   "testimonials": {
     "title": "Customer results in the first week",
+    "labels": {
+      "before": "Before:",
+      "after": "After:",
+      "result": "Result:"
+    },
     "cases": [
       {
         "type": "Instagram Shop (clothing)",
@@ -228,6 +233,7 @@
   },
   "pricing": {
     "title": "Choose the payment model that benefits your turnover",
+    "popularBadge": "Popular",
     "trial": {
       "text": "7 days free",
       "subtext": "— to test on real payments"
@@ -394,5 +400,74 @@
       "whatsapp": "WhatsApp",
       "telegram": "Telegram"
     }
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: January 2025",
+      "sections": {
+        "collection": {
+          "title": "Information We Collect",
+          "content": "We collect information you provide directly: name, phone number, business name, and payment transaction data necessary for service operation. We do not collect unnecessary personal data."
+        },
+        "usage": {
+          "title": "How We Use Information",
+          "content": "We use collected data exclusively to provide AiPay services: payment verification, invoice creation, reporting, and customer support. We do not use data for marketing purposes without your consent."
+        },
+        "storage": {
+          "title": "Data Storage and Security",
+          "content": "Data is stored on secure servers with encryption. We apply industry-standard security measures to protect your information from unauthorized access."
+        },
+        "sharing": {
+          "title": "Information Sharing",
+          "content": "We do not sell or transfer your data to third parties, except when necessary to provide services (e.g., payment processing) or when required by law."
+        },
+        "rights": {
+          "title": "Your Rights",
+          "content": "You have the right to access, correct, or delete your personal data. To exercise these rights, contact us via WhatsApp or Telegram."
+        },
+        "contact": {
+          "title": "Contact Us",
+          "content": "If you have questions about this Privacy Policy, contact us via WhatsApp or Telegram. Contact details are available on the main page."
+        }
+      }
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: January 2025",
+      "sections": {
+        "acceptance": {
+          "title": "Acceptance of Terms",
+          "content": "By using AiPay services, you agree to these Terms of Service. If you do not agree, please refrain from using our services."
+        },
+        "services": {
+          "title": "Services Description",
+          "content": "AiPay provides payment automation services for Kaspi Pay: invoice creation, payment verification, order matching, and fiscal receipt automation. We do not provide money withdrawal services and do not initiate outgoing transfers."
+        },
+        "accounts": {
+          "title": "User Account",
+          "content": "You are responsible for maintaining the confidentiality of your account credentials. Notify us immediately of any unauthorized access to your account."
+        },
+        "payment": {
+          "title": "Payment Terms",
+          "content": "AiPay offers two pricing models: fixed rate (20,000 KZT/terminal/month) or revenue share (1% of turnover). The first 7 days are free trial. Billing occurs monthly."
+        },
+        "liability": {
+          "title": "Limitation of Liability",
+          "content": "AiPay is not liable for losses caused by Kaspi system failures, incorrect data provided by users, or circumstances beyond our control. Our liability is limited to the amount paid for services."
+        },
+        "termination": {
+          "title": "Termination",
+          "content": "Either party may terminate the agreement with 30 days notice. We reserve the right to suspend service immediately for Terms violations."
+        }
+      }
+    }
+  },
+  "login": {
+    "title": "Login to Dashboard",
+    "description": "Access your AiPay dashboard to manage payments, view reports, and configure integrations.",
+    "dashboardButton": "Go to Dashboard",
+    "noAccount": "Don't have an account?",
+    "startTrial": "Start 7-day free trial"
   }
 }

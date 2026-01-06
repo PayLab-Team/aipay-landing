@@ -69,7 +69,7 @@ export function Pricing() {
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                       <span className="bg-gradient-to-r from-primary-600 to-primary-500 text-white text-sm font-semibold px-4 py-1.5 rounded-full shadow-lg">
-                        Популярный
+                        {t('popularBadge')}
                       </span>
                     </div>
                   )}

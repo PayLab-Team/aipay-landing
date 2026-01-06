@@ -35,19 +35,19 @@ export function Testimonials() {
                 <div className="space-y-3 mb-6">
                   <div className="flex items-start gap-3">
                     <span className="text-red-500 font-medium text-sm min-w-[40px]">
-                      До:
+                      {t('labels.before')}
                     </span>
                     <span className="text-gray-600 text-sm">{caseItem.before}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="text-green-500 font-medium text-sm min-w-[40px]">
-                      После:
+                      {t('labels.after')}
                     </span>
                     <span className="text-gray-600 text-sm">{caseItem.after}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="text-primary-500 font-medium text-sm min-w-[40px]">
-                      Итог:
+                      {t('labels.result')}
                     </span>
                     <span className="text-gray-900 font-medium text-sm">
                       {caseItem.result}

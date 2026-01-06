@@ -45,38 +45,35 @@ export function BusinessSegments() {
             </Tabs.List>
 
             <AnimatePresence mode="wait">
-              {BUSINESS_SEGMENTS.map((segment) => (
-                <Tabs.Content key={segment} value={segment} asChild>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Card className="p-8 max-w-2xl mx-auto">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                        {t(`content.${segment}.headline`)}
-                      </h3>
-                      <p className="text-gray-600 mb-6">
-                        {t(`content.${segment}.description`)}
-                      </p>
-                      <ul className="space-y-3">
-                        {(
-                          t.raw(`content.${segment}.bullets`) as string[]
-                        ).map((bullet, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2 text-gray-700"
-                          >
-                            <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </Card>
-                  </motion.div>
-                </Tabs.Content>
-              ))}
+              <motion.div
+                key={activeSegment}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="p-8 max-w-2xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    {t(`content.${activeSegment}.headline`)}
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    {t(`content.${activeSegment}.description`)}
+                  </p>
+                  <ul className="space-y-3">
+                    {(
+                      t.raw(`content.${activeSegment}.bullets`) as string[]
+                    ).map((bullet, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-2 text-gray-700"
+                      >
+                        <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </motion.div>
             </AnimatePresence>
           </Tabs.Root>
         </ScrollReveal>
