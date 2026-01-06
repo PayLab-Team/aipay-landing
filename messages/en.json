@@ -27,7 +27,7 @@
     "ctaMicroCopy": "Setup in 1 day · No card required · WhatsApp support"
   },
   "trustStrip": {
-    "partnersLabel": "Works with",
+    "partnersLabel": "Working with",
     "title": "What's important to know:",
     "points": [
       "AiPay doesn't withdraw money or initiate outgoing transfers — only automation and accounting.",
@@ -42,6 +42,10 @@
       "infobusiness": "Info-business",
       "services": "Services/Beauty",
       "retail": "Market/Retail",
+      "florist": "Flower Shop",
+      "bakery": "Bakery",
+      "restaurant": "Restaurant",
+      "medical": "Medical Center",
       "other": "Other"
     },
     "content": {
@@ -79,6 +83,42 @@
           "Sound notification on payment",
           "Can be supplemented with Soundbox (\"voice of money\")",
           "Minimum distractions from sales"
+        ]
+      },
+      "florist": {
+        "headline": "For Flower Shops",
+        "description": "Orders + delivery tracking — peak holiday demand handled",
+        "bullets": [
+          "Holiday rush automation",
+          "Same-day delivery tracking",
+          "Fewer lost orders"
+        ]
+      },
+      "bakery": {
+        "headline": "For Bakeries",
+        "description": "Pre-orders and custom cakes — no morning chaos",
+        "bullets": [
+          "Custom order prepayments",
+          "Morning pickup automation",
+          "Fewer no-shows"
+        ]
+      },
+      "restaurant": {
+        "headline": "For Restaurants",
+        "description": "Delivery and reservations — high volume handled",
+        "bullets": [
+          "Delivery order automation",
+          "Table deposit confirmation",
+          "Peak hour efficiency"
+        ]
+      },
+      "medical": {
+        "headline": "For Medical Centers",
+        "description": "Appointment payments — patient convenience",
+        "bullets": [
+          "Appointment prepayments",
+          "Reduced no-shows",
+          "Payment before visit"
         ]
       },
       "other": {
@@ -204,6 +244,38 @@
           "Fast payment verification without constantly \"checking the phone\"",
           "Can be supplemented with Soundbox (\"voice of money\")"
         ]
+      },
+      {
+        "icon": "flower2",
+        "title": "Flower Shop",
+        "bullets": [
+          "Orders + delivery tracking — peak holiday demand handled",
+          "Same-day delivery tracking"
+        ]
+      },
+      {
+        "icon": "cake",
+        "title": "Bakery",
+        "bullets": [
+          "Pre-orders and custom cakes — no morning chaos",
+          "Morning pickup automation"
+        ]
+      },
+      {
+        "icon": "utensilsCrossed",
+        "title": "Restaurant",
+        "bullets": [
+          "Delivery and reservations — high volume handled",
+          "Table deposit confirmation"
+        ]
+      },
+      {
+        "icon": "stethoscope",
+        "title": "Medical Center",
+        "bullets": [
+          "Appointment payments — patient convenience",
+          "Reduced no-shows"
+        ]
       }
     ]
   },
@@ -228,6 +300,13 @@
         "after": "delivery immediately after payment confirmation 24/7",
         "result": "faster value delivery to customer, fewer \"lost\" sales",
         "quote": "Customer pays — instantly gets access. Even at night."
+      },
+      {
+        "type": "Medical Center (Darmed)",
+        "before": "manual invoicing, payment control, data entry ~2-3 hours/day",
+        "after": "automated invoices and confirmations, minimal manual work",
+        "result": "saving ~2 hours/day (~60 hours/month)",
+        "quote": "We save 2 hours a day on invoicing, control, and data entry."
       }
     ]
   },
@@ -351,7 +430,7 @@
       },
       "businessType": {
         "label": "Business Type",
-        "options": ["Instagram Shop", "Info-business", "Services/Beauty", "Market/Retail", "Other"]
+        "options": ["Instagram Shop", "Info-business", "Services/Beauty", "Market/Retail", "Flower Shop", "Bakery", "Restaurant", "Medical Center", "Other"]
       },
       "hasKaspiPay": {
         "label": "Is Kaspi Pay connected?",

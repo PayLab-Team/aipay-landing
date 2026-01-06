@@ -19,6 +19,10 @@ export const BUSINESS_SEGMENTS = [
   'infobusiness',
   'services',
   'retail',
+  'florist',
+  'bakery',
+  'restaurant',
+  'medical',
   'other',
 ] as const;
 

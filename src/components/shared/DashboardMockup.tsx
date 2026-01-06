@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { float } from '@/lib/animations';
 
@@ -104,76 +105,15 @@ export function DashboardMockup({
       className={cn('relative', className)}
       {...wrapperProps}
     >
-      <div className="w-[500px] lg:w-[600px] bg-white rounded-2xl shadow-elevation-4 overflow-hidden border border-gray-100">
-        {/* Window chrome */}
-        <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 border-b border-gray-100">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
-          <div className="ml-4 flex-1 h-6 bg-gray-100 rounded-md max-w-xs" />
-        </div>
-
-        {/* Dashboard content */}
-        <div className="p-6 space-y-6">
-          {/* Header with stats */}
-          <div className="flex justify-between items-start">
-            <div>
-              <div className="h-4 w-32 bg-gray-100 rounded mb-2" />
-              <div className="h-8 w-48 bg-gradient-to-r from-primary-100 to-primary-200 rounded-lg" />
-            </div>
-            <div className="flex gap-2">
-              <div className="w-20 h-10 bg-primary-100 rounded-lg" />
-              <div className="w-20 h-10 bg-gray-100 rounded-lg" />
-            </div>
-          </div>
-
-          {/* Stats cards */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
-              <div className="h-3 w-16 bg-green-200 rounded mb-2" />
-              <div className="h-6 w-24 bg-green-300 rounded" />
-            </div>
-            <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
-              <div className="h-3 w-16 bg-blue-200 rounded mb-2" />
-              <div className="h-6 w-24 bg-blue-300 rounded" />
-            </div>
-            <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
-              <div className="h-3 w-16 bg-purple-200 rounded mb-2" />
-              <div className="h-6 w-24 bg-purple-300 rounded" />
-            </div>
-          </div>
-
-          {/* Chart placeholder */}
-          <div className="h-32 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl flex items-end justify-around px-4 pb-4">
-            <div className="w-8 bg-primary-200 rounded-t" style={{ height: '40%' }} />
-            <div className="w-8 bg-primary-300 rounded-t" style={{ height: '60%' }} />
-            <div className="w-8 bg-primary-400 rounded-t" style={{ height: '80%' }} />
-            <div className="w-8 bg-primary-500 rounded-t" style={{ height: '65%' }} />
-            <div className="w-8 bg-primary-400 rounded-t" style={{ height: '75%' }} />
-            <div className="w-8 bg-primary-300 rounded-t" style={{ height: '55%' }} />
-            <div className="w-8 bg-primary-200 rounded-t" style={{ height: '45%' }} />
-          </div>
-
-          {/* Table rows */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-              <div className="w-8 h-8 bg-green-100 rounded-full" />
-              <div className="flex-1">
-                <div className="h-3 w-32 bg-gray-200 rounded mb-1" />
-                <div className="h-2 w-24 bg-gray-100 rounded" />
-              </div>
-              <div className="h-4 w-16 bg-green-200 rounded-full" />
-            </div>
-            <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-              <div className="w-8 h-8 bg-blue-100 rounded-full" />
-              <div className="flex-1">
-                <div className="h-3 w-28 bg-gray-200 rounded mb-1" />
-                <div className="h-2 w-20 bg-gray-100 rounded" />
-              </div>
-              <div className="h-4 w-16 bg-blue-200 rounded-full" />
-            </div>
-          </div>
-        </div>
+      <div className="w-[500px] lg:w-[600px] rounded-2xl shadow-elevation-4 overflow-hidden border border-gray-200">
+        <Image
+          src="/images/dashboard.png"
+          alt="AI PAY Dashboard"
+          width={2424}
+          height={1740}
+          className="w-full h-auto"
+          priority
+        />
       </div>
     </Wrapper>
   );

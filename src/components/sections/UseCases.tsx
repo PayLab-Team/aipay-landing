@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Instagram, GraduationCap, Scissors, Store } from 'lucide-react';
+import { Instagram, GraduationCap, Scissors, Store, Flower2, Cake, UtensilsCrossed, Stethoscope } from 'lucide-react';
 import { Container, Card } from '@/components/ui';
 import { SectionHeading, ScrollReveal } from '@/components/shared';
 
@@ -10,6 +10,10 @@ const ICONS = {
   graduationCap: GraduationCap,
   scissors: Scissors,
   store: Store,
+  flower2: Flower2,
+  cake: Cake,
+  utensilsCrossed: UtensilsCrossed,
+  stethoscope: Stethoscope,
 };
 
 export function UseCases() {
