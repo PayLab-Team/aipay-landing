@@ -29,10 +29,10 @@ export default async function Home({ params }: Props) {
       <Problem />
       <Features />
       <HowItWorks />
-      <UseCases />
-      <Testimonials />
       <Pricing />
+      <UseCases />
       <FinalCTA /> 
+      <Testimonials />
       <LeadForm />
     </>
   );

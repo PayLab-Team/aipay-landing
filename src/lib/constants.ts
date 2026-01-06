@@ -10,8 +10,8 @@ export const NAV_ITEMS = [
 
 // TODO: Replace with real contact numbers before production launch
 export const SOCIAL_LINKS = {
-  whatsapp: 'https://wa.me/77001234567', // PLACEHOLDER - update with real WhatsApp number
-  telegram: 'https://t.me/aipay_kz', // PLACEHOLDER - update with real Telegram handle
+  whatsapp: 'https://wa.me/77775717557', // PLACEHOLDER - update with real WhatsApp number
+  telegram: 'https://t.me/adntgv', // PLACEHOLDER - update with real Telegram handle
 };
 
 export const BUSINESS_SEGMENTS = [
