@@ -32,9 +32,7 @@ export default async function Home({ params }: Props) {
       <UseCases />
       <Testimonials />
       <Pricing />
-      <Security />
-      <FAQ />
-      <FinalCTA />
+      <FinalCTA /> 
       <LeadForm />
     </>
   );

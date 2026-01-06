@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 const LOCALE_NAMES: Record<string, string> = {
   ru: 'RU',
   kk: 'KK',
-  en: 'EN',
+  // en: 'EN',
 };
 
 export function LanguageSwitcher() {

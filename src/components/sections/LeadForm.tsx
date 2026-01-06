@@ -5,11 +5,10 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
-import { Check, AlertCircle } from 'lucide-react';
-import { Container, Card, Button, Input, Select } from '@/components/ui';
+import { Check, AlertCircle, Phone } from 'lucide-react';
+import { Container, Card, Button, Input } from '@/components/ui';
 import { SectionHeading, ScrollReveal } from '@/components/shared';
 import { leadFormSchema, type LeadFormData } from '@/schemas/leadForm';
-import { cn } from '@/lib/utils';
 
 export function LeadForm() {
   const t = useTranslations('leadForm');
@@ -22,9 +21,6 @@ export function LeadForm() {
     formState: { errors },
   } = useForm<LeadFormData>({
     resolver: zodResolver(leadFormSchema),
-    defaultValues: {
-      consent: false,
-    },
   });
 
   const onSubmit = async (data: LeadFormData) => {
@@ -54,7 +50,7 @@ export function LeadForm() {
     return (
       <section id="contact" className="py-16 lg:py-24 bg-primary-50">
         <Container>
-          <Card className="max-w-2xl mx-auto p-8 text-center">
+          <Card className="max-w-md mx-auto p-8 text-center">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -75,7 +71,13 @@ export function LeadForm() {
     <section id="contact" className="py-16 lg:py-24 bg-primary-50">
       <Container>
         <ScrollReveal>
-          <Card className="max-w-2xl mx-auto p-8">
+          <Card className="max-w-md mx-auto p-8">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                <Phone className="w-6 h-6 text-primary-600" />
+              </div>
+            </div>
+
             <SectionHeading
               title={t('title')}
               subtitle={t('description')}
@@ -90,120 +92,14 @@ export function LeadForm() {
             )}
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* Row 1: Name & Phone */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input
-                  label={t('fields.name.label')}
-                  placeholder={t('fields.name.placeholder')}
-                  error={getError('name')}
-                  {...register('name')}
-                />
-                <Input
-                  label={t('fields.phone.label')}
-                  placeholder={t('fields.phone.placeholder')}
-                  hint={t('fields.phone.hint')}
-                  error={getError('phone')}
-                  {...register('phone')}
-                />
-              </div>
+              <Input
+                label={t('fields.phone.label')}
+                placeholder={t('fields.phone.placeholder')}
+                hint={t('fields.phone.hint')}
+                error={getError('phone')}
+                {...register('phone')}
+              />
 
-              {/* Row 2: Business Name & Type */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input
-                  label={t('fields.businessName.label')}
-                  placeholder={t('fields.businessName.placeholder')}
-                  {...register('businessName')}
-                />
-                <Select
-                  label={t('fields.businessType.label')}
-                  options={t.raw('fields.businessType.options') as string[]}
-                  placeholder="Выберите..."
-                  {...register('businessType')}
-                />
-              </div>
-
-              {/* Row 3: Kaspi Pay & Fiscal */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <Select
-                  label={t('fields.hasKaspiPay.label')}
-                  options={t.raw('fields.hasKaspiPay.options') as string[]}
-                  hint={t('fields.hasKaspiPay.hint')}
-                  placeholder="Выберите..."
-                  {...register('hasKaspiPay')}
-                />
-                <Select
-                  label={t('fields.needsFiscal.label')}
-                  options={t.raw('fields.needsFiscal.options') as string[]}
-                  hint={t('fields.needsFiscal.hint')}
-                  placeholder="Выберите..."
-                  {...register('needsFiscal')}
-                />
-              </div>
-
-              {/* Row 4: Integration & Volume */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <Select
-                  label={t('fields.integrationMethod.label')}
-                  options={t.raw('fields.integrationMethod.options') as string[]}
-                  placeholder="Выберите..."
-                  {...register('integrationMethod')}
-                />
-                <Select
-                  label={t('fields.monthlyVolume.label')}
-                  options={t.raw('fields.monthlyVolume.options') as string[]}
-                  placeholder="Выберите..."
-                  {...register('monthlyVolume')}
-                />
-              </div>
-
-              {/* Payment Model */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  {t('fields.paymentModel.label')}
-                </label>
-                <div className="flex flex-wrap gap-4">
-                  {(t.raw('fields.paymentModel.options') as string[]).map(
-                    (option) => (
-                      <label
-                        key={option}
-                        className="flex items-center gap-2 cursor-pointer"
-                      >
-                        <input
-                          type="radio"
-                          value={option}
-                          {...register('paymentModel')}
-                          className="w-4 h-4 text-primary-600 border-gray-300 focus:ring-primary-500"
-                        />
-                        <span className="text-sm text-gray-700">{option}</span>
-                      </label>
-                    )
-                  )}
-                </div>
-              </div>
-
-              {/* Consent */}
-              <div>
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    {...register('consent')}
-                    className={cn(
-                      'mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500',
-                      errors.consent && 'border-red-500'
-                    )}
-                  />
-                  <span className="text-sm text-gray-600">
-                    {t('fields.consent.label')}
-                  </span>
-                </label>
-                {errors.consent && (
-                  <p className="text-xs text-red-600 mt-1">
-                    {getError('consent')}
-                  </p>
-                )}
-              </div>
-
-              {/* Submit */}
               <Button
                 type="submit"
                 className="w-full"

@@ -31,7 +31,7 @@
     "title": "What's important to know:",
     "points": [
       "AiPay doesn't withdraw money or initiate outgoing transfers — only automation and accounting.",
-      "7 days free, then: 20,000 ₸/terminal or 1% of turnover",
+      "7 days free, then: 25,000 ₸/terminal/month (3-month minimum)",
       "Custom integrations — paid (per specification)"
     ]
   },
@@ -286,21 +286,7 @@
       "after": "After:",
       "result": "Result:"
     },
-    "cases": [
-      {
-        "type": "Instagram Shop (clothing)",
-        "before": "~80 payments/day, manual reconciliation ~2 hours/day",
-        "after": "~15 minutes/day for exceptions",
-        "result": "saving ~45 hours per month",
-        "quote": "No longer living in screenshots — I see everything in one place."
-      },
-      {
-        "type": "Info-business (courses/keys)",
-        "before": "night delivery delays → negativity/refunds",
-        "after": "delivery immediately after payment confirmation 24/7",
-        "result": "faster value delivery to customer, fewer \"lost\" sales",
-        "quote": "Customer pays — instantly gets access. Even at night."
-      },
+    "cases": [ 
       {
         "type": "Medical Center (Darmed)",
         "before": "manual invoicing, payment control, data entry ~2-3 hours/day",
@@ -311,7 +297,7 @@
     ]
   },
   "pricing": {
-    "title": "Choose the payment model that benefits your turnover",
+    "title": "Simple and transparent pricing",
     "popularBadge": "Popular",
     "trial": {
       "text": "7 days free",
@@ -320,31 +306,17 @@
     "plans": [
       {
         "name": "Fixed",
-        "price": "20,000",
+        "price": "25,000",
         "currency": "₸",
-        "period": "/terminal/month",
-        "description": "Suitable if turnover is high and predictability is needed.",
+        "period": "/terminal/month (3-month minimum)",
+        "description": "Predictable pricing for your business. Unlimited transactions included.",
         "features": [
           "Unlimited transactions",
           "Dashboard and API access",
           "24/7 verification",
           "WhatsApp/Telegram support"
         ],
-        "cta": "Choose Fixed"
-      },
-      {
-        "name": "Revenue Share",
-        "price": "1",
-        "currency": "%",
-        "period": "of turnover/month",
-        "description": "Suitable if turnover fluctuates or you're just starting.",
-        "features": [
-          "Pay only for results",
-          "Dashboard and API access",
-          "24/7 verification",
-          "WhatsApp/Telegram support"
-        ],
-        "cta": "Choose Revenue Share",
+        "cta": "Start Free Trial",
         "popular": true
       }
     ],
@@ -412,65 +384,26 @@
     "microCopy": "Leave your contacts — we'll send access and setup checklist."
   },
   "leadForm": {
-    "title": "Start 7-Day Free Trial",
-    "description": "Fill in 60 seconds — we'll create access and help you connect.",
+    "title": "Request a Callback",
+    "description": "Leave your number — we'll call you back",
     "fields": {
-      "name": {
-        "label": "Name",
-        "placeholder": "Your name"
-      },
       "phone": {
         "label": "Phone (WhatsApp)",
         "placeholder": "+7 7XX XXX XX XX",
-        "hint": "We'll send access to this number and write in WhatsApp"
-      },
-      "businessName": {
-        "label": "Business Name",
-        "placeholder": "ShopName / StudioName"
-      },
-      "businessType": {
-        "label": "Business Type",
-        "options": ["Instagram Shop", "Info-business", "Services/Beauty", "Market/Retail", "Flower Shop", "Bakery", "Restaurant", "Medical Center", "Other"]
-      },
-      "hasKaspiPay": {
-        "label": "Is Kaspi Pay connected?",
-        "hint": "Needed to work with payments",
-        "options": ["Yes", "No"]
-      },
-      "needsFiscal": {
-        "label": "Need fiscal receipts?",
-        "hint": "Cash register account needed for receipt automation",
-        "options": ["Yes", "No", "Not sure yet"]
-      },
-      "integrationMethod": {
-        "label": "How do you want to connect?",
-        "options": ["Dashboard only", "API (have a developer)", "Need custom integration (need evaluation)"]
-      },
-      "monthlyVolume": {
-        "label": "Monthly turnover via Kaspi (approximately)",
-        "options": ["up to 2M", "2–5M", "5–10M", "10M+"]
-      },
-      "paymentModel": {
-        "label": "Preferred payment model",
-        "options": ["20,000 ₸/terminal", "1% of turnover", "Not sure"]
-      },
-      "consent": {
-        "label": "I agree to data processing and receiving messages in WhatsApp/Telegram."
+        "hint": "We'll call you back and write in WhatsApp"
       }
     },
-    "submit": "Get Access",
-    "submitting": "Creating access...",
-    "success": "Done! We've sent instructions to WhatsApp. Setup usually takes from 1 day.",
-    "error": "Failed to submit form. Write to us on WhatsApp — we'll respond quickly.",
+    "submit": "Request Callback",
+    "submitting": "Sending...",
+    "success": "Done! We'll call you back shortly.",
+    "error": "Failed to submit. Write to us on WhatsApp — we'll respond quickly.",
     "errors": {
-      "nameRequired": "Enter your name",
       "phoneRequired": "Enter your phone",
-      "phoneInvalid": "Check phone format",
-      "consentRequired": "Consent to data processing required"
+      "phoneInvalid": "Check phone format"
     }
   },
   "footer": {
-    "copyright": "© 2024 AiPay. All rights reserved.",
+    "copyright": "© 2026 AiPay. All rights reserved.",
     "links": {
       "privacy": "Privacy Policy",
       "terms": "Terms of Service"
@@ -529,7 +462,7 @@
         },
         "payment": {
           "title": "Payment Terms",
-          "content": "AiPay offers two pricing models: fixed rate (20,000 KZT/terminal/month) or revenue share (1% of turnover). The first 7 days are free trial. Billing occurs monthly."
+          "content": "AiPay pricing: 25,000 KZT/terminal/month (3-month minimum). The first 7 days are free trial."
         },
         "liability": {
           "title": "Limitation of Liability",
