@@ -3,9 +3,9 @@ export const NAV_ITEMS = [
   { id: 'how-it-works', key: 'howItWorks' },
   { id: 'features', key: 'features' },
   { id: 'pricing', key: 'pricing' },
-  { id: 'security', key: 'security' },
-  { id: 'cases', key: 'cases' },
-  { id: 'faq', key: 'faq' },
+  // { id: 'security', key: 'security' },
+  // { id: 'cases', key: 'cases' },
+  // { id: 'faq', key: 'faq' },
 ] as const;
 
 // TODO: Replace with real contact numbers before production launch

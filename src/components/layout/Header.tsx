@@ -102,7 +102,7 @@ export function Header() {
         </nav>
 
         {/* Micro copy */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {!isScrolled && (
             <motion.p
               initial={{ opacity: 0, y: -10 }}
@@ -113,7 +113,7 @@ export function Header() {
               {t('microCopy')}
             </motion.p>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </Container>
 
       {/* Mobile Menu */}
