@@ -190,22 +190,32 @@
     ]
   },
   "howItWorks": {
-    "title": "How it works — 3 steps",
+    "title": "How it works",
     "steps": [
       {
         "number": "1",
-        "title": "You create an invoice",
-        "description": "— by phone number in Dashboard or via API."
+        "title": "Integrate with AiPay",
+        "description": "Connect via API or Dashboard"
       },
       {
         "number": "2",
-        "title": "Customer pays",
-        "description": "— regular payment in Kaspi."
+        "title": "Trigger payment",
+        "description": "Your system sends amount and customer phone number"
       },
       {
         "number": "3",
-        "title": "AiPay confirms payment and triggers action",
-        "description": "— access delivery / manager notification / booking / receipt / shipping."
+        "title": "Invoice sent",
+        "description": "Customer receives payment request in Kaspi"
+      },
+      {
+        "number": "4",
+        "title": "Customer pays",
+        "description": "One tap in Kaspi app"
+      },
+      {
+        "number": "5",
+        "title": "Status confirmed",
+        "description": "You receive \"paid\" status instantly"
       }
     ],
     "cta": "Watch Demo"

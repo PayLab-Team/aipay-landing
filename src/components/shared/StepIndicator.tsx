@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { cn } from '@/lib/utils';
-import { Check } from 'lucide-react';
 
 interface Step {
   number: number;
@@ -29,80 +28,111 @@ export function StepIndicator({
   const isHorizontal = orientation === 'horizontal';
 
   return (
-    <div
-      ref={ref}
-      className={cn(
-        'relative',
-        isHorizontal ? 'flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-4' : 'flex flex-col gap-8',
-        className
-      )}
-    >
-      {/* Connecting line */}
+    <div ref={ref} className={cn('relative', className)}>
       {isHorizontal ? (
-        <div className="hidden md:block absolute top-8 left-[15%] right-[15%] h-0.5 bg-gray-200">
-          <motion.div
-            className="h-full bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600"
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 1, delay: 0.5 }}
-            style={{ transformOrigin: 'left' }}
-          />
-        </div>
-      ) : (
-        <div className="absolute left-8 top-16 bottom-16 w-0.5 bg-gray-200">
-          <motion.div
-            className="w-full bg-gradient-to-b from-primary-400 via-primary-500 to-primary-600"
-            initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1, delay: 0.5 }}
-            style={{ transformOrigin: 'top' }}
-          />
-        </div>
-      )}
+        /* Horizontal layout for desktop */
+        <div className="hidden lg:block">
+          {/* Circles row with connecting line */}
+          <div className="relative flex items-center justify-between mb-6">
+            {/* Connecting line behind circles */}
+            <div className="absolute top-1/2 left-[10%] right-[10%] h-0.5 bg-gray-200 -translate-y-1/2">
+              <motion.div
+                className="h-full bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600"
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 1, delay: 0.5 }}
+                style={{ transformOrigin: 'left' }}
+              />
+            </div>
 
-      {steps.map((step, index) => (
-        <motion.div
-          key={step.number}
-          className={cn(
-            'relative z-10',
-            isHorizontal ? 'flex-1 text-center' : 'flex items-start gap-6'
-          )}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 + index * 0.2 }}
-        >
-          {/* Step circle */}
-          <motion.div
-            className={cn(
-              'w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold transition-all duration-300',
-              'bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-elevation-3',
-              isHorizontal ? 'mx-auto mb-4' : ''
-            )}
-            initial={{ scale: 0.8, boxShadow: '0 0 0 rgba(99, 102, 241, 0)' }}
-            animate={isInView ? {
-              scale: 1,
-              boxShadow: '0 0 30px rgba(99, 102, 241, 0.3)'
-            } : {}}
-            transition={{ duration: 0.5, delay: 0.3 + index * 0.2 }}
-            whileHover={{
-              scale: 1.1,
-              boxShadow: '0 0 40px rgba(99, 102, 241, 0.5)'
-            }}
-          >
-            {step.number}
-          </motion.div>
-
-          {/* Step content */}
-          <div className={cn(isHorizontal ? '' : 'flex-1 pt-2')}>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {step.title}
-            </h3>
-            <p className="text-gray-600 text-sm leading-relaxed max-w-xs mx-auto">
-              {step.description}
-            </p>
+            {/* Circles */}
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.number}
+                className="relative z-10 w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-elevation-3"
+                initial={{ scale: 0.8, boxShadow: '0 0 0 rgba(99, 102, 241, 0)' }}
+                animate={isInView ? {
+                  scale: 1,
+                  boxShadow: '0 0 30px rgba(99, 102, 241, 0.3)'
+                } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: '0 0 40px rgba(99, 102, 241, 0.5)'
+                }}
+              >
+                {step.number}
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
-      ))}
+
+          {/* Text row aligned with circles */}
+          <div className="flex justify-between">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.number}
+                className="flex-1 text-center px-2"
+                initial={{ opacity: 0, y: 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 + index * 0.15 }}
+              >
+                <h3 className="text-base font-semibold text-gray-900 mb-1">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {/* Vertical layout for mobile (always shown on mobile, hidden on desktop when horizontal) */}
+      <div className={cn(isHorizontal ? 'lg:hidden' : '')}>
+        <div className="relative flex flex-col gap-6">
+          {/* Vertical connecting line */}
+          <div className="absolute left-7 top-7 bottom-7 w-0.5 bg-gray-200">
+            <motion.div
+              className="w-full h-full bg-gradient-to-b from-primary-400 via-primary-500 to-primary-600"
+              initial={{ scaleY: 0 }}
+              animate={isInView ? { scaleY: 1 } : {}}
+              transition={{ duration: 1, delay: 0.5 }}
+              style={{ transformOrigin: 'top' }}
+            />
+          </div>
+
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.number}
+              className="relative z-10 flex items-start gap-4"
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+            >
+              {/* Circle */}
+              <motion.div
+                className="w-14 h-14 shrink-0 rounded-full flex items-center justify-center text-xl font-bold bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-elevation-3"
+                initial={{ scale: 0.8 }}
+                animate={isInView ? { scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+              >
+                {step.number}
+              </motion.div>
+
+              {/* Content */}
+              <div className="pt-2">
+                <h3 className="text-base font-semibold text-gray-900 mb-1">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
