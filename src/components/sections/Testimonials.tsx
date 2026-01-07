@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Quote, ArrowRight } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import { Container, Card } from '@/components/ui';
 import { SectionHeading, ScrollReveal } from '@/components/shared';
 
@@ -43,43 +43,33 @@ export function Testimonials() {
 
             {/* Metrics Row */}
             <ScrollReveal delay={0.2}>
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                 {/* Before */}
-                <Card className="p-5 md:col-span-1">
-                  <div className="text-red-500 font-semibold text-sm mb-2">
+                <Card className="p-6 lg:p-8">
+                  <div className="text-red-500 font-semibold text-base mb-3">
                     {t('labels.before')}
                   </div>
-                  <p className="text-gray-700 text-sm leading-relaxed">
+                  <p className="text-gray-700 text-base leading-relaxed">
                     {caseItem.before}
                   </p>
                 </Card>
 
-                {/* Arrow */}
-                <div className="hidden md:flex justify-center">
-                  <ArrowRight className="w-6 h-6 text-gray-300" />
-                </div>
-
                 {/* After */}
-                <Card className="p-5 md:col-span-1">
-                  <div className="text-green-500 font-semibold text-sm mb-2">
+                <Card className="p-6 lg:p-8">
+                  <div className="text-green-500 font-semibold text-base mb-3">
                     {t('labels.after')}
                   </div>
-                  <p className="text-gray-700 text-sm leading-relaxed">
+                  <p className="text-gray-700 text-base leading-relaxed">
                     {caseItem.after}
                   </p>
                 </Card>
 
-                {/* Arrow */}
-                <div className="hidden md:flex justify-center">
-                  <ArrowRight className="w-6 h-6 text-gray-300" />
-                </div>
-
                 {/* Result */}
-                <Card className="p-5 md:col-span-1 bg-primary-50 border-primary-100">
-                  <div className="text-primary-600 font-semibold text-sm mb-2">
+                <Card className="p-6 lg:p-8 bg-primary-50 border-primary-100">
+                  <div className="text-primary-600 font-semibold text-base mb-3">
                     {t('labels.result')}
                   </div>
-                  <p className="text-gray-900 font-medium text-sm leading-relaxed">
+                  <p className="text-gray-900 font-medium text-base leading-relaxed">
                     {caseItem.result}
                   </p>
                 </Card>
