@@ -49,6 +49,7 @@ const config: Config = {
         'fluid-3xl': 'clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem)',
         'fluid-4xl': 'clamp(2.25rem, 1.75rem + 2.5vw, 3.5rem)',
         'fluid-5xl': 'clamp(3rem, 2rem + 5vw, 4.5rem)',
+        'fluid-6xl': 'clamp(3.5rem, 2.5rem + 6vw, 5.5rem)',
       },
       boxShadow: {
         'elevation-1': '0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.08)',

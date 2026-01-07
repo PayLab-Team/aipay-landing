@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Check, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { Button, Container } from '@/components/ui';
 import { TrustStrip } from './TrustStrip';
 import { DashboardMockup } from '@/components/shared';
@@ -12,7 +12,6 @@ import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 export function Hero() {
   const t = useTranslations('hero');
   const { scrollToSection } = useSmoothScroll();
-  const bullets = t.raw('bullets') as string[];
 
   return (
     <section
@@ -45,7 +44,7 @@ export function Hero() {
             className="text-center lg:text-left"
           >
             {/* Badge */}
-            <motion.div
+            {/* <motion.div
               variants={blurIn}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-primary-100 shadow-elevation-1 mb-6"
             >
@@ -53,41 +52,21 @@ export function Hero() {
               <span className="text-sm font-medium text-primary-700">
                 {t('badge') || '7 дней бесплатно'}
               </span>
-            </motion.div>
+            </motion.div> */}
 
             <motion.h1
               variants={fadeInUp}
-              className="text-fluid-4xl lg:text-fluid-5xl font-bold text-gray-900 mb-6 leading-[1.1] tracking-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-[1.1] tracking-tight"
             >
               {t('headline')}
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
-              className="text-fluid-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-fluid-lg text-gray-600 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
               {t('subheadline')}
             </motion.p>
-
-            <motion.ul
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row lg:flex-col xl:flex-row flex-wrap justify-center lg:justify-start gap-3 sm:gap-5 mb-10"
-            >
-              {bullets.map((bullet, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 + index * 0.1 }}
-                  className="flex items-center gap-2 text-gray-700 text-sm sm:text-base"
-                >
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-                    <Check className="w-3 h-3 text-green-600" />
-                  </span>
-                  <span>{bullet}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
 
             <motion.div
               variants={fadeInUp}
