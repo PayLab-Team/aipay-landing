@@ -1,20 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+async function sendTelegramMessage(phone: string) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!token || !chatId) {
+    console.warn('Telegram credentials not configured');
+    return;
+  }
+
+  const message = `📱 New Lead!\n\nPhone: ${phone}\nTime: ${new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Almaty' })}`;
+
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: message,
+    }),
+  });
+}
+
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
 
-    // Log the lead data (in production, you'd send this to an email service)
-    console.log('New lead received:', data);
-
-    // Here you could integrate with:
-    // - Resend, SendGrid, or other email services
-    // - CRM systems
-    // - Slack/Discord notifications
-    // - Google Sheets
-
-    // For now, we'll just return success
-    // TODO: Add actual email sending logic
+    // Send to Telegram
+    await sendTelegramMessage(data.phone);
 
     return NextResponse.json(
       { success: true, message: 'Lead received successfully' },
