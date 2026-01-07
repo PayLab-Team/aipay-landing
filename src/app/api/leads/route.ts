@@ -5,7 +5,7 @@ async function sendTelegramMessage(phone: string) {
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
   if (!token || !chatId) {
-    console.warn('Telegram credentials not configured');
+    console.warn('Telegram credentials not configured!');
     return;
   }
 
