@@ -102,14 +102,14 @@ export function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="hidden lg:flex justify-center lg:justify-end"
+            className="flex justify-center lg:justify-end mt-8 lg:mt-0"
           >
             <Image
               src="/images/robotic-manipulator-pos-terminal.webp"
               alt="AI-powered payment automation"
               width={600}
               height={600}
-              className="w-[500px] lg:w-[600px] h-auto transform rotate-2 drop-shadow-2xl rounded-2xl"
+              className="w-[280px] sm:w-[400px] lg:w-[600px] h-auto transform rotate-2 drop-shadow-2xl rounded-2xl"
               priority
             />
           </motion.div>

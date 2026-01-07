@@ -80,7 +80,7 @@ export function Pricing() {
                   <p className="text-gray-600 mb-6">{plan.description}</p>
 
                   <div className="flex items-baseline gap-1 mb-6">
-                    <span className="text-4xl font-bold text-gray-900">
+                    <span className="text-3xl sm:text-4xl font-bold text-gray-900 whitespace-nowrap">
                       {plan.price}
                     </span>
                     <span className="text-xl text-gray-700">{plan.currency}</span>
