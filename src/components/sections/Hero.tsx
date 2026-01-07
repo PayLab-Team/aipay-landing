@@ -2,11 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import Image from 'next/image';
 import { Button, Container } from '@/components/ui';
 import { TrustStrip } from './TrustStrip';
-import { DashboardMockup } from '@/components/shared';
-import { fadeInUp, staggerContainer, blurIn } from '@/lib/animations';
+import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 export function Hero() {
@@ -98,14 +97,21 @@ export function Hero() {
             </motion.p>
           </motion.div>
 
-          {/* Right content - Dashboard mockup */}
+          {/* Right content - Robotic manipulator with POS terminal */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="hidden lg:flex justify-center lg:justify-end"
           >
-            <DashboardMockup variant="dashboard" animate />
+            <Image
+              src="/images/robotic-manipulator-pos-terminal.webp"
+              alt="AI-powered payment automation"
+              width={600}
+              height={600}
+              className="w-[500px] lg:w-[600px] h-auto transform rotate-2 drop-shadow-2xl rounded-2xl"
+              priority
+            />
           </motion.div>
         </div>
 

@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import {
   FileText,
   CheckCircle,
@@ -50,32 +51,50 @@ export function Features() {
           <SectionHeading title={t('title')} subtitle={t('subtitle')} />
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cards.map((card, index) => {
-            const Icon = ICONS[card.icon] || FileText;
-            const gradient = GRADIENTS[index % GRADIENTS.length];
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Left - Dashboard preview */}
+          <ScrollReveal delay={0.1}>
+            <div className="lg:sticky lg:top-24">
+              <div className="rounded-2xl shadow-elevation-3 overflow-hidden border border-gray-200">
+                <Image
+                  src="/images/dashboard.png"
+                  alt="AI PAY Dashboard"
+                  width={2424}
+                  height={1740}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          </ScrollReveal>
 
-            return (
-              <ScrollReveal key={index} delay={index * 0.05}>
-                <motion.div
-                  variants={cardHover}
-                  initial="initial"
-                  whileHover="hover"
-                  className="h-full"
-                >
-                  <Card className="p-6 h-full bg-white shadow-elevation-1 hover:shadow-elevation-3 transition-all duration-300 border-0">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center mb-5`}>
-                      <Icon className="w-7 h-7 text-gray-700" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                      {card.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{card.description}</p>
-                  </Card>
-                </motion.div>
-              </ScrollReveal>
-            );
-          })}
+          {/* Right - Feature cards (2x3 grid) */}
+          <div className="grid sm:grid-cols-2 gap-6">
+            {cards.map((card, index) => {
+              const Icon = ICONS[card.icon] || FileText;
+              const gradient = GRADIENTS[index % GRADIENTS.length];
+
+              return (
+                <ScrollReveal key={index} delay={index * 0.05}>
+                  <motion.div
+                    variants={cardHover}
+                    initial="initial"
+                    whileHover="hover"
+                    className="h-full"
+                  >
+                    <Card className="p-6 h-full bg-white shadow-elevation-1 hover:shadow-elevation-3 transition-all duration-300 border-0">
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center mb-5`}>
+                        <Icon className="w-7 h-7 text-gray-700" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                        {card.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{card.description}</p>
+                    </Card>
+                  </motion.div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
         </div>
       </Container>
     </section>
