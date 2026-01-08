@@ -24,7 +24,12 @@
     ],
     "primaryCta": "Start Free Trial",
     "secondaryCta": "See How It Works",
+    "demoBot": "Try Demo Bot",
     "ctaMicroCopy": "Setup in 1 day · No card required · WhatsApp support"
+  },
+  "demoVideo": {
+    "title": "See how AiPay works",
+    "subtitle": "Quick demo: from invoice creation to automatic payment confirmation"
   },
   "trustStrip": {
     "partnersLabel": "Working with",

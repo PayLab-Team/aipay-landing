@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import {
   Hero,
+  DemoVideo,
   BusinessSegments,
   Problem,
   Features,
@@ -25,6 +26,7 @@ export default async function Home({ params }: Props) {
   return (
     <>
       <Hero />
+      <DemoVideo />
       <BusinessSegments />
       <Problem />
       <Features />

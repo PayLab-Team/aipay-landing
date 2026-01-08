@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { Send } from 'lucide-react';
 import { Button, Container } from '@/components/ui';
 import { TrustStrip } from './TrustStrip';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
@@ -69,7 +70,7 @@ export function Hero() {
 
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
+              className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4"
             >
               <Button
                 size="lg"
@@ -79,14 +80,25 @@ export function Hero() {
               >
                 {t('primaryCta')}
               </Button>
-              <Button
+              {/* <Button
                 size="lg"
                 variant="secondary"
                 pill
                 onClick={() => scrollToSection('how-it-works')}
               >
                 {t('secondaryCta')}
-              </Button>
+              </Button> */}
+              <motion.a
+                href="https://t.me/aipay_demo_bot"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center h-14 px-8 text-lg gap-3 font-medium rounded-pill bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 hover:shadow-elevation-2 shadow-elevation-1 transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Send className="w-5 h-5" />
+                {t('demoBot')}
+              </motion.a>
             </motion.div>
 
             <motion.p

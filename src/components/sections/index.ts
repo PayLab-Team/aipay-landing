@@ -1,4 +1,5 @@
 export { Hero } from './Hero';
+export { DemoVideo } from './DemoVideo';
 export { TrustStrip } from './TrustStrip';
 export { BusinessSegments } from './BusinessSegments';
 export { Problem } from './Problem';
