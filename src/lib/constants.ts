@@ -8,10 +8,9 @@ export const NAV_ITEMS = [
   // { id: 'faq', key: 'faq' },
 ] as const;
 
-// TODO: Replace with real contact numbers before production launch
 export const SOCIAL_LINKS = {
-  whatsapp: 'https://wa.me/77775717557', // PLACEHOLDER - update with real WhatsApp number
-  telegram: 'https://t.me/adntgv', // PLACEHOLDER - update with real Telegram handle
+  whatsapp: 'https://wa.me/77755227623',
+  telegram: 'https://t.me/DrJonah',
 };
 
 export const BUSINESS_SEGMENTS = [
