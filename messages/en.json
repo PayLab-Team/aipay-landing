@@ -29,7 +29,15 @@
   },
   "demoVideo": {
     "title": "See how AiPay works",
-    "subtitle": "Quick demo: from invoice creation to automatic payment confirmation"
+    "subtitle": "Quick demo: from invoice creation to automatic payment confirmation",
+    "tabs": {
+      "general": "General Demo",
+      "altegio": "Altegio Integration"
+    },
+    "descriptions": {
+      "general": "Overview of AiPay payment automation flow",
+      "altegio": "AiPay integration with Altegio booking system for salons and beauty services"
+    }
   },
   "trustStrip": {
     "partnersLabel": "Working with",
