@@ -3,6 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { PARTNER_LINKS } from '@/lib/constants';
+import { Link } from '@/i18n/navigation';
 
 interface TrustStripProps {
   className?: string;
@@ -50,18 +52,29 @@ export function TrustStrip({ className }: TrustStripProps) {
 
           {/* Scrolling track */}
           <div className="flex animate-marquee">
-            {duplicatedSystems.map((system, index) => (
-              <div
-                key={`${system.name}-${index}`}
-                className="flex-shrink-0 mx-6"
-              >
-                <div className="flex items-center justify-center h-12 px-6 rounded-lg bg-white/60 backdrop-blur-sm border border-white/80 shadow-sm">
+            {duplicatedSystems.map((system, index) => {
+              const href = PARTNER_LINKS[system.name];
+              const content = (
+                <div className="flex items-center justify-center h-12 px-6 rounded-lg bg-white/60 backdrop-blur-sm border border-white/80 shadow-sm hover:bg-white/80 hover:shadow-md transition-all">
                   <span className="text-gray-700 font-medium text-sm whitespace-nowrap">
                     {system.name}
                   </span>
                 </div>
-              </div>
-            ))}
+              );
+
+              return (
+                <div
+                  key={`${system.name}-${index}`}
+                  className="flex-shrink-0 mx-6"
+                >
+                  {href ? (
+                    <Link href={href}>{content}</Link>
+                  ) : (
+                    content
+                  )}
+                </div>
+              );
+            })}
           </div>
         </motion.div>
       </div>

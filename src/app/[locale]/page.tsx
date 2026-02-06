@@ -9,10 +9,10 @@ import {
   UseCases,
   Testimonials,
   Pricing,
-  Security,
   FAQ,
   FinalCTA,
   LeadForm,
+  IntegratorsSection,
 } from '@/components/sections';
 
 type Props = {
@@ -30,11 +30,13 @@ export default async function Home({ params }: Props) {
       <BusinessSegments />
       <Problem />
       <Features />
+      <IntegratorsSection />
       <HowItWorks />
       <Pricing />
       <UseCases />
-      <FinalCTA /> 
+      <FinalCTA />
       <Testimonials />
+      <FAQ />
       <LeadForm />
     </>
   );

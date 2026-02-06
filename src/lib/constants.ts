@@ -8,6 +8,19 @@ export const NAV_ITEMS = [
   // { id: 'faq', key: 'faq' },
 ] as const;
 
+export const NAV_LINKS = [
+  { href: '/developers', key: 'developers' },
+] as const;
+
+export const PARTNER_LINKS: Record<string, string> = {
+  Hani: '/integrations/altegio',
+  'stiker.ai': '/integrations/stiker-ai',
+  altegio: '/integrations/altegio',
+  superme: '/integrations/pulseai',
+  flowsell: '/integrations/pulseai',
+  darmed: '/industries/medical-center-payments',
+};
+
 export const SOCIAL_LINKS = {
   whatsapp: 'https://wa.me/77755227623',
   telegram: 'https://t.me/DrJonah',
