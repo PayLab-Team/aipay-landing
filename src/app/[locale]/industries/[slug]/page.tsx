@@ -1,5 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
-import { useTranslations } from 'next-intl';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui';
 import { JsonLd } from '@/components/shared/JsonLd';
@@ -98,7 +97,7 @@ export default async function IndustryPage({ params }: Props) {
 
   setRequestLocale(locale);
   const key = SLUG_KEYS[slug];
-  const t = useTranslations(`industries.${key}`);
+  const t = await getTranslations(`industries.${key}`);
   const benefits = t.raw('benefits') as string[];
   const painPoints = t.raw('painPoints') as string[];
   const faqItems = t.raw('faq') as Array<{ question: string; answer: string }>;

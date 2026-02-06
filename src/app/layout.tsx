@@ -1,9 +1,22 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin', 'cyrillic'] });
+const inter = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Inter-Variable-Latin.woff2',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Inter-Variable-Italic.woff2',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'AiPay - Автоматизация оплат Kaspi для бизнеса',

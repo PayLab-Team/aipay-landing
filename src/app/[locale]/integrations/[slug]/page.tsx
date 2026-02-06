@@ -1,5 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
-import { useTranslations } from 'next-intl';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui';
 import { JsonLd } from '@/components/shared/JsonLd';
@@ -23,7 +22,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!VALID_SLUGS.includes(slug as IntegrationSlug)) return {};
 
-  const t_key = slug.replace('-', '') as string;
   const titles: Record<string, Record<string, string>> = {
     altegio: {
       ru: 'AiPay + Altegio — Kaspi Pay для бронирования и предоплаты',
@@ -97,7 +95,7 @@ export default async function IntegrationPage({ params }: Props) {
   }
 
   setRequestLocale(locale);
-  const t = useTranslations(`integrations.${slug.replace('-', '')}`);
+  const t = await getTranslations(`integrations.${slug.replace('-', '')}`);
   const benefits = t.raw('benefits') as string[];
   const steps = t.raw('steps') as string[];
   const faqItems = t.raw('faq') as Array<{ question: string; answer: string }>;

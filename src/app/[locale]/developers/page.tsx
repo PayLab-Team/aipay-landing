@@ -1,5 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
-import { useTranslations } from 'next-intl';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Container } from '@/components/ui';
 import { JsonLd } from '@/components/shared/JsonLd';
 import type { Metadata } from 'next';
@@ -31,26 +30,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function DevelopersFlowDiagram() {
-  const t = useTranslations('developersPage');
-  const steps = t.raw('flow.steps') as string[];
-
-  return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-8">
-      {steps.map((step, i) => (
-        <div key={i} className="flex items-center gap-4">
-          <div className="flex items-center justify-center w-auto px-6 py-3 rounded-xl bg-primary-50 border border-primary-200 text-primary-700 font-medium text-sm text-center">
-            {step}
-          </div>
-          {i < steps.length - 1 && (
-            <span className="text-primary-400 text-2xl hidden md:block">&rarr;</span>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function FeatureCard({ title, description }: { title: string; description: string }) {
   return (
     <div className="p-6 rounded-xl bg-white border border-gray-200 shadow-sm">
@@ -63,9 +42,10 @@ function FeatureCard({ title, description }: { title: string; description: strin
 export default async function DevelopersPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = useTranslations('developersPage');
+  const t = await getTranslations('developersPage');
   const features = t.raw('features') as Array<{ title: string; description: string }>;
   const faqItems = t.raw('faq') as Array<{ question: string; answer: string }>;
+  const flowSteps = t.raw('flow.steps') as string[];
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -121,7 +101,18 @@ export default async function DevelopersPage({ params }: Props) {
           <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
             {t('flow.subtitle')}
           </p>
-          <DevelopersFlowDiagram />
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-8">
+            {flowSteps.map((step, i) => (
+              <div key={i} className="flex items-center gap-4">
+                <div className="flex items-center justify-center w-auto px-6 py-3 rounded-xl bg-primary-50 border border-primary-200 text-primary-700 font-medium text-sm text-center">
+                  {step}
+                </div>
+                {i < flowSteps.length - 1 && (
+                  <span className="text-primary-400 text-2xl hidden md:block">&rarr;</span>
+                )}
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 
