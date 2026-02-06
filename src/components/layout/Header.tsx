@@ -7,7 +7,8 @@ import { Menu, X } from 'lucide-react';
 import { Button, Container } from '@/components/ui';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { MobileMenu } from './MobileMenu';
-import { NAV_ITEMS } from '@/lib/constants';
+import { NAV_ITEMS, NAV_LINKS } from '@/lib/constants';
+import { Link } from '@/i18n/navigation';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { cn } from '@/lib/utils';
 
@@ -68,6 +69,15 @@ export function Header() {
                 {t(`nav.${item.key}`)}
               </motion.button>
             ))}
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="relative px-4 py-2 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors rounded-lg hover:bg-primary-50"
+              >
+                {t(`nav.${link.key}`)}
+              </Link>
+            ))}
           </div>
 
           {/* Desktop Actions */}
@@ -100,20 +110,6 @@ export function Header() {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
         </nav>
-
-        {/* Micro copy */}
-        {/* <AnimatePresence>
-          {!isScrolled && (
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="hidden lg:block text-xs text-gray-500 text-center pb-2 -mt-2"
-            >
-              {t('microCopy')}
-            </motion.p>
-          )}
-        </AnimatePresence> */}
       </Container>
 
       {/* Mobile Menu */}

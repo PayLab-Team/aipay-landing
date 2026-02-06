@@ -7,7 +7,8 @@
       "pricing": "Pricing",
       "security": "Security",
       "cases": "Cases",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "developers": "Developers"
     },
     "login": "Login",
     "cta": "Start 7-Day Free Trial",
@@ -389,6 +390,22 @@
       {
         "question": "What if payment \"didn't match\"?",
         "answer": "Such cases go to \"exceptions\": you see them in Dashboard and resolve quickly."
+      },
+      {
+        "question": "How do webhooks work?",
+        "answer": "When a payment status changes, AiPay sends an HTTP POST request to your URL with payment data. Retry on errors and request signing for security are supported."
+      },
+      {
+        "question": "How fast is payment confirmation?",
+        "answer": "Confirmation is instant — within seconds of the customer paying in Kaspi."
+      },
+      {
+        "question": "Do you support remote Kaspi payments via invoice/link?",
+        "answer": "Yes. AiPay creates a Kaspi Pay invoice by the customer's phone number — they receive a notification and pay in one tap, without QR codes or in-person meetings."
+      },
+      {
+        "question": "Do I need to issue fiscal receipts?",
+        "answer": "If you're legally required to issue receipts — yes. AiPay can automatically send a fiscal receipt to the customer after payment confirmation via integration with cash register services."
       }
     ]
   },
@@ -496,5 +513,284 @@
     "dashboardButton": "Go to Dashboard",
     "noAccount": "Don't have an account?",
     "startTrial": "Start 7-day free trial"
+  },
+  "integrators": {
+    "title": "Integrate Kaspi Pay verification into your CRM, bot, or booking system",
+    "subtitle": "REST API + Webhooks + code examples. Setup from 1 day.",
+    "cards": [
+      {
+        "title": "REST API for Invoices",
+        "description": "Create invoices programmatically: pass amount and phone number — the customer receives a Kaspi payment request."
+      },
+      {
+        "title": "Webhook Notifications",
+        "description": "Instant HTTP callbacks on payment status change. Retry, signing, logging."
+      },
+      {
+        "title": "Quick Start",
+        "description": "Postman collection, Python/Node.js examples, sandbox for testing — launch in 1 day."
+      }
+    ],
+    "cta": "Developer Documentation"
+  },
+  "developersPage": {
+    "badge": "For Developers & Platforms",
+    "headline": "Kaspi Pay API for Your Platform",
+    "subheadline": "Invoice creation, payment verification, webhook notifications, fiscalization — all through a single REST API. Integration from 1 day.",
+    "primaryCta": "Request API Access",
+    "secondaryCta": "API Capabilities",
+    "flow": {
+      "title": "How Integration Works",
+      "subtitle": "Typical flow: your system creates an invoice → customer pays in Kaspi → webhook \"paid\" → your logic triggers",
+      "steps": ["Create Invoice (API)", "Customer Pays in Kaspi", "Webhook \"paid\"", "Your System Reacts"]
+    },
+    "featuresTitle": "What the API Provides",
+    "features": [
+      { "title": "Invoice Creation", "description": "POST request with amount and phone number. Customer receives a push notification in Kaspi." },
+      { "title": "Payment Statuses", "description": "Get current status: created, paid, expired, error. Polling or webhook." },
+      { "title": "Webhook Events", "description": "HTTP POST to your endpoint on status change. Retry on errors, HMAC signing." },
+      { "title": "Fiscalization", "description": "Automatic fiscal receipt delivery through integrated cash register services." },
+      { "title": "Sandbox", "description": "Test environment for development. Payment emulation without real money." },
+      { "title": "Postman Collection", "description": "Ready-made request collection for quick start. Import and test in minutes." }
+    ],
+    "faqTitle": "Developer FAQ",
+    "faq": [
+      { "question": "What API format?", "answer": "REST API with JSON body. Authentication via API key in header." },
+      { "question": "Are there rate limits?", "answer": "Standard limit is sufficient for most integrations. Extended plans available for high loads." },
+      { "question": "How to test without real payments?", "answer": "Use the sandbox environment. All endpoints are identical to production, but payments are emulated." },
+      { "question": "Do you support idempotency?", "answer": "Yes. Pass a unique idempotency key to protect against duplicate requests." }
+    ]
+  },
+  "integrations": {
+    "altegio": {
+      "badge": "Integration",
+      "headline": "AiPay + Altegio: Kaspi Pay Prepayment for Bookings",
+      "subheadline": "Automatic prepayment on Altegio bookings. Customer books → receives Kaspi invoice → pays → appointment confirmed. Fewer no-shows, more revenue.",
+      "benefitsTitle": "What This Enables",
+      "benefits": [
+        "40–60% reduction in no-shows through prepayment",
+        "Automatic appointment confirmation after payment",
+        "Fiscal receipt sent to customer automatically"
+      ],
+      "stepsTitle": "How to Connect",
+      "steps": [
+        "Sign up for AiPay and get your API key",
+        "Configure webhook URL in AiPay for payment events",
+        "Set up invoice trigger on booking in Altegio",
+        "Test the flow in sandbox and launch in production"
+      ],
+      "faqTitle": "FAQ",
+      "faq": [
+        { "question": "Does Altegio need modifications?", "answer": "No. Integration works via AiPay webhook — Altegio receives confirmation automatically." },
+        { "question": "What if the customer doesn't pay?", "answer": "The invoice expires automatically. You can configure a reminder or booking cancellation." },
+        { "question": "Does it work for multiple locations?", "answer": "Yes. Each location can have its own terminal and settings." }
+      ],
+      "ctaTitle": "Ready to connect AiPay + Altegio?",
+      "ctaSubtitle": "Leave a request — we'll set up the integration and help with testing.",
+      "ctaButton": "Request Setup",
+      "ctaSecondary": "API Documentation"
+    },
+    "pulseai": {
+      "badge": "Integration",
+      "headline": "AiPay + PulseAI: Kaspi Pay in WhatsApp Bots",
+      "subheadline": "Customer writes to WhatsApp → PulseAI bot creates Kaspi invoice → customer pays → order created automatically.",
+      "benefitsTitle": "What This Enables",
+      "benefits": [
+        "Automatic payment collection directly from WhatsApp chat",
+        "Order creation without manager involvement",
+        "Instant payment confirmation to customer"
+      ],
+      "stepsTitle": "How to Connect",
+      "steps": [
+        "Sign up for AiPay and get your API key",
+        "Connect AiPay API to your PulseAI bot",
+        "Set up invoice trigger on payment request",
+        "Test in sandbox and launch"
+      ],
+      "faqTitle": "FAQ",
+      "faq": [
+        { "question": "Does it work with voice bots?", "answer": "Yes. The API is universal — can be called from any bot, including PulseAI voice scenarios." },
+        { "question": "Can invoices be sent within the chat?", "answer": "Yes. The bot sends amount and phone to AiPay API, customer receives push notification from Kaspi." },
+        { "question": "How does the bot know about payment?", "answer": "Via webhook. AiPay sends a \"paid\" event — the bot continues the scenario automatically." }
+      ],
+      "ctaTitle": "Ready to connect AiPay + PulseAI?",
+      "ctaSubtitle": "Leave a request — we'll set up payments in your WhatsApp bot.",
+      "ctaButton": "Request Setup",
+      "ctaSecondary": "API Documentation"
+    },
+    "stikerai": {
+      "badge": "Integration",
+      "headline": "AiPay + STIKER.AI: Kaspi Pay for Freelancers",
+      "subheadline": "Accept Kaspi Pay payments in STIKER.AI WhatsApp scenarios. For freelancers, tutors, service providers.",
+      "benefitsTitle": "What This Enables",
+      "benefits": [
+        "1-click invoice to customer from WhatsApp bot",
+        "Automatic confirmation and history logging",
+        "No need to check screenshots"
+      ],
+      "stepsTitle": "How to Connect",
+      "steps": [
+        "Sign up for AiPay",
+        "Connect API to your STIKER.AI scenario",
+        "Set up automatic invoicing on order",
+        "Test and launch"
+      ],
+      "faqTitle": "FAQ",
+      "faq": [
+        { "question": "Does it work for one-time services?", "answer": "Yes. One invoice = one API call. Works for one-time payments of any size." },
+        { "question": "Do I need a business license?", "answer": "You need Kaspi Pay client status. Check with Kaspi for registration details." },
+        { "question": "Is there a minimum amount?", "answer": "Minimum amount is determined by Kaspi Pay. No restrictions from AiPay side." }
+      ],
+      "ctaTitle": "Ready to connect AiPay + STIKER.AI?",
+      "ctaSubtitle": "Automate Kaspi payment collection in your WhatsApp.",
+      "ctaButton": "Request Setup",
+      "ctaSecondary": "API Documentation"
+    },
+    "baskarupro": {
+      "badge": "Integration",
+      "headline": "AiPay + Baskaru Pro: Kaspi Pay Statuses in Your ERP",
+      "subheadline": "Sync Kaspi Pay payments with Baskaru Pro. Financial statuses update automatically, bots notify your team.",
+      "benefitsTitle": "What This Enables",
+      "benefits": [
+        "Automatic payment status updates in ERP",
+        "Team notifications via bots when money arrives",
+        "Payment reconciliation without manual work"
+      ],
+      "stepsTitle": "How to Connect",
+      "steps": [
+        "Sign up for AiPay and get your API key",
+        "Configure webhook to push statuses to Baskaru Pro",
+        "Map AiPay invoice fields to Baskaru Pro objects",
+        "Test the flow and launch"
+      ],
+      "faqTitle": "FAQ",
+      "faq": [
+        { "question": "What data is sent to the ERP?", "answer": "Amount, status, date, invoice ID, payer data — everything needed for financial accounting." },
+        { "question": "Can I set up notifications?", "answer": "Yes. Webhook can be directed to both ERP and bots (Telegram, WhatsApp) for team notifications." },
+        { "question": "Is 1C supported?", "answer": "AiPay API is universal. If your 1C accepts webhooks or HTTP requests — integration is possible." }
+      ],
+      "ctaTitle": "Ready to connect AiPay + Baskaru Pro?",
+      "ctaSubtitle": "Automate financial statuses in your ERP.",
+      "ctaButton": "Request Setup",
+      "ctaSecondary": "API Documentation"
+    }
+  },
+  "industries": {
+    "beauty": {
+      "headline": "Kaspi Pay for Beauty Salons: Booking Prepayment",
+      "subheadline": "Automatic Kaspi Pay prepayment reduces no-shows by 40–60%. Customer books → receives invoice → pays → appointment confirmed.",
+      "cta": "Start Free Trial",
+      "painTitle": "Sound Familiar?",
+      "painPoints": [
+        "Customers book appointments and don't show up",
+        "Manual prepayment verification via screenshots",
+        "No automatic booking confirmation"
+      ],
+      "benefitsTitle": "How AiPay Solves This",
+      "benefits": [
+        "Automatic Kaspi invoice on booking",
+        "Instant payment and booking confirmation",
+        "Fiscal receipt sent automatically",
+        "Integration with Altegio and other CRMs",
+        "Dashboard with payment reports",
+        "Fewer no-shows through prepayment"
+      ],
+      "faqTitle": "FAQ",
+      "faq": [
+        { "question": "How does it work with online booking?", "answer": "Customer books a time → receives Kaspi invoice → pays → appointment automatically confirmed." },
+        { "question": "Can I take partial prepayment?", "answer": "Yes. You set the invoice amount — full price or deposit." },
+        { "question": "What if a customer cancels?", "answer": "Refunds are handled through Dashboard. You control the cancellation policy." }
+      ],
+      "ctaTitle": "Ready to reduce no-shows at your salon?",
+      "ctaSubtitle": "7 days free. Setup from 1 day.",
+      "ctaButton": "Start Free"
+    },
+    "medical": {
+      "headline": "Kaspi Pay for Medical Centers: Online Appointment Payments",
+      "subheadline": "Patient books → receives Kaspi invoice → pays → appointment confirmed. Automatic receipt, fewer no-shows.",
+      "cta": "Start Free Trial",
+      "painTitle": "Sound Familiar?",
+      "painPoints": [
+        "Patients book appointments and don't show up",
+        "Admin spends hours reconciling payments",
+        "No automatic fiscal receipts"
+      ],
+      "benefitsTitle": "How AiPay Solves This",
+      "benefits": [
+        "Automatic Kaspi invoice on appointment booking",
+        "Save ~2 hours/day on reconciliation (example: Darmed)",
+        "Automatic fiscal receipts",
+        "Integration with medical CRMs",
+        "Dashboard for administration",
+        "Fewer no-shows through prepayment"
+      ],
+      "faqTitle": "FAQ",
+      "faq": [
+        { "question": "Does it comply with medical accounting requirements?", "answer": "AiPay automates payment collection and receipt issuance. Medical accounting stays in your system." },
+        { "question": "Can I connect multiple locations?", "answer": "Yes. Each location gets its own terminal and separate reporting." },
+        { "question": "Are there real examples?", "answer": "Darmed medical center saves ~2 hours/day on invoicing and payment control with AiPay." }
+      ],
+      "ctaTitle": "Ready to automate payments at your medical center?",
+      "ctaSubtitle": "7 days free. Real results — like Darmed.",
+      "ctaButton": "Start Free"
+    },
+    "restaurant": {
+      "headline": "Kaspi Pay for Restaurants & Delivery: Payment Automation",
+      "subheadline": "Automatic invoices for delivery, table deposits, peak hours without chaos. Kaspi Pay on autopilot.",
+      "cta": "Start Free Trial",
+      "painTitle": "Sound Familiar?",
+      "painPoints": [
+        "Manual payment verification under high load",
+        "Lost delivery orders due to payment confusion",
+        "No automatic table deposit confirmation"
+      ],
+      "benefitsTitle": "How AiPay Solves This",
+      "benefits": [
+        "Automatic invoices for delivery orders",
+        "Table reservation deposit confirmation",
+        "Integration with bots (WhatsApp, Telegram)",
+        "Instant verification during peak hours",
+        "Dashboard with per-order reports",
+        "Automatic fiscal receipts"
+      ],
+      "faqTitle": "FAQ",
+      "faq": [
+        { "question": "Does it handle high load?", "answer": "Yes. AiPay processes payments automatically — load doesn't affect confirmation speed." },
+        { "question": "Can I integrate with an order bot?", "answer": "Yes. API allows creating invoices from a bot and receiving webhook on payment." },
+        { "question": "Does it work for multiple locations?", "answer": "Yes. Separate terminal and reporting for each location." }
+      ],
+      "ctaTitle": "Ready to automate restaurant payments?",
+      "ctaSubtitle": "7 days free. No chaos during peak hours.",
+      "ctaButton": "Start Free"
+    },
+    "instagram": {
+      "headline": "Kaspi Pay Invoices for Instagram Shops: Payment Automation",
+      "subheadline": "1-click invoice → customer pays in Kaspi → status \"paid\" → order to delivery. No screenshots, no delays.",
+      "cta": "Start Free Trial",
+      "painTitle": "Sound Familiar?",
+      "painPoints": [
+        "Manually checking payment screenshots",
+        "Lost payments and overnight delays",
+        "Fraudulent screenshots and payment triangles"
+      ],
+      "benefitsTitle": "How AiPay Solves This",
+      "benefits": [
+        "Automatic invoice by phone number",
+        "Instant verification — no screenshots needed",
+        "Bot and CRM integration for order automation",
+        "24/7 payment notifications",
+        "Protection against fraud and fake receipts",
+        "Automatic fiscal receipts"
+      ],
+      "faqTitle": "FAQ",
+      "faq": [
+        { "question": "How to invoice a customer from Instagram?", "answer": "Via Dashboard or bot: enter phone number and amount — customer receives push notification in Kaspi." },
+        { "question": "Does it work at night?", "answer": "Yes. AiPay works 24/7. Payment is confirmed automatically at any time." },
+        { "question": "Can I connect a bot for automation?", "answer": "Yes. API can automate the entire flow: order → invoice → payment → confirmation → delivery." }
+      ],
+      "ctaTitle": "Ready to automate Instagram shop payments?",
+      "ctaSubtitle": "Forget screenshots. 7 days free.",
+      "ctaButton": "Start Free"
+    }
   }
 }

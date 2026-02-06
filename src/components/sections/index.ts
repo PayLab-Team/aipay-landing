@@ -12,3 +12,4 @@ export { Security } from './Security';
 export { FAQ } from './FAQ';
 export { FinalCTA } from './FinalCTA';
 export { LeadForm } from './LeadForm';
+export { IntegratorsSection } from './IntegratorsSection';
