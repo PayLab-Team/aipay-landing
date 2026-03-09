@@ -12,7 +12,7 @@
     },
     "login": "Login",
     "cta": "Start 7-Day Free Trial",
-    "microCopy": "Setup from 1 day • API + Dashboard • WhatsApp/Telegram Support"
+    "microCopy": "Setup from 1 hour • API + Dashboard • WhatsApp/Telegram Support"
   },
   "hero": {
     "badge": "7 days free",
@@ -26,7 +26,7 @@
     "primaryCta": "Start Free Trial",
     "secondaryCta": "See How It Works",
     "demoBot": "Try Demo Bot",
-    "ctaMicroCopy": "Setup in 1 day · No card required · WhatsApp support"
+    "ctaMicroCopy": "Setup in 1 hour · No card required · WhatsApp support"
   },
   "demoVideo": {
     "title": "See how AiPay works",
@@ -369,7 +369,7 @@
     "items": [
       {
         "question": "How long does setup take?",
-        "answer": "Best case — from 1 day. Depends on your process and available access."
+        "answer": "Best case — from 1 hour. Depends on your process and available access."
       },
       {
         "question": "What's needed to start?",
@@ -411,7 +411,7 @@
   },
   "finalCta": {
     "title": "Try AiPay on real payments today",
-    "subtitle": "7 days free. Setup from 1 day. WhatsApp/Telegram support.",
+    "subtitle": "7 days free. Setup from 1 hour. WhatsApp/Telegram support.",
     "cta": "Start 7-Day Free Trial",
     "microCopy": "Leave your contacts — we'll send access and setup checklist."
   },
