@@ -84,7 +84,7 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <LanguageSwitcher />
             <motion.a
-              href="/login"
+              href="https://cabinet.aipay.kz/login"
               className="text-sm font-medium text-gray-600 hover:text-gray-900 px-3 py-2 rounded-lg hover:bg-gray-100/50 transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

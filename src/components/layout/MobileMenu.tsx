@@ -35,7 +35,7 @@ export function MobileMenu({ onClose, onNavClick }: MobileMenuProps) {
         <div className="flex items-center justify-between">
           <LanguageSwitcher />
           <a
-            href="/login"
+            href="https://cabinet.aipay.kz/login"
             className="text-sm font-medium text-gray-600 hover:text-gray-900"
           >
             {t('login')}
