@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-primary-50: #eef2ff;
@@ -31,6 +32,170 @@
     @apply py-16 lg:py-24;
   }
 }
+
+/* ── Blog prose ───────────────────────────────────────── */
+.blog-prose {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: #374151;
+}
+
+.blog-prose h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.blog-prose h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-prose h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.blog-prose p {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+.blog-prose a {
+  color: #4f46e5;
+  text-decoration: underline;
+  text-decoration-color: #c7d2fe;
+  text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+.blog-prose a:hover {
+  color: #4338ca;
+  text-decoration-color: #4338ca;
+}
+
+.blog-prose strong {
+  font-weight: 700;
+  color: #111827;
+}
+
+.blog-prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.blog-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.blog-prose li {
+  margin-bottom: 0.4rem;
+  padding-left: 0.25rem;
+}
+
+.blog-prose li::marker {
+  color: #6366f1;
+}
+
+.blog-prose code:not(pre code) {
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  background: #eef2ff;
+  color: #4338ca;
+  padding: 0.15em 0.45em;
+  border-radius: 0.3rem;
+  font-weight: 500;
+}
+
+.blog-prose pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+  border: 1px solid #1e293b;
+}
+
+.blog-prose pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+.blog-prose blockquote {
+  border-left: 4px solid #6366f1;
+  background: #eef2ff;
+  padding: 1rem 1.25rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin: 1.5rem 0;
+  color: #374151;
+  font-style: normal;
+}
+
+.blog-prose blockquote p {
+  margin-bottom: 0;
+}
+
+.blog-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.blog-prose th {
+  background: #f1f5f9;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: left;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid #e2e8f0;
+}
+
+.blog-prose td {
+  padding: 0.575rem 0.875rem;
+  border: 1px solid #e2e8f0;
+  color: #374151;
+  vertical-align: top;
+}
+
+.blog-prose tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.blog-prose hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 2rem 0;
+}
+
+.blog-prose img {
+  border-radius: 0.75rem;
+  margin: 1.5rem auto;
+  display: block;
+  max-width: 100%;
+}
+
+/* ── End blog prose ───────────────────────────────────── */
 
 @keyframes accordion-down {
   from {

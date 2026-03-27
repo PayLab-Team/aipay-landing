@@ -114,22 +114,7 @@ export default async function BlogPostPage({ params }: Props) {
       <Container>
         <div className="max-w-3xl mx-auto">
           <div className="bg-white rounded-2xl border border-gray-200 p-8 md:p-12 shadow-sm">
-            <div className="prose prose-gray prose-lg max-w-none
-              prose-headings:font-bold prose-headings:text-gray-900
-              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-p:text-gray-600 prose-p:leading-relaxed prose-p:text-base
-              prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline
-              prose-strong:text-gray-800
-              prose-code:text-primary-700 prose-code:bg-primary-50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none
-              prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-xl prose-pre:text-sm prose-pre:leading-relaxed
-              prose-blockquote:border-primary-400 prose-blockquote:bg-primary-50 prose-blockquote:rounded-r-lg prose-blockquote:py-1 prose-blockquote:not-italic prose-blockquote:text-gray-700
-              prose-li:text-gray-600 prose-li:leading-relaxed
-              prose-ol:text-gray-600
-              prose-ul:text-gray-600
-              prose-hr:border-gray-200
-              prose-table:text-sm prose-thead:bg-gray-50 prose-th:text-gray-700 prose-td:text-gray-600
-            ">
+            <div className="blog-prose">
               <MDXRemote source={post.content} />
             </div>
           </div>
