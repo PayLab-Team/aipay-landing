@@ -8,7 +8,8 @@
       "security": "Security",
       "cases": "Cases",
       "faq": "FAQ",
-      "developers": "Developers"
+      "developers": "Developers",
+      "blog": "Blog"
     },
     "login": "Login",
     "cta": "Start 7-Day Free Trial",
@@ -302,7 +303,7 @@
       "after": "After:",
       "result": "Result:"
     },
-    "cases": [ 
+    "cases": [
       {
         "type": "Medical Center (Darmed)",
         "before": "manual invoicing, payment control, data entry ~2-3 hours/day",
@@ -542,23 +543,58 @@
     "flow": {
       "title": "How Integration Works",
       "subtitle": "Typical flow: your system creates an invoice → customer pays in Kaspi → webhook \"paid\" → your logic triggers",
-      "steps": ["Create Invoice (API)", "Customer Pays in Kaspi", "Webhook \"paid\"", "Your System Reacts"]
+      "steps": [
+        "Create Invoice (API)",
+        "Customer Pays in Kaspi",
+        "Webhook \"paid\"",
+        "Your System Reacts"
+      ]
     },
     "featuresTitle": "What the API Provides",
     "features": [
-      { "title": "Invoice Creation", "description": "POST request with amount and phone number. Customer receives a push notification in Kaspi." },
-      { "title": "Payment Statuses", "description": "Get current status: created, paid, expired, error. Polling or webhook." },
-      { "title": "Webhook Events", "description": "HTTP POST to your endpoint on status change. Retry on errors, HMAC signing." },
-      { "title": "Fiscalization", "description": "Automatic fiscal receipt delivery through integrated cash register services." },
-      { "title": "Sandbox", "description": "Test environment for development. Payment emulation without real money." },
-      { "title": "Postman Collection", "description": "Ready-made request collection for quick start. Import and test in minutes." }
+      {
+        "title": "Invoice Creation",
+        "description": "POST request with amount and phone number. Customer receives a push notification in Kaspi."
+      },
+      {
+        "title": "Payment Statuses",
+        "description": "Get current status: created, paid, expired, error. Polling or webhook."
+      },
+      {
+        "title": "Webhook Events",
+        "description": "HTTP POST to your endpoint on status change. Retry on errors, HMAC signing."
+      },
+      {
+        "title": "Fiscalization",
+        "description": "Automatic fiscal receipt delivery through integrated cash register services."
+      },
+      {
+        "title": "Sandbox",
+        "description": "Test environment for development. Payment emulation without real money."
+      },
+      {
+        "title": "Postman Collection",
+        "description": "Ready-made request collection for quick start. Import and test in minutes."
+      }
     ],
     "faqTitle": "Developer FAQ",
     "faq": [
-      { "question": "What API format?", "answer": "REST API with JSON body. Authentication via API key in header." },
-      { "question": "Are there rate limits?", "answer": "Standard limit is sufficient for most integrations. Extended plans available for high loads." },
-      { "question": "How to test without real payments?", "answer": "Use the sandbox environment. All endpoints are identical to production, but payments are emulated." },
-      { "question": "Do you support idempotency?", "answer": "Yes. Pass a unique idempotency key to protect against duplicate requests." }
+      {
+        "question": "What API format?",
+        "answer": "REST API with JSON body. Authentication via API key in header."
+      },
+      {
+        "question": "Are there rate limits?",
+        "answer": "Standard limit is sufficient for most integrations. Extended plans available for high loads."
+      },
+      {
+        "question": "How to test without real payments?",
+        "answer": "Use the sandbox environment. All endpoints are identical to production, but payments are emulated."
+      },
+      {
+        "question": "Do you support idempotency?",
+        "answer": "Yes. Pass a unique idempotency key to protect against duplicate requests."
+      }
     ]
   },
   "integrations": {
@@ -581,9 +617,18 @@
       ],
       "faqTitle": "FAQ",
       "faq": [
-        { "question": "Does Altegio need modifications?", "answer": "No. Integration works via AiPay webhook — Altegio receives confirmation automatically." },
-        { "question": "What if the customer doesn't pay?", "answer": "The invoice expires automatically. You can configure a reminder or booking cancellation." },
-        { "question": "Does it work for multiple locations?", "answer": "Yes. Each location can have its own terminal and settings." }
+        {
+          "question": "Does Altegio need modifications?",
+          "answer": "No. Integration works via AiPay webhook — Altegio receives confirmation automatically."
+        },
+        {
+          "question": "What if the customer doesn't pay?",
+          "answer": "The invoice expires automatically. You can configure a reminder or booking cancellation."
+        },
+        {
+          "question": "Does it work for multiple locations?",
+          "answer": "Yes. Each location can have its own terminal and settings."
+        }
       ],
       "ctaTitle": "Ready to connect AiPay + Altegio?",
       "ctaSubtitle": "Leave a request — we'll set up the integration and help with testing.",
@@ -609,9 +654,18 @@
       ],
       "faqTitle": "FAQ",
       "faq": [
-        { "question": "Does it work with voice bots?", "answer": "Yes. The API is universal — can be called from any bot, including PulseAI voice scenarios." },
-        { "question": "Can invoices be sent within the chat?", "answer": "Yes. The bot sends amount and phone to AiPay API, customer receives push notification from Kaspi." },
-        { "question": "How does the bot know about payment?", "answer": "Via webhook. AiPay sends a \"paid\" event — the bot continues the scenario automatically." }
+        {
+          "question": "Does it work with voice bots?",
+          "answer": "Yes. The API is universal — can be called from any bot, including PulseAI voice scenarios."
+        },
+        {
+          "question": "Can invoices be sent within the chat?",
+          "answer": "Yes. The bot sends amount and phone to AiPay API, customer receives push notification from Kaspi."
+        },
+        {
+          "question": "How does the bot know about payment?",
+          "answer": "Via webhook. AiPay sends a \"paid\" event — the bot continues the scenario automatically."
+        }
       ],
       "ctaTitle": "Ready to connect AiPay + PulseAI?",
       "ctaSubtitle": "Leave a request — we'll set up payments in your WhatsApp bot.",
@@ -637,9 +691,18 @@
       ],
       "faqTitle": "FAQ",
       "faq": [
-        { "question": "Does it work for one-time services?", "answer": "Yes. One invoice = one API call. Works for one-time payments of any size." },
-        { "question": "Do I need a business license?", "answer": "You need Kaspi Pay client status. Check with Kaspi for registration details." },
-        { "question": "Is there a minimum amount?", "answer": "Minimum amount is determined by Kaspi Pay. No restrictions from AiPay side." }
+        {
+          "question": "Does it work for one-time services?",
+          "answer": "Yes. One invoice = one API call. Works for one-time payments of any size."
+        },
+        {
+          "question": "Do I need a business license?",
+          "answer": "You need Kaspi Pay client status. Check with Kaspi for registration details."
+        },
+        {
+          "question": "Is there a minimum amount?",
+          "answer": "Minimum amount is determined by Kaspi Pay. No restrictions from AiPay side."
+        }
       ],
       "ctaTitle": "Ready to connect AiPay + STIKER.AI?",
       "ctaSubtitle": "Automate Kaspi payment collection in your WhatsApp.",
@@ -665,9 +728,18 @@
       ],
       "faqTitle": "FAQ",
       "faq": [
-        { "question": "What data is sent to the ERP?", "answer": "Amount, status, date, invoice ID, payer data — everything needed for financial accounting." },
-        { "question": "Can I set up notifications?", "answer": "Yes. Webhook can be directed to both ERP and bots (Telegram, WhatsApp) for team notifications." },
-        { "question": "Is 1C supported?", "answer": "AiPay API is universal. If your 1C accepts webhooks or HTTP requests — integration is possible." }
+        {
+          "question": "What data is sent to the ERP?",
+          "answer": "Amount, status, date, invoice ID, payer data — everything needed for financial accounting."
+        },
+        {
+          "question": "Can I set up notifications?",
+          "answer": "Yes. Webhook can be directed to both ERP and bots (Telegram, WhatsApp) for team notifications."
+        },
+        {
+          "question": "Is 1C supported?",
+          "answer": "AiPay API is universal. If your 1C accepts webhooks or HTTP requests — integration is possible."
+        }
       ],
       "ctaTitle": "Ready to connect AiPay + Baskaru Pro?",
       "ctaSubtitle": "Automate financial statuses in your ERP.",
@@ -697,9 +769,18 @@
       ],
       "faqTitle": "FAQ",
       "faq": [
-        { "question": "How does it work with online booking?", "answer": "Customer books a time → receives Kaspi invoice → pays → appointment automatically confirmed." },
-        { "question": "Can I take partial prepayment?", "answer": "Yes. You set the invoice amount — full price or deposit." },
-        { "question": "What if a customer cancels?", "answer": "Refunds are handled through Dashboard. You control the cancellation policy." }
+        {
+          "question": "How does it work with online booking?",
+          "answer": "Customer books a time → receives Kaspi invoice → pays → appointment automatically confirmed."
+        },
+        {
+          "question": "Can I take partial prepayment?",
+          "answer": "Yes. You set the invoice amount — full price or deposit."
+        },
+        {
+          "question": "What if a customer cancels?",
+          "answer": "Refunds are handled through Dashboard. You control the cancellation policy."
+        }
       ],
       "ctaTitle": "Ready to reduce no-shows at your salon?",
       "ctaSubtitle": "7 days free. Setup from 1 day.",
@@ -726,9 +807,18 @@
       ],
       "faqTitle": "FAQ",
       "faq": [
-        { "question": "Does it comply with medical accounting requirements?", "answer": "AiPay automates payment collection and receipt issuance. Medical accounting stays in your system." },
-        { "question": "Can I connect multiple locations?", "answer": "Yes. Each location gets its own terminal and separate reporting." },
-        { "question": "Are there real examples?", "answer": "Darmed medical center saves ~2 hours/day on invoicing and payment control with AiPay." }
+        {
+          "question": "Does it comply with medical accounting requirements?",
+          "answer": "AiPay automates payment collection and receipt issuance. Medical accounting stays in your system."
+        },
+        {
+          "question": "Can I connect multiple locations?",
+          "answer": "Yes. Each location gets its own terminal and separate reporting."
+        },
+        {
+          "question": "Are there real examples?",
+          "answer": "Darmed medical center saves ~2 hours/day on invoicing and payment control with AiPay."
+        }
       ],
       "ctaTitle": "Ready to automate payments at your medical center?",
       "ctaSubtitle": "7 days free. Real results — like Darmed.",
@@ -755,9 +845,18 @@
       ],
       "faqTitle": "FAQ",
       "faq": [
-        { "question": "Does it handle high load?", "answer": "Yes. AiPay processes payments automatically — load doesn't affect confirmation speed." },
-        { "question": "Can I integrate with an order bot?", "answer": "Yes. API allows creating invoices from a bot and receiving webhook on payment." },
-        { "question": "Does it work for multiple locations?", "answer": "Yes. Separate terminal and reporting for each location." }
+        {
+          "question": "Does it handle high load?",
+          "answer": "Yes. AiPay processes payments automatically — load doesn't affect confirmation speed."
+        },
+        {
+          "question": "Can I integrate with an order bot?",
+          "answer": "Yes. API allows creating invoices from a bot and receiving webhook on payment."
+        },
+        {
+          "question": "Does it work for multiple locations?",
+          "answer": "Yes. Separate terminal and reporting for each location."
+        }
       ],
       "ctaTitle": "Ready to automate restaurant payments?",
       "ctaSubtitle": "7 days free. No chaos during peak hours.",
@@ -784,9 +883,18 @@
       ],
       "faqTitle": "FAQ",
       "faq": [
-        { "question": "How to invoice a customer from Instagram?", "answer": "Via Dashboard or bot: enter phone number and amount — customer receives push notification in Kaspi." },
-        { "question": "Does it work at night?", "answer": "Yes. AiPay works 24/7. Payment is confirmed automatically at any time." },
-        { "question": "Can I connect a bot for automation?", "answer": "Yes. API can automate the entire flow: order → invoice → payment → confirmation → delivery." }
+        {
+          "question": "How to invoice a customer from Instagram?",
+          "answer": "Via Dashboard or bot: enter phone number and amount — customer receives push notification in Kaspi."
+        },
+        {
+          "question": "Does it work at night?",
+          "answer": "Yes. AiPay works 24/7. Payment is confirmed automatically at any time."
+        },
+        {
+          "question": "Can I connect a bot for automation?",
+          "answer": "Yes. API can automate the entire flow: order → invoice → payment → confirmation → delivery."
+        }
       ],
       "ctaTitle": "Ready to automate Instagram shop payments?",
       "ctaSubtitle": "Forget screenshots. 7 days free.",

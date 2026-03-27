@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { NAV_ITEMS } from '@/lib/constants';
+import { NAV_ITEMS, NAV_LINKS } from '@/lib/constants';
+import { Link } from '@/i18n/navigation';
 
 interface MobileMenuProps {
   onClose: () => void;
@@ -30,6 +31,16 @@ export function MobileMenu({ onClose, onNavClick }: MobileMenuProps) {
           >
             {t(`nav.${item.key}`)}
           </button>
+        ))}
+        {NAV_LINKS.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={onClose}
+            className="block w-full py-2 text-primary-600 hover:text-primary-700 font-medium"
+          >
+            {t(`nav.${link.key}`)}
+          </Link>
         ))}
         <hr className="border-gray-100" />
         <div className="flex items-center justify-between">

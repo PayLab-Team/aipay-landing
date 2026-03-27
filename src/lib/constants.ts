@@ -10,6 +10,7 @@ export const NAV_ITEMS = [
 
 export const NAV_LINKS = [
   { href: '/developers', key: 'developers' },
+  { href: '/blog', key: 'blog' },
 ] as const;
 
 export const PARTNER_LINKS: Record<string, string> = {
