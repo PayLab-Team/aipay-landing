@@ -1,0 +1,55 @@
+# AiPay
+
+> Kaspi Pay payment automation platform for businesses in Kazakhstan. Instant verification, phone-number invoicing, webhook notifications, fiscal receipts, and a developer API for CRMs, bots, and booking systems.
+
+AiPay automates Kaspi Pay payment acceptance for businesses: invoice creation by phone number, real-time payment verification 24/7, webhook callbacks, and automatic fiscal receipt generation. It integrates with CRMs, Telegram/WhatsApp bots, and booking platforms via REST API.
+
+## Key Features
+
+- **Instant Payment Verification**: Automatic 24/7 Kaspi Pay payment confirmation without manual screenshot checks
+- **Phone-Number Invoicing**: Generate Kaspi Pay invoices using only the customer's phone number
+- **Webhook Notifications**: Real-time HTTP callbacks on payment status changes for system-to-system integration
+- **Fiscal Receipts**: Automatic fiscal receipt (чек) generation compliant with Kazakhstan tax regulations
+- **REST API**: Full-featured API for developers to integrate payment automation into any platform
+- **Multi-Terminal Support**: Manage multiple Kaspi terminals from a single dashboard
+
+## Target Industries
+
+- Beauty salons and service businesses (prepayment to reduce no-shows)
+- Medical centers (appointment deposits and remote payments)
+- Instagram shops and e-commerce (automated order-to-delivery payment flow)
+- Restaurants and delivery services (order payment automation)
+- Info-businesses (instant digital product delivery upon payment)
+
+## Integration Partners
+
+- [Altegio](https://aipay.kz/ru/integrations/altegio) — CRM for beauty and service businesses
+- [PulseAI](https://aipay.kz/ru/integrations/pulseai) — AI-powered booking assistant
+- [STIKER.AI](https://aipay.kz/ru/integrations/stiker-ai) — Telegram/WhatsApp bot builder
+- [Baskaru Pro](https://aipay.kz/ru/integrations/baskaru-pro) — Business management platform
+
+## Pages
+
+- [Homepage](https://aipay.kz/ru): Main landing page with product overview, pricing, and use cases
+- [Developers](https://aipay.kz/ru/developers): API documentation overview, integration flow, and developer resources
+- [Beauty Salon Prepayment](https://aipay.kz/ru/industries/beauty-salon-prepayment): Kaspi Pay for salons and service bookings
+- [Medical Center Payments](https://aipay.kz/ru/industries/medical-center-payments): Payment automation for clinics
+- [Restaurant & Delivery Payments](https://aipay.kz/ru/industries/restaurant-delivery-payments): Order payment automation
+- [Instagram Shop Invoices](https://aipay.kz/ru/industries/instagram-shop-kaspi-invoices): Kaspi invoicing for social commerce
+
+## Pricing
+
+- 7-day free trial, no card required
+- 25,000 KZT per terminal per month (3-month minimum)
+- Custom integrations available (priced per specification)
+
+## Locales
+
+Available in Russian (ru), Kazakh (kk), and English (en). Default locale is Russian.
+All pages are accessible at `https://aipay.kz/{locale}/{path}`.
+
+## Contact
+
+- Website: https://aipay.kz
+- Telegram: @DrJonah
+- WhatsApp: +7 775 522 7623
