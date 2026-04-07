@@ -12,20 +12,31 @@ const BASE_URL = 'https://aipay.kz';
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const titles: Record<string, string> = {
-    ru: 'AiPay для разработчиков — API, Webhooks, интеграция Kaspi Pay',
-    kk: 'AiPay әзірлеушілерге — API, Webhooks, Kaspi Pay интеграция',
-    en: 'AiPay for Developers — API, Webhooks, Kaspi Pay Integration',
+    ru: 'Kaspi Pay API для разработчиков — AiPay | REST API, Webhooks, интеграция',
+    kk: 'Kaspi Pay API әзірлеушілерге — AiPay | REST API, Webhooks, интеграция',
+    en: 'Kaspi Pay API for Developers — AiPay | REST API, Webhooks, Integration',
   };
   const descriptions: Record<string, string> = {
-    ru: 'Интегрируйте Kaspi Pay в вашу CRM, бота или букинг-систему за 1 день. REST API, webhook-уведомления, Postman-коллекция, примеры кода.',
-    kk: 'Kaspi Pay-ді CRM, ботқа немесе брондау жүйесіне 1 күнде интеграциялаңыз. REST API, webhook хабарламалар, Postman жинағы, код мысалдары.',
-    en: 'Integrate Kaspi Pay into your CRM, bot, or booking system in 1 day. REST API, webhook notifications, Postman collection, code examples.',
+    ru: 'Kaspi Pay API для разработчиков: REST API для выставления счетов, webhook-уведомления о статусах, Postman-коллекция, примеры на Python и Node.js. Интеграция в CRM, бота или сайт за 1 день.',
+    kk: 'Kaspi Pay API әзірлеушілерге: шот жазуға арналған REST API, статус туралы webhook хабарламалар, Postman жинағы, Python және Node.js мысалдары. CRM, ботқа немесе сайтқа 1 күнде интеграция.',
+    en: 'Kaspi Pay API for developers: REST API for invoice creation, webhook status notifications, Postman collection, Python and Node.js examples. Integrate into CRM, bot, or website in 1 day.',
   };
+  const keywords: Record<string, string[]> = {
+    ru: [
+      'kaspi pay api', 'kaspi api', 'kaspi api для разработчиков',
+      'Kaspi Pay интеграция', 'Kaspi Pay webhook', 'AiPay API',
+      'REST API Kaspi', 'автоматизация Kaspi Pay',
+    ],
+    kk: ['kaspi pay api', 'kaspi api', 'Kaspi Pay интеграция', 'AiPay API'],
+    en: ['kaspi pay api', 'kaspi api', 'Kaspi Pay integration', 'AiPay API', 'REST API Kaspi'],
+  };
+  const localeUrl = (l: string) => l === 'ru' ? BASE_URL : `${BASE_URL}/${l}`;
   return {
     title: titles[locale] || titles.ru,
     description: descriptions[locale] || descriptions.ru,
+    keywords: keywords[locale] || keywords.ru,
     alternates: {
-      canonical: `${BASE_URL}/${locale}/developers`,
+      canonical: `${localeUrl(locale)}/developers`,
     },
   };
 }

@@ -42,8 +42,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const keywords: Record<string, string[]> = {
     ru: [
       'Kaspi Pay', 'оплата Kaspi', 'верификация оплат', 'автоматизация Kaspi',
+      'автоматизация оплаты каспи', 'автоматизация оплат Kaspi Pay',
       'Kaspi Pay API', 'Kaspi webhook', 'Kaspi Pay интеграция', 'проверка оплат Kaspi',
-      'Kaspi Pay для бизнеса', 'AiPay', 'фискальные чеки Kaspi',
+      'Kaspi Pay для бизнеса', 'AiPay', 'ai pay', 'фискальные чеки Kaspi',
     ],
     kk: [
       'Kaspi Pay', 'Kaspi төлем', 'төлемді тексеру', 'Kaspi автоматтандыру',
