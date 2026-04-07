@@ -5,18 +5,92 @@
 ## Main
 
 - [Home](https://aipay.kz/): Overview of AiPay — features, pricing, how it works, use cases by business type (Instagram shops, infobusiness, beauty, retail, restaurants, medical centers).
-- [For Developers](https://cabinet.aipay.kz/doc): REST API documentation — invoice creation, payment status webhooks, Postman collection, Python/Node.js code examples, sandbox environment.
+- [For Developers](https://aipay.kz/developers): Landing page for developers — API overview, integration flow, FAQ. Full REST API documentation at https://cabinet.aipay.kz/doc (invoice creation, payment status webhooks, Postman collection, Python/Node.js code examples, sandbox environment).
 - [Blog](https://aipay.kz/blog): Articles on Kaspi Pay automation, payment verification, and integrations.
+  - [Kaspi Pay для доставки еды: автоматизация оплат](https://aipay.kz/ru/blog/kaspi-pay-avtomatizaciya-dostavka): How restaurants and food delivery services in Kazakhstan automate Kaspi Pay via webhooks and Telegram bots.
+  - [Kaspi Pay + CRM: интеграция через AiPay API](https://aipay.kz/ru/blog/kaspi-pay-crm-integraciya): How to connect Kaspi Pay to Bitrix24, AmoCRM, or a custom ERP via AiPay API — with code examples.
+  - [Kaspi Pay для медцентра: автоматизация оплат](https://aipay.kz/ru/blog/kaspi-pay-dlya-medtsentra): How a medical center eliminated 65 hours of manual work per month using AiPay — automatic invoices, fiscal receipts, fewer no-shows.
+  - [Kaspi Pay для Instagram-магазина](https://aipay.kz/ru/blog/kaspi-pay-instagram-magazin): How to eliminate fake Kaspi payment screenshots and automate payment verification for Instagram sellers.
+  - [Kaspi Pay для Telegram-бота: webhook за 1 час](https://aipay.kz/ru/blog/kaspi-pay-telegram-bot-webhook): Step-by-step guide to connecting Kaspi Pay webhooks to a Telegram bot via AiPay API, with Python code.
+  - [Kaspi Pay webhook: что это и как настроить](https://aipay.kz/ru/blog/kaspi-pay-webhook-nastroyka): What Kaspi Pay webhooks are, why they don't exist natively, and how to add event-driven payment notifications via AiPay.
 
 ## Integrations
 
-- [AiPay + Altegio](https://aipay.kz/integrations/altegio): Pre-payment for bookings via Kaspi Pay. Reduces no-shows by 40–60%.
-- [AiPay + PulseAI](https://aipay.kz/integrations/pulseai): Kaspi Pay payments inside WhatsApp bots.
-- [AiPay + STIKER.AI](https://aipay.kz/integrations/stiker-ai): Kaspi Pay invoicing in WhatsApp automation scenarios.
+- [AiPay + Altegio](https://aipay.kz/integrations/altegio): Automatic pre-payment for bookings via Kaspi Pay. Client books → receives Kaspi invoice → pays → booking confirmed. Reduces no-shows by 40–60%.
+- [AiPay + PulseAI](https://aipay.kz/integrations/pulseai): Kaspi Pay payments inside WhatsApp bots (PulseAI). Client messages bot → invoice issued → paid → order created automatically.
+- [AiPay + STIKER.AI](https://aipay.kz/integrations/stiker-ai): Kaspi Pay invoicing in WhatsApp automation scenarios via STIKER.AI.
+- [AiPay + Baskaru Pro](https://aipay.kz/integrations/baskaru-pro): Kaspi Pay integration for Baskaru Pro users.
 
 ## Industries
 
-- [Medical Centers](https://aipay.kz/industries/medical-center-payments): Payment automation for clinics and medical practices.
+- [Beauty Salons](https://aipay.kz/industries/beauty-salon-prepayment): Pre-payment automation for beauty salons and spas. Reduces no-shows via Kaspi Pay invoices at booking time.
+- [Medical Centers](https://aipay.kz/industries/medical-center-payments): Payment automation for clinics and medical practices. Patient books → receives invoice → pays → appointment confirmed.
+- [Restaurants & Delivery](https://aipay.kz/industries/restaurant-delivery-payments): Kaspi Pay payment automation for restaurants and food delivery businesses.
+- [Instagram Shops](https://aipay.kz/industries/instagram-shop-kaspi-invoices): Kaspi Pay invoice automation for Instagram sellers — send invoices via DM or bot, confirm payment automatically.
+
+## API Reference
+
+Full interactive docs: https://cabinet.aipay.kz/doc
+OpenAPI spec: https://core.aipay.kz/api/v2/openapi.yaml
+
+### Authentication
+JWT Bearer token. Obtain via `POST /api/v2/auth/login` or `POST /api/v2/auth/register`. Pass as `Authorization: Bearer <token>` header.
+
+### Invoice Endpoints
+- `POST /api/v2/invoices` — Create invoice. Body: `{ pos_id, account (phone), amount, message }`. Returns invoice with `id` and `status_code`.
+- `GET /api/v2/invoices/{id}` — Get invoice status.
+- `PUT /api/v2/invoices/{id}/cancel` — Cancel pending invoice.
+- `PUT /api/v2/invoices/{id}/refund` — Refund paid invoice.
+- `GET /api/v2/invoices/{id}/events` — Full lifecycle event log for an invoice.
+- `GET /api/v2/invoices` — List invoices with filters: `status`, `pos_id`, `company_id`, date range, pagination.
+
+### Invoice Status Codes
+1=created, 2=pending (sent to terminal), 3=no_account, 5=canceled (system), 7=expired, 8=canceled (user), 9=paid, 11=refunded, 12=rejected.
+
+### Webhooks
+Set `notif_url` on your company. AiPay sends `POST` to your URL on every status change.
+
+**Invoice event payload:**
+```json
+{
+  "event_type": "invoice_update",
+  "timestamp": "RFC3339",
+  "user_id": "uuid",
+  "data": {
+    "invoice_id": "uuid",
+    "status_code": 9,
+    "status": "paid",
+    "amount": 5000,
+    "account": "+77009876543",
+    "account_name": "Иван Иванов",
+    "message": "Order #123"
+  }
+}
+```
+
+**Device status event payload:**
+```json
+{
+  "event_type": "device_status",
+  "data": { "pos_id": "uuid", "status": "working|paused|stopped|logged_out|unassigned" }
+}
+```
+
+### POS Terminal Endpoints
+- `GET /api/v2/pos` — List terminals.
+- `POST /api/v2/pos` — Claim a new terminal.
+- `PUT /api/v2/pos/{id}/pause` / `resume` / `stop` / `logout` — Terminal lifecycle.
+- `GET /api/v2/pos/{id}/events` — Terminal state-change event log.
+
+### Other Endpoints
+- `POST /api/v2/auth/register` — Register company + user.
+- `POST /api/v2/auth/login` — Login, returns JWT.
+- `GET /api/v2/companies` — List companies.
+- `GET /api/v2/analytics/overview` — Partner-level aggregated metrics (requires PARTNER company type).
+
+### Response Envelope
+- Success: `{ "data": { ... } }` or `{ "data": [...], "meta": { "page", "limit", "total" } }`
+- Error: `{ "error": { "code": "ERROR_CODE", "message": "..." } }`
 
 ## Legal
 
