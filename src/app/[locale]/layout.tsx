@@ -55,9 +55,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ],
   };
 
+  const localeUrl = (l: string) => l === 'ru' ? BASE_URL : `${BASE_URL}/${l}`;
+
   const alternates: Record<string, string> = {};
   for (const l of routing.locales) {
-    alternates[HREFLANG_MAP[l]] = `${BASE_URL}/${l}`;
+    alternates[HREFLANG_MAP[l]] = localeUrl(l);
   }
 
   return {
@@ -65,13 +67,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: descriptions[locale] || descriptions.ru,
     keywords: keywords[locale] || keywords.ru,
     alternates: {
-      canonical: `${BASE_URL}/${locale}`,
+      canonical: localeUrl(locale),
       languages: alternates,
     },
     openGraph: {
       title: titles[locale] || titles.ru,
       description: descriptions[locale] || descriptions.ru,
-      url: `${BASE_URL}/${locale}`,
+      url: localeUrl(locale),
       siteName: 'AiPay',
       locale: locale === 'ru' ? 'ru_KZ' : locale === 'kk' ? 'kk_KZ' : 'en_US',
       type: 'website',

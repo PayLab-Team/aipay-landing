@@ -65,13 +65,15 @@ export function IntegratorsSection() {
 
         <ScrollReveal delay={0.3}>
           <div className="text-center">
-            <Link
-              href="/developers"
+            <a
+              href="https://cabinet.aipay.kz/doc"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary-600 text-white font-medium hover:bg-primary-700 transition-colors shadow-elevation-2 hover:shadow-elevation-3"
             >
               {t('cta')}
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </a>
           </div>
         </ScrollReveal>
       </Container>

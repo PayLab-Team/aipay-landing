@@ -42,6 +42,20 @@ export function DemoVideo() {
                 className="absolute inset-0 w-full h-full"
               />
             </div>
+
+            <div className="mt-5 flex flex-col items-center gap-3">
+              <p className="text-sm text-gray-400">{t('channelNote')}</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {['Telegram', 'WhatsApp', 'Instagram', 'CRM', 'Сайт / API', '1C', 'Altegio'].map((ch) => (
+                  <span
+                    key={ch}
+                    className="px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-sm font-medium border border-gray-200"
+                  >
+                    {ch}
+                  </span>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </Container>

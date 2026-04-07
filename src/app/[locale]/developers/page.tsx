@@ -76,7 +76,9 @@ export default async function DevelopersPage({ params }: Props) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="#contact"
+                href="https://cabinet.aipay.kz/doc"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-primary-500 text-white font-medium hover:bg-primary-600 transition-colors"
               >
                 {t('primaryCta')}

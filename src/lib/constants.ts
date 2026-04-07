@@ -9,7 +9,7 @@ export const NAV_ITEMS = [
 ] as const;
 
 export const NAV_LINKS = [
-  { href: '/developers', key: 'developers' },
+  { href: 'https://cabinet.aipay.kz/doc', key: 'developers' },
   { href: '/blog', key: 'blog' },
 ] as const;
 

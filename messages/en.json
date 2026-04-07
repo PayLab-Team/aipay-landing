@@ -31,7 +31,8 @@
   },
   "demoVideo": {
     "title": "See how AiPay works",
-    "subtitle": "Quick demo: from invoice creation to automatic payment confirmation"
+    "subtitle": "Quick demo: from invoice creation to automatic payment confirmation",
+    "channelNote": "Demo shown in Telegram — AiPay works with any channel or platform"
   },
   "trustStrip": {
     "partnersLabel": "Working with",
