@@ -12,16 +12,7 @@ import type { Metadata } from 'next';
 const BASE_URL = 'https://aipay.kz';
 
 const inter = localFont({
-  src: [
-    {
-      path: '../../../public/fonts/Inter-Variable-Latin.woff2',
-      style: 'normal',
-    },
-    {
-      path: '../../../public/fonts/Inter-Variable-Italic.woff2',
-      style: 'italic',
-    },
-  ],
+  src: '../../../public/fonts/Inter-Variable-Latin.woff2',
   variable: '--font-inter',
   display: 'swap',
 });

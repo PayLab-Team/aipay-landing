@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Container } from '@/components/ui';
 import { SectionHeading } from '@/components/shared/SectionHeading';
+import { YouTubeLite } from '@/components/shared/YouTubeLite';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 
 export function DemoVideo() {
@@ -34,11 +35,9 @@ export function DemoVideo() {
             className="max-w-4xl mx-auto"
           >
             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-elevation-4 bg-gray-900">
-              <iframe
-                src="https://www.youtube.com/embed/57IdbbYz1rs?controls=0&rel=0"
+              <YouTubeLite
+                videoId="57IdbbYz1rs"
                 title={t('title')}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
                 className="absolute inset-0 w-full h-full"
               />
             </div>
