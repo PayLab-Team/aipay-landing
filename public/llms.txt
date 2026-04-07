@@ -1,0 +1,32 @@
+# AiPay
+
+> AiPay automates Kaspi Pay payments for businesses in Kazakhstan — invoice creation by phone number, instant payment verification, webhook notifications, and fiscal receipts. Works via API, dashboard, or ready-made integrations. Supports any channel: Telegram, WhatsApp, Instagram, CRM, website, 1C, and more.
+
+## Main
+
+- [Home](https://aipay.kz/): Overview of AiPay — features, pricing, how it works, use cases by business type (Instagram shops, infobusiness, beauty, retail, restaurants, medical centers).
+- [For Developers](https://cabinet.aipay.kz/doc): REST API documentation — invoice creation, payment status webhooks, Postman collection, Python/Node.js code examples, sandbox environment.
+- [Blog](https://aipay.kz/blog): Articles on Kaspi Pay automation, payment verification, and integrations.
+
+## Integrations
+
+- [AiPay + Altegio](https://aipay.kz/integrations/altegio): Pre-payment for bookings via Kaspi Pay. Reduces no-shows by 40–60%.
+- [AiPay + PulseAI](https://aipay.kz/integrations/pulseai): Kaspi Pay payments inside WhatsApp bots.
+- [AiPay + STIKER.AI](https://aipay.kz/integrations/stiker-ai): Kaspi Pay invoicing in WhatsApp automation scenarios.
+
+## Industries
+
+- [Medical Centers](https://aipay.kz/industries/medical-center-payments): Payment automation for clinics and medical practices.
+
+## Legal
+
+- [Privacy Policy](https://aipay.kz/privacy): Data processing and privacy policy.
+- [Terms of Service](https://aipay.kz/terms): Terms and conditions of use.
+
+## Key Facts
+
+- Pricing: 25,000 KZT per terminal per month (3-month minimum). 7-day free trial, no card required.
+- Setup time: 1 day via API, 1 hour via dashboard.
+- Languages: Russian, Kazakh, English.
+- Support: WhatsApp (+7 775 522-76-23), Telegram (@DrJonah).
+- AiPay does not withdraw funds or initiate outgoing transfers — only automation and accounting.
