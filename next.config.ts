@@ -15,17 +15,6 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.aipay.kz' }],
-        destination: 'https://aipay.kz/:path*',
-        permanent: true,
-      },
-    ];
-  },
-
   async headers() {
     return [
       {
