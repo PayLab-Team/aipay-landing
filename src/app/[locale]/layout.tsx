@@ -1,6 +1,8 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import localFont from 'next/font/local';
+import { Analytics } from '@vercel/analytics/react';
 import { routing } from '@/i18n/routing';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -8,6 +10,21 @@ import { JsonLd } from '@/components/shared/JsonLd';
 import type { Metadata } from 'next';
 
 const BASE_URL = 'https://aipay.kz';
+
+const inter = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/Inter-Variable-Latin.woff2',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/Inter-Variable-Italic.woff2',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
 type Props = {
   children: React.ReactNode;
@@ -67,6 +84,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: titles[locale] || titles.ru,
     description: descriptions[locale] || descriptions.ru,
     keywords: keywords[locale] || keywords.ru,
+    icons: {
+      icon: [
+        { url: '/favicon_io/favicon.ico' },
+        { url: '/favicon_io/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+        { url: '/favicon_io/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      ],
+      apple: '/favicon_io/apple-touch-icon.png',
+    },
+    manifest: '/favicon_io/site.webmanifest',
     alternates: {
       canonical: localeUrl(locale),
       languages: alternates,
@@ -130,12 +156,17 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <JsonLd data={ORGANIZATION_SCHEMA} />
-      <JsonLd data={SOFTWARE_SCHEMA} />
-      <Header />
-      <main className="flex-1">{children}</main>
-      <Footer />
-    </NextIntlClientProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
+        <NextIntlClientProvider messages={messages}>
+          <JsonLd data={ORGANIZATION_SCHEMA} />
+          <JsonLd data={SOFTWARE_SCHEMA} />
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
+        <Analytics />
+      </body>
+    </html>
   );
 }
