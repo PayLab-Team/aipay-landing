@@ -1,8 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /login
-Disallow: /*/login
 Disallow: /api/
 Disallow: /*/api/
+Disallow: /_next/
 
 Sitemap: https://www.aipay.kz/sitemap.xml

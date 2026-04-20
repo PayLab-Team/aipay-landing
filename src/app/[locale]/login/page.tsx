@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: titles[locale] || titles.ru,
+    robots: { index: false, follow: false },
   };
 }
 
