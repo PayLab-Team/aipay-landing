@@ -5,4 +5,4 @@ Disallow: /*/login
 Disallow: /api/
 Disallow: /*/api/
 
-Sitemap: https://aipay.kz/sitemap.xml
+Sitemap: https://www.aipay.kz/sitemap.xml

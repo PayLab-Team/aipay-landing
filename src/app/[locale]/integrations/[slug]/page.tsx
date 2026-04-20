@@ -8,7 +8,9 @@ import type { Metadata } from 'next';
 const VALID_SLUGS = ['altegio', 'pulseai', 'stiker-ai', 'baskaru-pro'] as const;
 type IntegrationSlug = typeof VALID_SLUGS[number];
 
-const BASE_URL = 'https://aipay.kz';
+const BASE_URL = 'https://www.aipay.kz';
+
+const localeUrl = (l: string) => l === 'ru' ? BASE_URL : `${BASE_URL}/${l}`;
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -71,7 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: titles[slug]?.[locale] || titles[slug]?.ru,
     description: descriptions[slug]?.[locale] || descriptions[slug]?.ru,
     alternates: {
-      canonical: `${BASE_URL}/${locale}/integrations/${slug}`,
+      canonical: `${localeUrl(locale)}/integrations/${slug}`,
     },
   };
 }

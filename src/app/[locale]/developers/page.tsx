@@ -7,7 +7,7 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const BASE_URL = 'https://aipay.kz';
+const BASE_URL = 'https://www.aipay.kz';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;

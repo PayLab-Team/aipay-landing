@@ -6,7 +6,9 @@ import { Link } from '@/i18n/navigation';
 import { getBlogPost, getBlogSlugs } from '@/lib/blog';
 import type { Metadata } from 'next';
 
-const BASE_URL = 'https://aipay.kz';
+const BASE_URL = 'https://www.aipay.kz';
+
+const localeUrl = (l: string) => l === 'ru' ? BASE_URL : `${BASE_URL}/${l}`;
 
 const LOCALES = ['ru', 'kk', 'en'];
 
@@ -25,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} | AiPay`,
     description: post.description,
-    alternates: { canonical: `${BASE_URL}/${locale}/blog/${slug}` },
+    alternates: { canonical: `${localeUrl(locale)}/blog/${slug}` },
   };
 }
 

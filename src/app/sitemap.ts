@@ -1,23 +1,27 @@
 import type { MetadataRoute } from 'next';
 import { getBlogSlugs } from '@/lib/blog';
 
-const BASE_URL = 'https://aipay.kz';
+const BASE_URL = 'https://www.aipay.kz';
 const locales = ['ru', 'kk', 'en'] as const;
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
+
+function localeUrl(l: string, path: string) {
+  return l === 'ru' ? `${BASE_URL}${path}` : `${BASE_URL}/${l}${path}`;
+}
 
 function localizedEntries(
   path: string,
   options: { changeFrequency: SitemapEntry['changeFrequency']; priority: number },
 ): SitemapEntry[] {
   return locales.map((locale) => ({
-    url: `${BASE_URL}/${locale}${path}`,
+    url: localeUrl(locale, path),
     lastModified: new Date(),
     changeFrequency: options.changeFrequency,
     priority: options.priority,
     alternates: {
       languages: Object.fromEntries(
-        locales.map((l) => [l, `${BASE_URL}/${l}${path}`]),
+        locales.map((l) => [l, localeUrl(l, path)]),
       ),
     },
   }));
@@ -26,7 +30,7 @@ function localizedEntries(
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogEntries = locales.flatMap((locale) =>
     getBlogSlugs(locale).map((slug) => ({
-      url: `${BASE_URL}/${locale}/blog/${slug}`,
+      url: localeUrl(locale, `/blog/${slug}`),
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,

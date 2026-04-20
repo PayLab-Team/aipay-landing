@@ -4,29 +4,29 @@
 
 ## Main
 
-- [Home](https://aipay.kz/): Overview of AiPay — features, pricing, how it works, use cases by business type (Instagram shops, infobusiness, beauty, retail, restaurants, medical centers).
-- [For Developers](https://aipay.kz/developers): Landing page for developers — API overview, integration flow, FAQ. Full REST API documentation at https://cabinet.aipay.kz/doc (invoice creation, payment status webhooks, Postman collection, Python/Node.js code examples, sandbox environment).
-- [Blog](https://aipay.kz/blog): Articles on Kaspi Pay automation, payment verification, and integrations.
-  - [Kaspi Pay для доставки еды: автоматизация оплат](https://aipay.kz/ru/blog/kaspi-pay-avtomatizaciya-dostavka): How restaurants and food delivery services in Kazakhstan automate Kaspi Pay via webhooks and Telegram bots.
-  - [Kaspi Pay + CRM: интеграция через AiPay API](https://aipay.kz/ru/blog/kaspi-pay-crm-integraciya): How to connect Kaspi Pay to Bitrix24, AmoCRM, or a custom ERP via AiPay API — with code examples.
-  - [Kaspi Pay для медцентра: автоматизация оплат](https://aipay.kz/ru/blog/kaspi-pay-dlya-medtsentra): How a medical center eliminated 65 hours of manual work per month using AiPay — automatic invoices, fiscal receipts, fewer no-shows.
-  - [Kaspi Pay для Instagram-магазина](https://aipay.kz/ru/blog/kaspi-pay-instagram-magazin): How to eliminate fake Kaspi payment screenshots and automate payment verification for Instagram sellers.
-  - [Kaspi Pay для Telegram-бота: webhook за 1 час](https://aipay.kz/ru/blog/kaspi-pay-telegram-bot-webhook): Step-by-step guide to connecting Kaspi Pay webhooks to a Telegram bot via AiPay API, with Python code.
-  - [Kaspi Pay webhook: что это и как настроить](https://aipay.kz/ru/blog/kaspi-pay-webhook-nastroyka): What Kaspi Pay webhooks are, why they don't exist natively, and how to add event-driven payment notifications via AiPay.
+- [Home](https://www.aipay.kz/): Overview of AiPay — features, pricing, how it works, use cases by business type (Instagram shops, infobusiness, beauty, retail, restaurants, medical centers).
+- [For Developers](https://www.aipay.kz/developers): Landing page for developers — API overview, integration flow, FAQ. Full REST API documentation at https://cabinet.aipay.kz/doc (invoice creation, payment status webhooks, Postman collection, Python/Node.js code examples, sandbox environment).
+- [Blog](https://www.aipay.kz/blog): Articles on Kaspi Pay automation, payment verification, and integrations.
+  - [Kaspi Pay для доставки еды: автоматизация оплат](https://www.aipay.kz/blog/kaspi-pay-avtomatizaciya-dostavka): How restaurants and food delivery services in Kazakhstan automate Kaspi Pay via webhooks and Telegram bots.
+  - [Kaspi Pay + CRM: интеграция через AiPay API](https://www.aipay.kz/blog/kaspi-pay-crm-integraciya): How to connect Kaspi Pay to Bitrix24, AmoCRM, or a custom ERP via AiPay API — with code examples.
+  - [Kaspi Pay для медцентра: автоматизация оплат](https://www.aipay.kz/blog/kaspi-pay-dlya-medtsentra): How a medical center eliminated 65 hours of manual work per month using AiPay — automatic invoices, fiscal receipts, fewer no-shows.
+  - [Kaspi Pay для Instagram-магазина](https://www.aipay.kz/blog/kaspi-pay-instagram-magazin): How to eliminate fake Kaspi payment screenshots and automate payment verification for Instagram sellers.
+  - [Kaspi Pay для Telegram-бота: webhook за 1 час](https://www.aipay.kz/blog/kaspi-pay-telegram-bot-webhook): Step-by-step guide to connecting Kaspi Pay webhooks to a Telegram bot via AiPay API, with Python code.
+  - [Kaspi Pay webhook: что это и как настроить](https://www.aipay.kz/blog/kaspi-pay-webhook-nastroyka): What Kaspi Pay webhooks are, why they don't exist natively, and how to add event-driven payment notifications via AiPay.
 
 ## Integrations
 
-- [AiPay + Altegio](https://aipay.kz/integrations/altegio): Automatic pre-payment for bookings via Kaspi Pay. Client books → receives Kaspi invoice → pays → booking confirmed. Reduces no-shows by 40–60%.
-- [AiPay + PulseAI](https://aipay.kz/integrations/pulseai): Kaspi Pay payments inside WhatsApp bots (PulseAI). Client messages bot → invoice issued → paid → order created automatically.
-- [AiPay + STIKER.AI](https://aipay.kz/integrations/stiker-ai): Kaspi Pay invoicing in WhatsApp automation scenarios via STIKER.AI.
-- [AiPay + Baskaru Pro](https://aipay.kz/integrations/baskaru-pro): Kaspi Pay integration for Baskaru Pro users.
+- [AiPay + Altegio](https://www.aipay.kz/integrations/altegio): Automatic pre-payment for bookings via Kaspi Pay. Client books → receives Kaspi invoice → pays → booking confirmed. Reduces no-shows by 40–60%.
+- [AiPay + PulseAI](https://www.aipay.kz/integrations/pulseai): Kaspi Pay payments inside WhatsApp bots (PulseAI). Client messages bot → invoice issued → paid → order created automatically.
+- [AiPay + STIKER.AI](https://www.aipay.kz/integrations/stiker-ai): Kaspi Pay invoicing in WhatsApp automation scenarios via STIKER.AI.
+- [AiPay + Baskaru Pro](https://www.aipay.kz/integrations/baskaru-pro): Kaspi Pay integration for Baskaru Pro users.
 
 ## Industries
 
-- [Beauty Salons](https://aipay.kz/industries/beauty-salon-prepayment): Pre-payment automation for beauty salons and spas. Reduces no-shows via Kaspi Pay invoices at booking time.
-- [Medical Centers](https://aipay.kz/industries/medical-center-payments): Payment automation for clinics and medical practices. Patient books → receives invoice → pays → appointment confirmed.
-- [Restaurants & Delivery](https://aipay.kz/industries/restaurant-delivery-payments): Kaspi Pay payment automation for restaurants and food delivery businesses.
-- [Instagram Shops](https://aipay.kz/industries/instagram-shop-kaspi-invoices): Kaspi Pay invoice automation for Instagram sellers — send invoices via DM or bot, confirm payment automatically.
+- [Beauty Salons](https://www.aipay.kz/industries/beauty-salon-prepayment): Pre-payment automation for beauty salons and spas. Reduces no-shows via Kaspi Pay invoices at booking time.
+- [Medical Centers](https://www.aipay.kz/industries/medical-center-payments): Payment automation for clinics and medical practices. Patient books → receives invoice → pays → appointment confirmed.
+- [Restaurants & Delivery](https://www.aipay.kz/industries/restaurant-delivery-payments): Kaspi Pay payment automation for restaurants and food delivery businesses.
+- [Instagram Shops](https://www.aipay.kz/industries/instagram-shop-kaspi-invoices): Kaspi Pay invoice automation for Instagram sellers — send invoices via DM or bot, confirm payment automatically.
 
 ## API Reference
 
@@ -94,8 +94,8 @@ Set `notif_url` on your company. AiPay sends `POST` to your URL on every status 
 
 ## Legal
 
-- [Privacy Policy](https://aipay.kz/privacy): Data processing and privacy policy.
-- [Terms of Service](https://aipay.kz/terms): Terms and conditions of use.
+- [Privacy Policy](https://www.aipay.kz/privacy): Data processing and privacy policy.
+- [Terms of Service](https://www.aipay.kz/terms): Terms and conditions of use.
 
 ## Key Facts
 

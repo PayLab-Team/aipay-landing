@@ -15,6 +15,13 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  async redirects() {
+    return [
+      { source: '/ru', destination: '/', permanent: true },
+      { source: '/ru/:path*', destination: '/:path*', permanent: true },
+    ];
+  },
+
   async headers() {
     return [
       {

@@ -20,7 +20,9 @@ const SLUG_KEYS: Record<string, string> = {
   'instagram-shop-kaspi-invoices': 'instagram',
 };
 
-const BASE_URL = 'https://aipay.kz';
+const BASE_URL = 'https://www.aipay.kz';
+
+const localeUrl = (l: string) => l === 'ru' ? BASE_URL : `${BASE_URL}/${l}`;
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -83,7 +85,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: titles[slug]?.[locale] || titles[slug]?.ru,
     description: descriptions[slug]?.[locale] || descriptions[slug]?.ru,
     alternates: {
-      canonical: `${BASE_URL}/${locale}/industries/${slug}`,
+      canonical: `${localeUrl(locale)}/industries/${slug}`,
     },
   };
 }

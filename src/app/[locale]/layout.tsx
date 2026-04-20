@@ -9,7 +9,7 @@ import { Footer } from '@/components/layout/Footer';
 import { JsonLd } from '@/components/shared/JsonLd';
 import type { Metadata } from 'next';
 
-const BASE_URL = 'https://aipay.kz';
+const BASE_URL = 'https://www.aipay.kz';
 
 const inter = localFont({
   src: '../../../public/fonts/Inter-Variable-Latin.woff2',
