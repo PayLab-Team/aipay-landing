@@ -1,0 +1,249 @@
+---
+title: "Kaspi Pay for Telegram Bots: Automating Payments via Webhook in 1 Hour"
+description: "How to connect a Kaspi Pay webhook to a Telegram bot using the AiPay API: a step-by-step guide with Python code. Automatic payment confirmation without manual verification."
+date: "2026-03-27"
+tags: ["Telegram", "webhooks", "automation"]
+---
+
+## The Client Paid at 2 AM. Got the Product in the Morning. And Already Messaged Support
+
+Imagine: your Telegram bot sells an online course. A client decides to buy at 2:17 AM — in Kazakhstan this is completely normal, especially for the 25–35 age group. They transfer the money via Kaspi, receive a message saying "Payment received, awaiting confirmation," and go to sleep.
+
+In the morning — no course, no access. They contact support. You wake up, see ten unread messages, manually check the transaction history, and send the access link. The client is already frustrated. You're already tired — and the workday hasn't even started.
+
+This is not a bug in your bot. It's an architectural problem: **Kaspi Pay does not offer a public webhook API**. No "payment completed" event means no automation. Every payment requires manual verification or custom workarounds like parsing SMS or email notifications.
+
+AiPay closes exactly this gap. Below — how it works and how to integrate it in one hour.
+
+---
+
+## Why Kaspi Pay and Telegram Bots Are a Difficult Pair Without Middleware
+
+Kaspi is Kazakhstan's largest payment platform: **14.7 million monthly active users**, 737,000 active merchants, and 75% of the country's digital payments market. Ignoring it is not an option: if your audience is in Kazakhstan, Kaspi is not just one of the options — it's the primary payment method.
+
+Telegram bots in Kazakhstan are experiencing a genuine boom. Bots for food delivery, digital product sales, subscriptions, and info businesses — all of it is built on Telegram because the audience is already there and the barrier to entry is low.
+
+The problem lies at the intersection of these two tools.
+
+The standard Kaspi Pay business flow looks like this: a client scans a QR code or transfers money by phone number, the funds arrive, and a manager sees the notification in the app or via email. For a brick-and-mortar store this works fine. For a Telegram bot that needs to respond instantly — it does not.
+
+**Kaspi does not provide a public REST API with webhook events for external developers.** This means your bot cannot directly subscribe to a "payment for invoice #12345 completed" event. Developers work around this in various ways:
+
+- Manual transaction log verification (does not scale)
+- Parsing email/SMS notifications from Kaspi (brittle, breaks when the format changes)
+- Periodic polling via unofficial methods (violates ToS, unstable)
+
+None of these approaches are suitable for production under real load.
+
+---
+
+## How AiPay Solves the Problem: The Full Flow in 5 Steps
+
+AiPay is a middleware layer between your Telegram bot and Kaspi Pay. It handles all interaction with Kaspi and delivers clean webhook events back to your bot.
+
+**The flow looks like this:**
+
+1. The client presses "Pay" in the bot
+2. Your bot sends a POST request to the AiPay API with the client's phone number and the amount
+3. AiPay creates an invoice in Kaspi Pay — the client receives a push notification in the Kaspi app
+4. The client taps one button in Kaspi and pays — **without leaving the Telegram session**
+5. AiPay receives confirmation from Kaspi and immediately fires a webhook to your endpoint
+6. Your bot receives the webhook, verifies the HMAC signature, and delivers what the client paid for
+
+The entire cycle — from pressing "Pay" to receiving the product — takes 20–40 seconds at a normal client pace. At night, at 2 AM, without any action from you.
+
+Additionally, AiPay automatically issues a fiscal receipt — which removes a separate headache for businesses operating legally in Kazakhstan.
+
+---
+
+## Step-by-Step Integration Guide
+
+### Step 1. Registration and Getting Your API Key
+
+Go to [aipay.kz](https://aipay.kz), register, and activate the free 7-day trial. After registration, in your dashboard you will find:
+
+- `API_KEY` — for authenticating requests
+- `WEBHOOK_SECRET` — for verifying the HMAC signature of incoming webhook events
+- Endpoint: `https://api.aipay.kz/v1`
+
+### Step 2. Setting Up the Webhook Endpoint in Your Bot
+
+Before making the first API request, set up an endpoint that will receive events from AiPay. This can be any publicly accessible URL — Flask, FastAPI, Express, whatever you prefer.
+
+Minimum requirements for the endpoint:
+- Accepts POST requests
+- Returns HTTP 200 within 5 seconds
+- Verifies the HMAC signature from the `X-AiPay-Signature` header
+
+### Step 3. Creating an Invoice via the API
+
+When a client initiates a payment in the bot, your backend makes a single POST request:
+
+```
+POST https://api.aipay.kz/v1/invoices
+```
+
+Request body:
+```json
+{
+  "phone": "77001234567",
+  "amount": 4900,
+  "description": "Course 'Python for Beginners' — 12-month access",
+  "external_id": "order_telegram_98765"
+}
+```
+
+`external_id` is your internal order identifier. You will use it to match the incoming webhook to a specific client in your database.
+
+### Step 4. Handling the Webhook Event
+
+AiPay will send a POST to your endpoint whenever the invoice status changes. Possible statuses: `paid`, `expired`, `error`.
+
+Event body:
+```json
+{
+  "event": "invoice.paid",
+  "invoice_id": "inv_abc123",
+  "external_id": "order_telegram_98765",
+  "amount": 4900,
+  "paid_at": "2026-03-27T02:17:43Z"
+}
+```
+
+### Step 5. Verifying the Signature and Fulfilling the Order
+
+Before delivering anything, always verify the HMAC signature. AiPay signs every webhook request — this protects against forged events.
+
+Algorithm: `HMAC-SHA256(raw_request_body, WEBHOOK_SECRET)`
+
+The signature is passed in the `X-AiPay-Signature` header. If the signatures match — process the event and grant the client access.
+
+---
+
+## Python Code Example
+
+Below is a minimal working implementation in Python using `httpx` for API requests and `FastAPI` for webhook handling.
+
+```python
+import hmac
+import hashlib
+import httpx
+from fastapi import FastAPI, Request, HTTPException
+
+app = FastAPI()
+
+AIPAY_API_KEY = "your_api_key_here"
+WEBHOOK_SECRET = "your_webhook_secret_here"
+AIPAY_BASE_URL = "https://api.aipay.kz/v1"
+
+
+async def create_invoice(phone: str, amount: int, external_id: str) -> dict:
+    """Create an invoice in Kaspi Pay via the AiPay API."""
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            f"{AIPAY_BASE_URL}/invoices",
+            headers={"Authorization": f"Bearer {AIPAY_API_KEY}"},
+            json={
+                "phone": phone,
+                "amount": amount,
+                "description": "Payment via Telegram bot",
+                "external_id": external_id,
+            },
+        )
+        response.raise_for_status()
+        return response.json()
+
+
+@app.post("/webhook/aipay")
+async def handle_aipay_webhook(request: Request):
+    """Receive and verify a webhook event from AiPay."""
+    body = await request.body()
+    signature = request.headers.get("X-AiPay-Signature", "")
+
+    # Verify HMAC signature
+    expected = hmac.new(
+        WEBHOOK_SECRET.encode(),
+        body,
+        hashlib.sha256
+    ).hexdigest()
+
+    if not hmac.compare_digest(expected, signature):
+        raise HTTPException(status_code=403, detail="Invalid signature")
+
+    payload = await request.json()
+
+    if payload.get("event") == "invoice.paid":
+        external_id = payload["external_id"]
+        # Here: find the order by external_id and deliver the product/access
+        await fulfill_order(external_id)
+
+    return {"status": "ok"}
+
+
+async def fulfill_order(external_id: str):
+    """Deliver the product to the client — your business logic."""
+    # Send a Telegram message, grant access, etc.
+    pass
+```
+
+For the full API documentation and a description of all parameters, see the [developer page](/developers).
+
+---
+
+## Real-World Use Cases
+
+### Digital Products and Info Businesses
+
+Courses, PDF guides, templates, access to private channels — anything that can be delivered automatically after payment. This is the ideal scenario for AiPay: the bot collects the payment, the webhook confirms it, the bot sends the link or grants access. Zero manual work.
+
+This is exactly how [PulseAI](https://aipay.kz) and STIKER.AI bots work — both are already integrated with AiPay and process payments fully automatically.
+
+### Subscription Models
+
+Monthly subscriptions to services, private communities, and newsletters. The bot tracks the next payment date, reminds the client, accepts payment, and renews access — all within a single Telegram chat.
+
+### Food Delivery and Local Business
+
+Bots for food ordering in Kazakhstan are a whole story in themselves. The client places an order directly in the bot, pays via Kaspi with a single tap, and the kitchen receives a notification. No "please call to confirm your payment."
+
+### Night and Weekend Orders
+
+This is a separate advantage that is hard to overstate. An order at 2 AM on a Friday is not a problem. The webhook arrives immediately, the bot delivers the product, the client is happy. You see it in the morning in your dashboard as an already-completed order.
+
+---
+
+## Try AiPay Free — 7 Days, No Limits
+
+If you are building or have already launched a Telegram bot with sales in Kazakhstan, the trial period is one hour of your developer's time and zero risk. Connect it, run a test payment, confirm the webhook works. The cost after the trial period is ₸25,000 per month per terminal.
+
+[Contact us with integration questions →](/#contact)
+
+---
+
+## Frequently Asked Questions
+
+### Does the client need to install anything or register separately?
+
+No. The client uses the Kaspi app they already have. Once your bot creates an invoice, the client receives a standard push notification from Kaspi. They tap one button — payment is done.
+
+### Is the Kaspi Pay API an official integration?
+
+AiPay works with Kaspi through official partnership mechanisms. This is not scraping or bypassing security systems — it is a legitimate middleware that receives events from Kaspi and delivers them in webhook format to your application.
+
+### How do I make sure a webhook isn't forged?
+
+AiPay signs every request using HMAC-SHA256 with your personal `WEBHOOK_SECRET`. The verification algorithm is shown in the code example above. If the signature does not match — reject the request with a 403 status code. This is standard practice for webhook security.
+
+---
+
+## Summary
+
+- Kaspi Pay is an essential tool for businesses in Kazakhstan, but it does not have a native webhook API
+- AiPay adds this layer: a POST request creates an invoice, a webhook reports the result
+- Integration takes about one hour if you already have a working Telegram bot
+- Works for digital products, subscriptions, food delivery, and any other monetized bot
+- Automatic product delivery 24/7, including 2 AM on a Friday
+- Fiscal receipts are issued automatically
+- 7-day trial period, then ₸25,000/month per terminal
+
+If you have questions about the integration or need help with the architecture — [contact us](/#contact) and we'll figure it out together.

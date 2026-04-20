@@ -1,0 +1,262 @@
+---
+title: "Kaspi Pay + CRM: Integration via AiPay API"
+description: "How to connect Kaspi Pay to Bitrix24, AmoCRM, or your own ERP via AiPay API — no manual checks, with real-world scenarios and code."
+date: "2026-03-27"
+tags: ["CRM", "integration", "API"]
+---
+
+# Kaspi Pay and CRM: Automating Payments via AiPay API
+
+A sales manager opens the Kaspi app, checks the amount, switches to Bitrix24, types the amount in manually, sets the status to "paid," opens WhatsApp, and sends the client a "thank you." This is the fortieth time today.
+
+With 30 deals per day, that cycle burns **90–120 minutes of pure time** — every day, for every manager. That's 45 hours a month spent on copy-paste that a script should have been handling long ago.
+
+The problem isn't laziness. The problem is that Kaspi Pay has no native webhook notifications for CRM systems. There's no official connector for Bitrix24. No ready-made integration with AmoCRM. The gap between "client paid" and "CRM knows about it" is entirely manual.
+
+This guide explains how to close that gap using [AiPay API](/developers), with three concrete scenarios: Bitrix24, AmoCRM, and custom ERP.
+
+## Why CRM + Kaspi Pay Is a Non-Trivial Problem
+
+Kaspi Pay is the dominant payment instrument in Kazakhstan. Over 12 million active users, instant transfers by phone number. For businesses, it's perfect UX for the client.
+
+For developers — it's a different story.
+
+**Kaspi does not provide:**
+- Webhooks for payment status changes
+- An API for creating invoices by phone number
+- An idempotency mechanism for safe retries
+- Ready-made integrations with popular CRM platforms
+
+So businesses end up stuck between two systems: CRM handles deal management, Kaspi handles money collection — but the two don't talk to each other.
+
+The standard workaround is screenshots. The client pays, takes a screenshot, sends it via WhatsApp. The manager looks at the screenshot, manually verifies the amount, updates the CRM. That's not a process — it's an anti-pattern.
+
+> **Want to calculate your losses right now?**
+> Multiply your daily deal count by 3 minutes of manual work. That's your daily "tax" for the missing integration. [Try AiPay free for 7 days](/en/#contact).
+
+## Architecture: AiPay as the Connecting Layer
+
+AiPay is a payment middleware between your CRM and the Kaspi Pay infrastructure. It handles everything Kaspi doesn't provide natively: an API for creating invoices, status verification, and webhook notifications to your system.
+
+Data flow diagram:
+
+```
+Your CRM / ERP
+      │
+      │  POST /invoices
+      │  { phone, amount, idempotency_key }
+      ▼
+  AiPay API  ◄──── HMAC signature
+      │
+      │  Creates invoice in Kaspi Pay
+      │  Tracks status
+      ▼
+  Kaspi Pay
+      │
+      │  Client pays
+      ▼
+  AiPay API
+      │
+      │  HTTP POST → your webhook endpoint
+      │  { status: "paid", invoice_id, amount }
+      ▼
+Your CRM / ERP
+  — updates deal status
+  — generates fiscal receipt
+  — notifies manager
+```
+
+Key components:
+
+- **POST /invoices** — creates an invoice by phone number and amount, returns `invoice_id`
+- **Webhook** — HTTP POST to your endpoint when status changes (`paid`, `expired`, `error`)
+- **HMAC signature** — every webhook is signed with a secret key, verified on your side
+- **Idempotency key** — prevents duplicates on retries
+- **Fiscal receipt** — generated automatically when status becomes `paid`
+- **Sandbox** — test environment with no real money
+
+Full documentation is available in the [developer section](/developers).
+
+## Three Integration Scenarios
+
+### Scenario 1: Bitrix24
+
+Bitrix24 supports incoming webhook requests via REST API and Custom Activities. This means AiPay can update deal status directly, without requiring an intermediate server.
+
+**Flow:**
+
+1. Manager creates a deal in Bitrix24 with status "Awaiting Payment"
+2. Bitrix24 Automation or a stage handler calls AiPay: `POST /invoices` with the client's phone number and deal amount
+3. AiPay sends the client a Kaspi Pay payment link
+4. Client pays
+5. AiPay sends a webhook to your endpoint: `{ "status": "paid", "invoice_id": "...", "deal_id": "..." }`
+6. Your handler calls the Bitrix24 REST API: `crm.deal.update` — moves the deal to the "Paid" stage
+7. Manager receives a notification in Telegram or Bitrix24
+
+**Technical details:**
+- The webhook endpoint can be hosted on a separate microservice or directly on the Bitrix24 server (if self-hosted)
+- For Bitrix24 Cloud — use the Webhook Handler in the Automation section
+- Pass `deal_id` as `external_id` when creating the invoice — AiPay will return it in the webhook payload
+
+**Result:** the manager does nothing manually after creating the deal. Status updates automatically.
+
+---
+
+### Scenario 2: AmoCRM
+
+AmoCRM follows the same logic but has its own webhook mechanism and pipeline stages.
+
+**Flow:**
+
+1. Deal moves to the "Invoice Sent" stage — trigger in AmoCRM Automation
+2. Automation makes an HTTP request to AiPay: `POST /invoices`
+3. Client receives a payment link
+4. AiPay webhook signals: `status: paid`
+5. Your handler calls the AmoCRM API: moves the deal to "Paid," adds a tag, creates a task for the manager
+
+**Important note for AmoCRM:** the platform only allows external HTTP calls from pipeline triggers. Make sure your account has a plan that supports webhooks (Professional tier and above).
+
+**Additionally:** when you receive a webhook from AiPay, you can automatically add a note to the AmoCRM client card with the amount, date, and `invoice_id` — for audit purposes.
+
+---
+
+### Scenario 3: Custom ERP or Internal System
+
+If you have a custom accounting system, online store, or platform — integrating via [AiPay API](/developers) gives you full control.
+
+**Minimum required:**
+
+1. Authentication: `Bearer` token in the header of every request
+2. Invoice creation: `POST /invoices` — returns `invoice_id` and a payment link
+3. Webhook handling: your endpoint processes the POST request, verifies the HMAC, updates status in your database
+4. Fiscal receipt: generated automatically, accessible via API
+
+**Idempotency:** submitting the same `idempotency_key` again will return the existing invoice — no duplicates. Critical for retry logic.
+
+## Code Example: Webhook Handler in Python Flask
+
+This is a minimal handler. It accepts a POST from AiPay, verifies the HMAC signature, and updates the status in your system.
+
+```python
+import hmac
+import hashlib
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+AIPAY_SECRET = "your_webhook_secret"
+
+@app.route("/aipay/webhook", methods=["POST"])
+def handle_webhook():
+    payload = request.get_data()
+    sig = request.headers.get("X-AiPay-Signature", "")
+    expected = hmac.new(AIPAY_SECRET.encode(), payload, hashlib.sha256).hexdigest()
+
+    if not hmac.compare_digest(sig, expected):
+        return jsonify({"error": "invalid signature"}), 403
+
+    data = request.get_json()
+    if data.get("status") == "paid":
+        update_crm_deal(data["external_id"], "paid", data["amount"])
+
+    return jsonify({"ok": True}), 200
+```
+
+**What this does:**
+- `X-AiPay-Signature` — HMAC-SHA256 signature of the request body, signed with your secret
+- `hmac.compare_digest` — protects against timing attacks when comparing signatures
+- `external_id` — the `deal_id` or any identifier you passed when creating the invoice
+- `update_crm_deal` — your function for updating the CRM (Bitrix24 REST API, AmoCRM API, your database)
+
+Equivalent logic in Node.js Express takes 12–15 lines.
+
+---
+
+### Set This Up in 1 Hour
+
+AiPay handles the full cycle: invoice → payment → confirmation → your CRM.
+7 days free, no card required.
+
+[Get started →](/en/#contact)
+
+---
+
+## Before and After: How the Manager's Workflow Changes
+
+### Without AiPay — Manual Process
+
+| Step | Who does it | Time |
+|---|---|---|
+| Create deal in CRM | Manager | 1 min |
+| Call client, ask them to pay | Manager | 2–3 min |
+| Wait for screenshot in WhatsApp | Manager | 5–30 min |
+| Manually verify screenshot | Manager | 1–2 min |
+| Update status in CRM | Manager | 1 min |
+| Issue fiscal receipt | Manager / accountant | 2–5 min |
+| **Total per deal** | | **12–42 min** |
+
+At 30 deals per day: **90–120 minutes daily** spent on routine tasks.
+
+### With AiPay — Automated Process
+
+| Step | Who does it | Time |
+|---|---|---|
+| Create deal in CRM | Manager | 1 min |
+| AiPay creates invoice, client receives link | Automatic | 0 sec |
+| Client pays | Client | — |
+| AiPay webhook updates CRM, issues receipt | Automatic | 0 sec |
+| Manager receives notification | Automatic | — |
+| **Total per deal** | | **1 min** |
+
+At 30 deals per day: **saves 90–120 minutes daily** = 45+ hours per month.
+
+**What else changes:**
+- No risk of forged screenshots — status is confirmed directly via API, not through an image
+- Fiscal receipts are issued automatically — cleaner audit trail
+- Managers focus on selling, not copy-pasting
+- Evening and weekend payments are processed without team involvement
+
+## How to Get Started: 4 Steps Without Deep Technical Knowledge
+
+**Step 1 — Sign up and get your API key.**
+Create an account at aipay.kz. Your API key and webhook secret are available in the Dashboard immediately after registration. First 7 days are free.
+
+**Step 2 — Test in the Sandbox.**
+AiPay provides a test environment with no real transactions. Send a few test invoices, confirm that webhooks reach your endpoint. Instructions are in the [developer documentation](/developers).
+
+**Step 3 — Set up the CRM integration.**
+For Bitrix24 and AmoCRM — this means configuring automation in the CRM interface and deploying a webhook handler. For custom systems — direct integration via REST API. Typical setup time: 1–4 hours.
+
+**Step 4 — Go to production.**
+Replace Sandbox keys with live keys, run a few real test transactions, and confirm that fiscal receipts are issued correctly.
+
+If you need help — reach out via [WhatsApp](https://wa.me/77755227623) or [Telegram](https://t.me/DrJonah).
+
+## Frequently Asked Questions
+
+### Do I need a developer to set this up?
+
+For custom integration — yes, you'll need a developer for 4–8 hours of work. For Bitrix24 and AmoCRM, basic setup can be done through the automation interface without code, provided you have CRM admin access. We also offer turnkey integration services — just reach out.
+
+### How does AiPay connect to Kaspi Pay?
+
+AiPay is an official partner and integrator of Kaspi Pay. This means that when you call `POST /invoices`, AiPay creates a real invoice within the Kaspi infrastructure — the client sees it in their Kaspi app and can pay with one tap. You don't interact with Kaspi directly — AiPay handles all authorization, status monitoring, and notifications.
+
+### Is there a native Kaspi Pay integration for Bitrix24?
+
+There is no native integration — neither in Bitrix24 itself nor in its app marketplace. There are third-party solutions (such as AngryCode), but they either require significant customization or don't support real-time webhook notifications. AiPay provides a ready-made API and webhooks that connect to Bitrix24 via the standard CRM REST API in a matter of hours.
+
+### What happens if the client doesn't pay?
+
+AiPay assigns the invoice a status of `expired` after a configurable timeout. A webhook with that status is sent to your endpoint — and you can automatically move the deal in your CRM to "Invoice Expired," or trigger a follow-up flow (for example, send a new invoice or notify the manager).
+
+### How much does it cost?
+
+₸25,000 per month per terminal. First 7 days are free, no card required. For most businesses with 20+ deals per day, AiPay pays for itself within 2–3 working days through time saved by managers.
+
+---
+
+If your business accepts payments via Kaspi Pay and your managers are still manually cross-checking screenshots — that can be fixed today.
+
+Setup takes about 1 hour. First 7 days are free. Integration with Bitrix24, AmoCRM, or your own system — through a single API.
+
+[Try AiPay for free →](/en/#contact)

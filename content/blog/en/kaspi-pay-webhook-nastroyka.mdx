@@ -1,0 +1,365 @@
+---
+title: "Kaspi Pay webhook: what it is and how to set it up with AiPay"
+description: "A practical breakdown of what a Kaspi Pay webhook is, why it's not available out of the box, and how to add event-driven payment notifications through AiPay in about an hour."
+date: "2026-03-27"
+tags: ["webhooks", "API", "development"]
+---
+
+## You created a Kaspi invoice. The customer paid. Your code has no idea.
+
+Picture a typical scenario: an online store operating in Kazakhstan, accepting payments through Kaspi. The customer sends the money — and then one of three things happens:
+
+1. **A manager manually checks the statement** — every 5–10 minutes, during business hours, on weekdays.
+2. **A script runs polling** — hitting the API every 30 seconds, with 99% of requests returning nothing, burning server resources for no reason.
+3. **The customer writes "I've paid"** — and you take their word for it until you can verify it yourself.
+
+All three approaches break down at night, on weekends, and under any load higher than "a few orders a day." The right solution is a **webhook**: instead of your server continuously asking the system for updates, the system reaches out to you the moment something happens. That's exactly what we're going to set up here.
+
+---
+
+## What is a webhook and how is it different from polling
+
+Think of two ways to track a pizza delivery.
+
+**Polling** — you open the app every 5 minutes to check the status. Most of the time it says "on the way" and nothing has changed. You're wasting time and attention.
+
+**Webhook** — the app sends you a push notification when the courier has left, when they're nearby, when they ring the doorbell. You don't do anything until it's time to open the door.
+
+In software development it works the same way. Polling is when your code periodically asks "so, did the payment go through?" A webhook is when the payment system itself sends an HTTP POST request to your endpoint at the moment an event occurs.
+
+```
+Polling:  your server → API (×N times) → "no data" / "no data" / "no data" / "paid"
+Webhook:  payment system → your server (once, at exactly the right moment)
+```
+
+A webhook is **event-driven architecture**: code runs only when something has actually happened. It's more reliable, cheaper on resources, and easier to maintain.
+
+---
+
+## Why Kaspi Pay doesn't send webhooks natively
+
+Kaspi is Kazakhstan's largest fintech platform: 14.7 million monthly active users, 737,000 merchants. For offline businesses Kaspi works great — the cashier sees a push in the app, the transaction appears in the dashboard.
+
+But **Kaspi Pay does not provide a public webhook API for third-party developers**. This means your server cannot directly subscribe to an event like "invoice #12345 was paid." There are several reasons:
+
+- Kaspi was originally built around a B2C flow where notifications go to the user's app, not to an external developer's server.
+- A public webhook API requires infrastructure to manage subscriptions, retry delivery, and handle monitoring — that's a separate product in its own right.
+- As of this writing, an official integration for independent developers via webhook events is not publicly available.
+
+The result: developers are forced to rely on workarounds — email/SMS parsing, unofficial methods, constant polling. None of these are stable in production.
+
+**AiPay is a middleware layer** that closes exactly this gap. It interfaces with Kaspi through official partner mechanisms and adds a full-featured webhook layer on top.
+
+---
+
+## How AiPay webhooks work: the architecture in 2 minutes
+
+Here's what the complete flow looks like, from payment initiation to order fulfillment:
+
+```
+Your service       AiPay                 Kaspi Pay            Customer
+──────────────────────────────────────────────────────────────────────
+POST /invoices →   Creates invoice  →    Push notification →  [sees it in the app]
+                                                               [taps "Pay"]
+                   Receives status  ←    Confirmation     ←   [payment confirmed]
+POST /webhook  ←   Delivers event   ←
+[verify HMAC]
+[update order]
+[fulfill item]
+```
+
+Key components:
+
+- **REST API** — you create an invoice with a single POST request and receive an `invoice_id`.
+- **Webhook delivery** — AiPay monitors the invoice status and fires an HTTP POST to your URL on any status change.
+- **HMAC-SHA256 signature** — every request is signed, so you can verify its authenticity.
+- **Retry logic** — if your server is temporarily unavailable, AiPay will retry delivery.
+- **Polling as a fallback** — if the webhook doesn't arrive for any reason, you can always query the status via `GET /invoices/{id}`.
+
+---
+
+## Step-by-step AiPay webhook flow
+
+1. **Customer initiates payment** — clicks "Pay" in your interface (website, bot, or app).
+2. **Your backend creates an invoice** — sends a POST request to AiPay with the amount and the customer's phone number.
+3. **AiPay creates the invoice in Kaspi** — the customer receives a push notification in the Kaspi app with a payment request.
+4. **Customer confirms the payment** — one tap in the Kaspi app.
+5. **AiPay receives confirmation** — detects the status change on the invoice.
+6. **AiPay sends the webhook** — HTTP POST to your endpoint with payment data and an HMAC signature.
+7. **Your server processes the event** — verifies the signature, checks idempotency, and executes business logic.
+8. **Order is fulfilled** — item delivered, status updated, customer happy.
+
+The full cycle (steps 3–8) takes 20–60 seconds. No manual intervention, any time of day or night.
+
+---
+
+## Code example: creating an invoice via the AiPay API
+
+First, you need to create an invoice. This is a single POST request.
+
+**cURL:**
+
+```bash
+curl -X POST https://api.aipay.kz/v1/invoices \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "phone": "77001234567",
+    "amount": 12900,
+    "description": "Order #4521 — delivery",
+    "external_id": "order_4521"
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "invoice_id": "inv_k7x9m2p",
+  "status": "pending",
+  "amount": 12900,
+  "phone": "77001234567",
+  "created_at": "2026-03-27T10:15:00Z",
+  "expires_at": "2026-03-27T10:30:00Z"
+}
+```
+
+**Python (httpx):**
+
+```python
+import httpx
+
+AIPAY_API_KEY = "your_api_key_here"
+AIPAY_BASE_URL = "https://api.aipay.kz/v1"
+
+
+async def create_kaspi_invoice(
+    phone: str,
+    amount: int,
+    external_id: str,
+    description: str = "",
+) -> dict:
+    """
+    Creates a Kaspi Pay invoice via the AiPay API.
+
+    :param phone: customer's phone number in the format 77XXXXXXXXX
+    :param amount: amount in tenge (integer)
+    :param external_id: your internal order ID for matching the webhook
+    :param description: payment description (visible to the customer in Kaspi)
+    :return: dict with invoice_id, status, and other fields
+    """
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            f"{AIPAY_BASE_URL}/invoices",
+            headers={
+                "Authorization": f"Bearer {AIPAY_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "phone": phone,
+                "amount": amount,
+                "description": description,
+                "external_id": external_id,
+            },
+        )
+        response.raise_for_status()
+        return response.json()
+```
+
+Save the `invoice_id` from the response — you'll need it if you want to poll for status as a fallback. The `external_id` field is your own order ID; AiPay will return it back to you in the webhook event.
+
+---
+
+## Code example: webhook handler with HMAC verification
+
+This is the most important part. Receiving a POST request is not enough — you need to confirm that it actually came from AiPay.
+
+**Python (Flask):**
+
+```python
+import hmac
+import hashlib
+import json
+from flask import Flask, request, jsonify, abort
+
+app = Flask(__name__)
+
+WEBHOOK_SECRET = "your_webhook_secret_here"
+
+# Set of processed invoice_ids for idempotency.
+# In production, use Redis or a database table instead.
+processed_invoices: set[str] = set()
+
+
+def verify_aipay_signature(body: bytes, signature: str) -> bool:
+    """Verifies the HMAC-SHA256 signature from AiPay."""
+    expected = hmac.new(
+        WEBHOOK_SECRET.encode("utf-8"),
+        body,
+        hashlib.sha256,
+    ).hexdigest()
+    # compare_digest protects against timing attacks
+    return hmac.compare_digest(expected, signature)
+
+
+@app.route("/webhook/aipay", methods=["POST"])
+def handle_aipay_webhook():
+    # 1. Read the raw body BEFORE parsing JSON — required for signature verification
+    body = request.get_data()
+    signature = request.headers.get("X-Signature", "")
+
+    # 2. Verify the signature — reject the request if it doesn't match
+    if not verify_aipay_signature(body, signature):
+        abort(403)
+
+    payload = json.loads(body)
+    invoice_id = payload.get("invoice_id")
+    status = payload.get("status")
+
+    # 3. Idempotency: don't process the same event twice
+    if invoice_id in processed_invoices:
+        return jsonify({"status": "already_processed"}), 200
+
+    # 4. Handle successful payments
+    if status == "paid":
+        external_id = payload.get("external_id")
+        amount = payload.get("amount")
+        timestamp = payload.get("timestamp")
+
+        # Your business logic goes here:
+        # - update order status in the database
+        # - send a notification to the customer
+        # - trigger delivery / grant access
+        fulfill_order(external_id, amount)
+
+        processed_invoices.add(invoice_id)
+
+    elif status == "expired":
+        # Invoice expired — notify the customer and offer to retry payment
+        handle_expired_invoice(payload.get("external_id"))
+
+    elif status == "error":
+        # Something went wrong on the Kaspi side
+        handle_payment_error(payload.get("external_id"))
+
+    # 5. Always return 200 — otherwise AiPay will keep retrying the request
+    return jsonify({"status": "ok"}), 200
+
+
+def fulfill_order(external_id: str, amount: int):
+    """Your order fulfillment logic after a successful payment."""
+    print(f"Order {external_id} paid for {amount} ₸")
+    # update the database, send a notification, etc.
+
+
+def handle_expired_invoice(external_id: str):
+    """Handle an expired invoice."""
+    print(f"Invoice for order {external_id} has expired")
+
+
+def handle_payment_error(external_id: str):
+    """Handle a payment error."""
+    print(f"Payment error for order {external_id}")
+
+
+if __name__ == "__main__":
+    app.run(port=8000)
+```
+
+See the full API reference on the [developer page](/en/developers).
+
+---
+
+## Security: why HMAC verification is non-negotiable
+
+Without signature verification, your `/webhook/aipay` endpoint is an open door. Anyone who knows its URL can send a crafted POST request with `"status": "paid"` and obtain goods for free.
+
+**How HMAC-SHA256 protection works:**
+
+1. AiPay knows your `WEBHOOK_SECRET` (generated at registration and stored only by you).
+2. For every webhook request, AiPay computes `HMAC-SHA256(request_body, WEBHOOK_SECRET)` and puts the result in the `X-Signature` header.
+3. Your server independently does the same computation and compares the results.
+4. If the signatures match, the request definitely came from AiPay and the body was not tampered with in transit.
+
+Three rules you must never break:
+
+- **Always verify the signature** — before any business logic runs.
+- **Use `hmac.compare_digest`** (or the equivalent in your language) — plain string comparison is vulnerable to timing attacks.
+- **Compute the HMAC over the raw body** — not over the parsed JSON. JSON parsers may reorder keys, causing the signature to not match.
+
+---
+
+## Handling edge cases
+
+### Retries
+
+If your server returns something other than `200` (or doesn't respond within the timeout), AiPay will retry delivery after a delay. This protects against brief outages — good news.
+
+The downside: it means the same event can arrive more than once. Always check whether a given `invoice_id` has already been processed. In the code above this is done with the `processed_invoices` set — in real production, use a database table or Redis with a TTL.
+
+### Idempotency
+
+The rule is simple: **processing the same webhook twice must not create duplicate records**. Two ways to implement this:
+
+- **Upsert instead of insert**: `INSERT INTO orders ... ON CONFLICT (invoice_id) DO NOTHING`
+- **Explicit check**: look up `invoice_id` in a `processed_webhooks` table before processing
+
+### Expired invoices
+
+A Kaspi invoice has a limited lifetime (typically 15 minutes). If the customer doesn't pay in time, AiPay will send `"status": "expired"`. The usual response is to notify the customer and offer them the option to create a new invoice.
+
+### Handler timeout
+
+AiPay waits a limited amount of time for a response. If your business logic (sending an email, calling an external API) takes more than 5 seconds, offload it to a background task. The webhook handler should return `200 OK` as quickly as possible, with the heavier work done asynchronously.
+
+---
+
+## Try AiPay — 7 days free
+
+If you're building something that accepts Kaspi payments and want to move away from manual checking or polling, AiPay solves exactly that problem. Integration takes about an hour if you already have a basic backend.
+
+The trial period is 7 days, with no feature restrictions. After that, pricing is ₸25,000 per month per terminal.
+
+[Start for free →](/#contact)
+
+If you need help with your integration architecture or have questions, [reach out to us](/#contact) and we'll work through it together.
+
+---
+
+## Frequently asked questions
+
+### What if my server is down when a webhook is delivered?
+
+AiPay will automatically retry delivery. The retry logic ensures that if your server experiences a brief outage (restart, deploy, overload), the event is not lost. The only requirement on your end is to implement idempotency so that a repeated delivery doesn't result in a duplicate order.
+
+As an additional safety net, `GET /invoices/{invoice_id}` lets you query the current status of any invoice at any time — this is useful to call on service startup to sync state.
+
+### Can I use this without a server (no-code / low-code)?
+
+Technically, a webhook requires a publicly accessible HTTP endpoint. But there are options that don't require writing a full server:
+
+- **Make (formerly Integromat) / n8n** — visual automation tools with built-in webhook triggers. Can be set up in 30 minutes without writing code.
+- **Zapier** — same idea, webhook trigger is available.
+- **Serverless functions** — Vercel Functions, AWS Lambda, Cloudflare Workers. Minimal code, no need for a permanently running server.
+
+For Telegram bots in Python, a common approach is `aiogram` or `python-telegram-bot` alongside a separate Flask/FastAPI service for the webhook.
+
+### How do I test webhooks locally?
+
+A local server is not reachable from the internet, so AiPay won't be able to reach it. There are two convenient solutions:
+
+**ngrok** — the most popular tool. Run:
+```bash
+ngrok http 8000
+```
+You get a public URL like `https://abc123.ngrok.io` — set it as the webhook URL in your AiPay settings. All requests are proxied to your local server.
+
+**Sandbox environment** — AiPay provides a test environment where you can create invoices and simulate payments without using real money. Ideal for development and CI/CD pipelines.
+
+### Do I need to configure anything in the Kaspi merchant dashboard?
+
+No — all interaction goes through AiPay. You only need to register at aipay.kz, obtain your API key and `WEBHOOK_SECRET`, and enter your webhook URL in the AiPay dashboard settings. No direct configuration in Kaspi's systems is required.
+
+---
+
+Full API reference with all parameters, error codes, and examples for multiple languages is available on the [developer page](/en/developers).

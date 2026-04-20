@@ -1,0 +1,167 @@
+---
+title: "Kaspi Pay for Medical Centers: Automating Payments and Prepayments"
+description: "How Darmed medical center eliminated 65 hours of manual work per month with AiPay: automatic Kaspi Pay invoices, fiscal receipts, and reduced no-shows."
+date: "2026-03-27"
+tags: ["healthcare", "prepayment", "automation"]
+---
+
+# An Administrator Spends 3 Hours a Day Checking Payments. That's 65 Hours a Month
+
+The administrator at Darmed medical center started every morning the same way: open Kaspi, reconcile yesterday's incoming payments, manually enter each one into the CRM, check which patients had paid and which needed a callback. Then issue new invoices for today's appointments. One by one. By hand.
+
+2–3 hours every day. 55–65 hours a month — spent on routine tasks that the system should handle automatically.
+
+If you accept payments through **Kaspi Pay for medical centers**, you probably know this scenario. This article is about how to put an end to it.
+
+---
+
+## What Manual Payment Processing Looks Like in a Clinic — and Where It Breaks Down
+
+A typical pre-automation workflow looks like this:
+
+1. A patient books an appointment — by phone or through the CRM.
+2. The administrator manually creates an invoice in Kaspi Business or asks the patient to transfer money to a phone number.
+3. The patient pays — or doesn't, because they forgot, changed their mind, took a screenshot, and claimed they paid.
+4. The administrator opens Kaspi, searches for the transaction, and confirms that the payment actually arrived.
+5. Manually marks the payment in the CRM.
+6. Issues a fiscal receipt — yet another separate action.
+
+That's at least 5–7 steps per patient. With 15–20 appointments per day, this takes 2–3 hours.
+
+Where it breaks down:
+
+- **Fake screenshots.** A patient sends an image of a "completed" transfer. The administrator takes it at face value — and the patient gets the appointment for free. This is a real problem, especially for first-time visits.
+- **Missed payments.** The administrator doesn't check Kaspi in time, the payment "gets lost" — the doctor sees the patient, but the payment is never recorded.
+- **Duplicate data entry.** Payment data is entered twice: in Kaspi and in the CRM. At any scale, this is a bottleneck.
+- **Human error.** When an administrator is replaced, the entire process has to be explained from scratch.
+
+---
+
+## The No-Show Problem: What an Empty Doctor's Chair Really Costs
+
+This is a distinct pain point for medical businesses in Kazakhstan. Industry data shows that clinics without a prepayment system lose 20% to 40% of bookings — patients simply don't show up. The reasons vary: they forgot, changed their mind, found a cheaper option, or ran into friction during payment. But the result is always the same — an empty chair and wasted time for the entire team.
+
+Do the math: if an appointment costs ₸8,000 and a doctor sees 12 patients per day — 3 no-shows means ₸24,000 in lost revenue daily. Over a month, that's ₸500,000+. And those are only the direct losses, not counting the operational costs of the occupied slot.
+
+Meanwhile, prepayment reduces the no-show rate by 2–3x. The logic is simple: someone who has already paid shows up. Canceling after you've paid is an extra hurdle that most patients don't bother with. But requiring prepayment is awkward when the process is manual — it means an extra phone call, extra explanations, and extra friction before the patient has even set foot in the clinic.
+
+The problem is particularly acute for multi-doctor clinics: each specialist has their own schedule, rates, and queue. Tracking unpaid appointments across five doctors manually is a task no administrator handles perfectly.
+
+**AiPay makes prepayment at the time of booking a standard step, not an exception.** The patient receives a push notification in Kaspi immediately upon booking — and pays with two taps. No phone calls, no "transfer to this number." For the patient, it's more convenient than any other payment method.
+
+With prepayment through automatic invoicing, **no-show rates in clinics drop by 40–60%** — because the barrier to cancellation is higher.
+
+---
+
+## The Compliance Problem: Fiscal Receipts and Tax Monitoring
+
+Since 2024, Kazakhstan has enforced stricter monitoring: if your Kaspi number receives transfers from 100 or more unique senders over 3 consecutive months, the bank is required to report this to the tax authorities. For a medical center with a steady patient flow, this is not a hypothetical risk. Virtually any active clinic easily crosses this threshold.
+
+The second issue is **OFD obligations**. Every transaction with an individual must be accompanied by a fiscal receipt. Doing this manually adds another 2–3 minutes per payment and carries a high risk of missing a receipt on a busy day. A single tax audit could result in fines that exceed the annual cost of any automation solution.
+
+Notably, many clinics that accept payments via personal transfers are genuinely unaware of these risks. They typically learn about the rules only after a tax inspection — which is an expensive way to discover compliance requirements.
+
+**How AiPay addresses this:**
+
+- All payments go through an official Kaspi Pay business account, not personal transfers — this is the legal path.
+- A fiscal receipt is issued automatically with every confirmed payment — OFD integration is built into the platform.
+- The administrator cannot "forget" to issue a receipt — the system does it without human involvement.
+- The AiPay Dashboard maintains a complete history of all transactions — which can be exported for reporting at any time.
+
+For more on payment automation specifics for medical centers, see the [industry solution page](/industries/medical-center-payments).
+
+---
+
+## How AiPay Works: The New Flow, Step by Step
+
+After connecting, the process looks like this:
+
+| Step | Who Acts | What Happens |
+|------|----------|--------------|
+| 1 | CRM / administrator | Patient books an appointment |
+| 2 | AiPay API | A Kaspi Pay invoice is automatically created and sent to the patient's phone number |
+| 3 | Patient | Receives a push notification in Kaspi — pays with two taps |
+| 4 | AiPay Webhook | HTTP POST to your endpoint — payment status is updated in the CRM |
+| 5 | AiPay + OFD | Fiscal receipt is issued automatically |
+
+Zero manual steps. Time from booking to payment confirmation — under one minute.
+
+**Technically:** `POST /invoices` accepts a phone number and amount — that's all it takes for the patient to receive a push notification in the Kaspi app. No QR codes, no links, no phone calls.
+
+In addition to the API, AiPay provides a **Dashboard** — a web panel for administrators where you can manually issue an invoice with a single click, check the status of each payment, and filter by date or doctor. This is a fallback tool for non-standard situations: for example, a walk-in patient or an administrator who wants to quickly verify a payment without opening the CRM.
+
+---
+
+## The Darmed Case Study: Real Numbers After Integration
+
+Darmed is a medical center that connected AiPay to automate their Kaspi Pay operations. Here's what changed:
+
+**Before AiPay:**
+- 2–3 hours per day spent manually issuing invoices, reconciling payments, and entering data into the CRM
+- High no-show rate with no prepayment system in place
+- Fiscal receipt compliance risks from manual processing
+
+**After AiPay:**
+- Manual time spent on payment processing — near zero
+- Savings: **~60 hours per month** (per Darmed: "We save about 2 hours a day on invoicing, tracking, and data entry")
+- Fiscal receipts issued automatically — without administrator involvement
+- Payment data flows into the CRM without manual entry
+
+60 hours a month is one and a half working weeks. At an administrator salary of ₸200,000 per month, that's ₸60,000–70,000 in labor cost now redirected toward patient care rather than Kaspi reconciliation.
+
+AiPay costs **₸25,000 per month per terminal**. The ROI is clear within the first week.
+
+There's another important benefit: Darmed administrators say one of the biggest sources of daily stress has disappeared — the need to keep track of who has paid and who hasn't. Now the system automatically signals every confirmed or unconfirmed payment. This frees up not just time, but mental bandwidth — which can be invested in service quality rather than routine tasks.
+
+For a multi-doctor center with several specialists, the economics are even more favorable: with 3–4 doctors and a combined volume of 40–50 patients per day, savings from eliminating manual processing can reach 4–5 hours daily. That's the equivalent of a full-time staff position.
+
+---
+
+## Try It Free — Setup in 1 Hour
+
+The first 7 days are free. Setup takes about an hour and requires no specialized technical knowledge.
+
+[Submit a request and start your free trial](/#contact)
+
+---
+
+## How to Connect AiPay to a Medical Center: 4 Steps
+
+**Automating clinic payments** with AiPay takes 4 steps:
+
+1. **Register and get your API key.** Submit a request — we connect a terminal to your Kaspi Business account.
+2. **Integrate with your CRM.** If you use Altegio — the integration is ready to go, setup takes minutes. For other systems — webhook + REST API, documentation provided.
+3. **Configure the webhook.** Specify the endpoint where AiPay will send payment status updates. Your CRM updates in real time.
+4. **Test and go live.** Issue a test invoice, confirm the patient receives the push notification, verify the status appears in the CRM. Launch in production.
+
+Technical integration does not require an in-house developer — most medical CRMs in Kazakhstan support webhook notifications out of the box.
+
+---
+
+## Frequently Asked Questions
+
+### Do I need to be a developer to connect AiPay?
+
+No. If you use Altegio — the integration is configured through the UI without any code. For other systems, you'll need to set up a webhook once (specify your CRM's URL), which takes 15–30 minutes. AiPay provides step-by-step documentation and onboarding support.
+
+### Is it compatible with Altegio?
+
+Yes. AiPay has a ready-made integration with Altegio — the appointment management system used by many medical centers and beauty businesses in Kazakhstan. When a patient books through Altegio, a Kaspi Pay invoice is created automatically — without any administrator involvement.
+
+### How are fiscal receipts handled?
+
+AiPay is connected to an OFD (fiscal data operator). With every confirmed payment, a receipt is issued and sent automatically — to the patient's email or phone number. The administrator does not need to manually open any point-of-sale software or remember to issue a receipt. This fully covers the OFD obligation for every transaction.
+
+---
+
+## The Bottom Line: 65 Hours a Month Is Money
+
+Manual payment processing in a medical center is not just an inconvenience. It's a measurable loss: staff time, no-shows, tax compliance risks, and data entry errors.
+
+**AiPay closes the entire cycle**: invoice → payment → confirmation → fiscal receipt → CRM update. Automatically, without the administrator.
+
+To learn how to accept prepayments at a medical center correctly — with minimal effort and full regulatory compliance — read more on the [medical centers page](/industries/medical-center-payments).
+
+Or simply start your free trial right now:
+
+[Connect AiPay — 7 days free](/#contact)

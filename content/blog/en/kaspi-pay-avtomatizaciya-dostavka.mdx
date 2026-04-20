@@ -1,0 +1,167 @@
+---
+title: "Kaspi Pay for Food Delivery: Automating Payments in Kazakhstan"
+description: "How restaurants and delivery services in Kazakhstan automate Kaspi Pay through AiPay: webhooks, Telegram bot integration, and zero manual work during peak hours."
+date: "2026-03-27"
+tags: ["delivery", "restaurants", "automation"]
+---
+
+## Lunchtime. 35 Orders. 40 Minutes. The Manager Can't Keep Up.
+
+12:10 PM. Your restaurant's Telegram bot has received 35 incoming orders in the last 40 minutes. The manager opens each chat, manually creates an invoice in Kaspi Pay, waits for a payment screenshot from the customer, cross-checks it in the app — and only then passes the order to the kitchen. The kitchen sits idle. Couriers wait at the counter. Customers write: "So, when is it coming?"
+
+This isn't a hypothetical scenario. It's the standard picture at any Kazakhstani restaurant with delivery on a Friday at noon.
+
+While the manager works through the payment queue, the 5th customer has already messaged twice. The 8th cancelled and went to a competitor. The 12th sent three screenshots of the same transaction because they were anxious. In the end, the kitchen runs at 40% capacity — not because of a shortage of ingredients or cooks, but because one person cannot manually process 35 payments simultaneously.
+
+The problem isn't Kaspi Pay. The problem is that manual payment verification physically cannot scale under peak load.
+
+---
+
+## Why Food Delivery and Kaspi Pay Create a Specific Bottleneck
+
+Kaspi Pay processed 5.9 billion transactions in 2024, growing +40% year over year. For restaurants, it has become the standard: customers pay with one tap in a familiar app, money arrives instantly. Kaspi even launched a dedicated "Kaspi Restaurants" feature — currently used by more than 800 venues across the country.
+
+But here's the trap: **the peak of delivery orders coincides with the peak of the manager's workload**. Between 12:00 and 13:00, one person physically cannot:
+
+- accept 20–40 orders simultaneously,
+- manually create a Kaspi Pay invoice for each one,
+- wait for payment and confirm it,
+- and simultaneously answer customer questions.
+
+Each manual verification takes 3–5 minutes. With 50 orders per day, that's **200 minutes (3.3 hours) of pure manual labor** just for payment verification. And all that time, the kitchen receives no confirmed orders.
+
+### The Typical Manual Process Today:
+
+1. Customer places an order via Telegram/WhatsApp bot
+2. Manager sees the order, opens Kaspi Pay Business
+3. Manually creates an invoice for the required amount
+4. Sends the link or number to the customer
+5. Waits for a payment screenshot from the customer
+6. Checks for the incoming payment in the app
+7. Only then confirms the order with the kitchen
+8. Assigns a courier
+
+Every step requires a human. Every step is a potential delay.
+
+---
+
+## Late-Night Orders: Another Hidden Loss
+
+Peak load isn't just at lunchtime. In Kazakhstan's major cities, food delivery is active from 11 PM to 1 AM. Customers order after the movies, after meetups, or simply late at night.
+
+Who checks payments at 1 AM? Either a duty manager receives a premium for night shifts, or orders simply aren't processed in real time. Both options mean losses: either financial or reputational.
+
+There's a third scenario: the manager is "on call" from home, on their phone, half paying attention. They notice the payment 20 minutes after it arrived. By that time, the customer has messaged support twice and concluded they were scammed. The reputational damage from a single such incident outweighs the cost of automation for several months.
+
+On holidays and weekends the picture is even starker: the same staff, three times as many orders. Manual verification here isn't just inconvenient — it's technically impossible without queues and cancellations. March 8th, Nauryz, the November holidays — these are the days restaurants earn the most. And these are the exact days the system breaks down first.
+
+---
+
+## How AiPay Removes the Human from the Payment Chain
+
+[AiPay](https://aipay.kz) automates precisely this bottleneck — Kaspi Pay verification. There's no need to change your POS system, terminal, or the customer-facing app. You simply connect the API.
+
+**Automated delivery flow:**
+
+1. Customer places an order via Telegram/WhatsApp bot
+2. The bot calls `POST /invoices` with the customer's phone number and amount
+3. AiPay creates a Kaspi Pay invoice — the customer receives a push notification in the Kaspi app
+4. The customer pays with one tap
+5. AiPay registers the payment and immediately sends a webhook to your system
+6. The kitchen automatically receives the confirmed order
+7. A courier is assigned without any manager involvement
+
+The human is completely removed from the verification chain. The manager sees only already confirmed and paid orders — and focuses on coordination, not clicking.
+
+At night, on weekends, on holidays — the process works identically. The webhook arrives on average 3–5 seconds after the customer taps "Pay" in the Kaspi app. No screenshots, no waiting, no human error.
+
+An important note for developers: AiPay sends the webhook with a signature that can be verified on your side. This eliminates false positives and status spoofing. If a payment fails, the webhook arrives with a status of `expired` or `error`, and your system can automatically notify the customer or offer an alternative.
+
+---
+
+## Before and After: By the Numbers
+
+| Parameter | Before AiPay (manual process) | After AiPay (automated) |
+|---|---|---|
+| Verification time per order | 3–5 minutes | ~5 seconds (webhook) |
+| Manual labor at 50 orders/day | 200+ minutes/day | 0 minutes |
+| Late-night orders (11 PM–1 AM) | Require a duty manager or are lost | Processed automatically |
+| Peak load (lunch/weekends) | Queues, cancellations, complaints | No change in staff workload |
+| Fiscal receipts | Manual or not issued | Automatically generated for every payment |
+| Cost | Manager salary × hours | ₸25,000/month per terminal |
+
+3.3 hours per day × 22 working days = 72 hours per month spent only on payment verification. AiPay costs ₸25,000/month. Calculate the cost of 72 hours of your manager's time.
+
+But it's not just about money. The point is that with a manual process, the speed of your business is capped by the speed of one person. With AiPay, that cap is removed: the system will handle 5 simultaneous orders and 500 at exactly the same speed. Scaling your delivery no longer runs into an operational ceiling.
+
+---
+
+## Bonus: Table Reservations with a Deposit
+
+For restaurants that accept reservations on holidays or weekends, AiPay solves another problem — the deposit at booking.
+
+The standard problem: a customer books a table for 8 people on New Year's Eve, promises to show up — and doesn't. You lose revenue and the spot.
+
+With AiPay: when the reservation is made, the system automatically issues a deposit invoice (for example, ₸5,000 per person). The customer receives a Kaspi push notification and pays with one tap. The reservation is only confirmed after the deposit is received. All of this happens without any administrator involvement.
+
+An added benefit: customers who have paid a deposit show up. The no-show rate drops dramatically. For restaurants with high holiday occupancy, this allows kitchen, procurement, and staffing to be planned with a precision that's simply unachievable with free reservations.
+
+The same mechanism works for prepayment of banquet menus, corporate dinners, or advance ordering of specific dishes — all through the same `POST /invoices` endpoint.
+
+---
+
+## Try AiPay — 7 Days Free
+
+If you want to remove manual payment verification from your workflow, [contact us](/en/#contact) — we'll get you set up in 1 hour.
+
+---
+
+## How to Connect AiPay for Delivery: 5 Steps
+
+1. **Register** at aipay.kz — a 7-day free trial activates immediately
+2. **Get your API key** from your account dashboard
+3. **Integrate `POST /invoices`** into your Telegram/WhatsApp bot — one endpoint, documentation takes 15 minutes to read
+4. **Set up a webhook** — specify the URL of your system where AiPay will send `paid` / `expired` / `error` statuses
+5. **Test with real orders** — on average, the first fully automated order goes through the same day
+
+For those using Poster POS: Poster already displays amounts on the Kaspi terminal. AiPay adds a confirmation layer on top — the webhook goes directly to your POS system and the order closes without any manual cashier action.
+
+Not using an off-the-shelf POS system? No problem. The AiPay API is simple enough to integrate even into Google Sheets using Apps Script — if your current process is built on manual spreadsheets. It's not the ideal long-term solution, but it lets you start saving time on day one while a full integration is being built.
+
+---
+
+## Frequently Asked Questions
+
+**Do I need a Telegram bot to connect AiPay?**
+
+No. AiPay is a REST API. It can be connected to any system: a Telegram bot, WhatsApp bot, website, mobile app, or even a server-side script. A Telegram bot is the most common delivery scenario, but it's not required. For more on the Telegram bot scenario, see our article ["Kaspi Pay + Telegram Bot: Webhooks and Automation"](/en/blog/kaspi-pay-telegram-bot-webhook).
+
+**How does AiPay work with Poster POS?**
+
+Poster displays the amount on the Kaspi terminal for in-person payments. AiPay works on top of this: when the customer pays, the AiPay webhook automatically closes the order in Poster without any cashier involvement. The integration is configured via the webhook URL in your AiPay account dashboard.
+
+**Does it work for delivery orders from Instagram?**
+
+Yes. If a customer writes via Instagram Direct, the manager moves them to WhatsApp or Telegram, where the bot already creates an invoice through AiPay. Alternatively, AiPay can be integrated directly into any CRM that handles Instagram requests. AiPay is not tied to any sales channel — only to a phone number and an amount.
+
+**What happens if the customer doesn't pay in time?**
+
+The invoice expires and AiPay sends a webhook with the status `expired`. Your system can automatically re-notify the customer, cancel the order, or offer an alternative payment method — the logic is on your side.
+
+**Is a fiscal online cash register required?**
+
+Yes, for issuing fiscal receipts — but AiPay handles this automatically. A fiscal receipt is issued automatically for every successful payment. No additional equipment is required.
+
+---
+
+## Summary
+
+Manual Kaspi Pay verification isn't the problem of an individual manager. It's a structural limitation that prevents your delivery operation from scaling. 50 orders a day can be processed manually; 150 cannot.
+
+AiPay removes this ceiling: webhooks instead of screenshot verification, automatic fiscal receipts, and late-night and holiday orders processed without additional staff. The manager stops being the bottleneck and starts doing what they're actually needed for — managing quality, not clicking buttons.
+
+Your customers already have Kaspi Pay. AiPay gives you the ability to use it without the constraints of manual labor.
+
+₸25,000 per month. Setup in 1 hour. 7 days free.
+
+[Connect AiPay →](/en/#contact)
