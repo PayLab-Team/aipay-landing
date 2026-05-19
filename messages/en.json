@@ -421,6 +421,10 @@
     "title": "Request a Callback",
     "description": "Leave your number — we'll call you back",
     "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "How should we call you"
+      },
       "phone": {
         "label": "Phone (WhatsApp)",
         "placeholder": "+7 7XX XXX XX XX",
@@ -433,7 +437,10 @@
     "error": "Failed to submit. Write to us on WhatsApp — we'll respond quickly.",
     "errors": {
       "phoneRequired": "Enter your phone",
-      "phoneInvalid": "Check phone format"
+      "phoneInvalid": "Check phone format",
+      "nameRequired": "Enter your name",
+      "nameTooShort": "Name is too short",
+      "nameTooLong": "Name is too long"
     }
   },
   "footer": {

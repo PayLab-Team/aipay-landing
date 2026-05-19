@@ -1,6 +1,12 @@
 import { z } from 'zod';
 
 export const leadFormSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, 'nameRequired')
+    .min(2, 'nameTooShort')
+    .max(80, 'nameTooLong'),
   phone: z
     .string()
     .min(1, 'phoneRequired')

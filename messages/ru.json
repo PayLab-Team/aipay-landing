@@ -421,6 +421,10 @@
     "title": "Обратный звонок",
     "description": "Оставьте номер — мы перезвоним",
     "fields": {
+      "name": {
+        "label": "Имя",
+        "placeholder": "Как к вам обращаться"
+      },
       "phone": {
         "label": "Телефон (WhatsApp)",
         "placeholder": "+7 7XX XXX XX XX",
@@ -433,7 +437,10 @@
     "error": "Не получилось отправить. Напишите нам в WhatsApp — ответим быстро.",
     "errors": {
       "phoneRequired": "Укажите телефон",
-      "phoneInvalid": "Проверьте формат телефона"
+      "phoneInvalid": "Проверьте формат телефона",
+      "nameRequired": "Укажите имя",
+      "nameTooShort": "Имя слишком короткое",
+      "nameTooLong": "Имя слишком длинное"
     }
   },
   "footer": {

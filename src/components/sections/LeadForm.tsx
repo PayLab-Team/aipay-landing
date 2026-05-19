@@ -93,10 +93,20 @@ export function LeadForm() {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <Input
+                label={t('fields.name.label')}
+                placeholder={t('fields.name.placeholder')}
+                error={getError('name')}
+                autoComplete="name"
+                {...register('name')}
+              />
+
+              <Input
                 label={t('fields.phone.label')}
                 placeholder={t('fields.phone.placeholder')}
                 hint={t('fields.phone.hint')}
                 error={getError('phone')}
+                type="tel"
+                autoComplete="tel"
                 {...register('phone')}
               />
 

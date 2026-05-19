@@ -421,6 +421,10 @@
     "title": "Кері қоңырау",
     "description": "Нөміріңізді қалдырыңыз — біз қайта қоңырау шаламыз",
     "fields": {
+      "name": {
+        "label": "Атыңыз",
+        "placeholder": "Сізге қалай хабарласайық"
+      },
       "phone": {
         "label": "Телефон (WhatsApp)",
         "placeholder": "+7 7XX XXX XX XX",
@@ -433,7 +437,10 @@
     "error": "Жіберу сәтсіз болды. Бізге WhatsApp-та жазыңыз — тез жауап береміз.",
     "errors": {
       "phoneRequired": "Телефоныңызды көрсетіңіз",
-      "phoneInvalid": "Телефон форматын тексеріңіз"
+      "phoneInvalid": "Телефон форматын тексеріңіз",
+      "nameRequired": "Атыңызды көрсетіңіз",
+      "nameTooShort": "Аты тым қысқа",
+      "nameTooLong": "Аты тым ұзын"
     }
   },
   "footer": {

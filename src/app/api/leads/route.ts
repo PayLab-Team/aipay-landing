@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { leadFormSchema, type LeadFormData } from '@/schemas/leadForm';
 
-async function sendTelegramMessage(phone: string) {
+async function sendTelegramMessage({ name, phone }: LeadFormData) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
@@ -9,7 +10,8 @@ async function sendTelegramMessage(phone: string) {
     return;
   }
 
-  const message = `📱 New Lead!\n\nPhone: ${phone}\nTime: ${new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Almaty' })}`;
+  const submittedAt = new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Almaty' });
+  const message = `📱 New Lead!\n\nName: ${name}\nPhone: ${phone}\nTime: ${submittedAt}`;
 
   await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST',
@@ -23,10 +25,18 @@ async function sendTelegramMessage(phone: string) {
 
 export async function POST(request: NextRequest) {
   try {
-    const data = await request.json();
+    const payload = await request.json();
+    const parsed = leadFormSchema.safeParse(payload);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { success: false, message: 'Invalid lead data' },
+        { status: 400 }
+      );
+    }
 
     // Send to Telegram
-    await sendTelegramMessage(data.phone);
+    await sendTelegramMessage(parsed.data);
 
     return NextResponse.json(
       { success: true, message: 'Lead received successfully' },
