@@ -40,11 +40,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     // Homepage
     ...localizedEntries('', { changeFrequency: 'weekly', priority: 1.0 }),
+
+    // About
+    ...localizedEntries('/about', { changeFrequency: 'monthly', priority: 0.7 }),
+
     // Blog listing
     ...localizedEntries('/blog', { changeFrequency: 'weekly', priority: 0.8 }),
 
-    // Developers
+    // Developers — main page
     ...localizedEntries('/developers', { changeFrequency: 'weekly', priority: 0.9 }),
+
+    // Developers — granular pages (NEW)
+    ...localizedEntries('/developers/quick-start', { changeFrequency: 'weekly', priority: 0.85 }),
+    ...localizedEntries('/developers/api', { changeFrequency: 'weekly', priority: 0.9 }),
+    ...localizedEntries('/developers/webhooks', { changeFrequency: 'weekly', priority: 0.85 }),
+    ...localizedEntries('/developers/sandbox', { changeFrequency: 'weekly', priority: 0.85 }),
 
     // Integration partner pages
     ...localizedEntries('/integrations/altegio', { changeFrequency: 'monthly', priority: 0.8 }),

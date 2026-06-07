@@ -1,5 +1,6 @@
-import { setRequestLocale } from 'next-intl/server';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import dynamic from 'next/dynamic';
+import { JsonLd } from '@/components/shared/JsonLd';
 
 // Above fold — static imports (critical path)
 import { Hero } from '@/components/sections/Hero';
@@ -25,9 +26,46 @@ type Props = {
 export default async function Home({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations('faq');
+  const hw = await getTranslations('howItWorks');
+
+  const faqItems = t.raw('items') as Array<{ question: string; answer: string }>;
+  const steps = hw.raw('steps') as Array<{ number: string; title: string; description: string }>;
+
+  // FAQPage schema
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  };
+
+  // HowTo schema
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: locale === 'en' ? 'How to integrate Kaspi Pay with your business' :
+           locale === 'kk' ? 'Kaspi Pay-ді бизнесіңізге қалай интеграциялау керек' :
+           'Как подключить Kaspi Pay к вашему бизнесу',
+    description: locale === 'en' ? 'Step-by-step guide to integrating Kaspi Pay payment automation via AiPay API' :
+                 locale === 'kk' ? 'AiPay API арқылы Kaspi Pay төлемдерін автоматтандыру бойынша нұсқаулық' :
+                 'Пошаговая инструкция по интеграции автоматизации Kaspi Pay через AiPay API',
+    totalTime: 'PT1H',
+    estimatedTime: 'PT1H',
+    step: steps.map((s) => ({
+      '@type': 'HowToStep',
+      name: s.title,
+      itemListElement: s.description,
+    })),
+  };
 
   return (
     <>
+      <JsonLd data={faqSchema} />
+      <JsonLd data={howToSchema} />
       <Hero />
       <DemoVideo />
       <BusinessSegments />
