@@ -27,6 +27,17 @@ export const SOCIAL_LINKS = {
   telegram: 'https://t.me/DrJonah',
 };
 
+export const CABINET_REGISTER_URL = 'https://cabinet.aipay.kz/register';
+
+export function getCabinetRegisterUrl() {
+  if (typeof window === 'undefined') return CABINET_REGISTER_URL;
+  const { hostname } = window.location;
+  if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('100.')) {
+    return `http://${hostname}:5173/register`;
+  }
+  return CABINET_REGISTER_URL;
+}
+
 export const BUSINESS_SEGMENTS = [
   'instagram',
   'infobusiness',

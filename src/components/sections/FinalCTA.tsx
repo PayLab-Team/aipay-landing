@@ -4,11 +4,10 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Container, Button } from '@/components/ui';
 import { ScrollReveal, AngledDivider } from '@/components/shared';
-import { useSmoothScroll } from '@/hooks/useSmoothScroll';
+import { getCabinetRegisterUrl } from '@/lib/constants';
 
 export function FinalCTA() {
   const t = useTranslations('finalCta');
-  const { scrollToSection } = useSmoothScroll();
 
   return (
     <section className="py-20 lg:py-28 relative overflow-hidden">
@@ -71,7 +70,7 @@ export function FinalCTA() {
               <Button
                 size="lg"
                 className="bg-white hover:bg-gray-50 text-primary-700 shadow-elevation-4 hover:shadow-glow-primary-lg"
-                onClick={() => scrollToSection('contact')}
+                onClick={() => { window.location.href = getCabinetRegisterUrl(); }}
                 withArrow
               >
                 {t('cta')}

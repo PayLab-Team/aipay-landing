@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { NAV_ITEMS, NAV_LINKS } from '@/lib/constants';
+import { getCabinetRegisterUrl, NAV_ITEMS, NAV_LINKS } from '@/lib/constants';
 import { Link } from '@/i18n/navigation';
 
 interface MobileMenuProps {
@@ -52,7 +52,7 @@ export function MobileMenu({ onClose, onNavClick }: MobileMenuProps) {
             {t('login')}
           </a>
         </div>
-        <Button className="w-full" onClick={() => onNavClick('contact')}>
+        <Button className="w-full" onClick={() => { window.location.href = getCabinetRegisterUrl(); }}>
           {t('cta')}
         </Button>
         <p className="text-xs text-gray-500 text-center">{t('microCopy')}</p>

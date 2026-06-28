@@ -7,7 +7,7 @@ import { Menu, X } from 'lucide-react';
 import { Button, Container } from '@/components/ui';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { MobileMenu } from './MobileMenu';
-import { NAV_ITEMS, NAV_LINKS } from '@/lib/constants';
+import { getCabinetRegisterUrl, NAV_ITEMS, NAV_LINKS } from '@/lib/constants';
 import { Link } from '@/i18n/navigation';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { cn } from '@/lib/utils';
@@ -30,7 +30,7 @@ export function Header() {
   };
 
   const handleCtaClick = () => {
-    scrollToSection('contact');
+    window.location.href = getCabinetRegisterUrl();
   };
 
   return (

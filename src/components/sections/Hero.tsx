@@ -6,12 +6,11 @@ import Image from 'next/image';
 import { Send } from 'lucide-react';
 import { Button, Container } from '@/components/ui';
 import { TrustStrip } from './TrustStrip';
+import { getCabinetRegisterUrl } from '@/lib/constants';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
-import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 export function Hero() {
   const t = useTranslations('hero');
-  const { scrollToSection } = useSmoothScroll();
 
   return (
     <section
@@ -75,7 +74,7 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="glow"
-                onClick={() => scrollToSection('contact')}
+                onClick={() => { window.location.href = getCabinetRegisterUrl(); }}
                 withArrow
               >
                 {t('primaryCta')}
